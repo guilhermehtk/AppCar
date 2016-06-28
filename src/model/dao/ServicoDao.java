@@ -18,7 +18,7 @@ public class ServicoDao implements InterfaceDao {
 
     public int add(Object ser) {
         // cria a query
-        String sql = "insert into Servicos (serDescricao,serValor,ser_osCod) values (?,?,?)";
+        String sql = "insert into Servicos (serDescricao,serValor,ser_osCod,ser_mecCod) values (?,?,?,?)";
         // cast
         Servico servico = (Servico) ser;
         try {
@@ -29,7 +29,7 @@ public class ServicoDao implements InterfaceDao {
             stmt.setString(1, servico.getDescricao());
             stmt.setDouble(2, servico.getValor());
             stmt.setInt(3, servico.getOsCod());
-
+             stmt.setInt(3, servico.getMecCod());
             // executa
             stmt.execute();
             // fecha a conexão
@@ -63,7 +63,7 @@ public class ServicoDao implements InterfaceDao {
 
     public void altera(int id, Object ser) {
         // cria a query
-        String sql = "update Servicos set serDescricao=?,serValor=?,ser_osCod=? where serCod=?";
+        String sql = "update Servicos set serDescricao=?,serValor=?,ser_osCod=?,ser_mecCod=? where serCod=?";
         // cast
         Servico servico = (Servico) ser;
         try {
@@ -74,7 +74,8 @@ public class ServicoDao implements InterfaceDao {
             stmt.setString(1, servico.getDescricao());
             stmt.setDouble(2, servico.getValor());
             stmt.setInt(3, servico.getOsCod());
-            stmt.setInt(4, id);
+            stmt.setInt(4, servico.getMecCod());
+            stmt.setInt(5, id);
 
             // executa
             stmt.execute();
@@ -102,7 +103,7 @@ public class ServicoDao implements InterfaceDao {
 
             //cria o servico
             while (rs.next()) {
-                servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4));
+                servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4),rs.getInt(5));
                 servico.setCod(rs.getInt(1));
             }
             // fecha a conexão
@@ -127,7 +128,7 @@ public class ServicoDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                Servico servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4));
+                Servico servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4),rs.getInt(5));
                 servico.setCod(rs.getInt(1));
                 lista.add(servico);
             }
@@ -157,7 +158,7 @@ public class ServicoDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                Servico servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4));
+                Servico servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4),rs.getInt(5));
                 servico.setCod(rs.getInt(1));
                 lista.add(servico);
             }

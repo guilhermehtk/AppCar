@@ -4,13 +4,25 @@ public class Servico {
     private int cod;
     private String descricao;
     private int osCod;
+    private int mecCod;
     private double valor;
 
-    public Servico(String descricao,double valor, int osCod) {
+    public Servico(String descricao,double valor, int osCod,int mecCod) {
         this.descricao = descricao;
         this.osCod = osCod;
         this.valor = valor;
+        this.mecCod = mecCod;
     }
+
+    public int getMecCod() {
+        return mecCod;
+    }
+
+    public void setMecCod(int mecCod) {
+        this.mecCod = mecCod;
+    }
+    
+    
 
     public double getValor() {
         return valor;

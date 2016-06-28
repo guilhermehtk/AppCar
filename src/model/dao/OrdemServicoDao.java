@@ -19,7 +19,7 @@ public class OrdemServicoDao implements InterfaceDao {
 
     public int add(Object ordemser) {
         // cria a query
-        String sql = "insert into OrdemServicos (osTipo,osData,osValor,os_cliCod,os_mecCod) values (?,?,?,?,?)";
+        String sql = "insert into OrdemServicos (osTipo,osData,osDescricao,osSituacao,os_cliCod,os_carCod) values (?,?,?,?,?,?)";
         // cast
         OrdemServico os = (OrdemServico) ordemser;
         try {
@@ -29,9 +29,10 @@ public class OrdemServicoDao implements InterfaceDao {
             // seta os valores
             stmt.setString(1, os.getTipo());
             stmt.setString(2, os.getData().toString());
-            stmt.setDouble(3, os.getValor());
-            stmt.setInt(4, os.getCliCod());
-            stmt.setInt(5, os.getMecCod());
+            stmt.setString(3, os.getDescricao());
+             stmt.setString(4, os.getSituacao());
+            stmt.setInt(5, os.getCliCod());
+            stmt.setInt(6, os.getCarCod());
 
             // executa
             stmt.execute();
@@ -66,7 +67,7 @@ public class OrdemServicoDao implements InterfaceDao {
 
     public void altera(int id, Object ordemser) {
         // cria a query
-        String sql = "update OrdemServicos set osTipo=?,osData=?,osValor=?,os_cliCod=?,os_mecCod=? where osCod=?";
+        String sql = "update OrdemServicos set osTipo=?,osData=?,osDescricaor=?,osSituacao=?,os_cliCod=?,os_carCod=? where osCod=?";
         // cast
         OrdemServico os = (OrdemServico) ordemser;
         try {
@@ -76,10 +77,11 @@ public class OrdemServicoDao implements InterfaceDao {
             // seta os valores
              stmt.setString(1, os.getTipo());
             stmt.setString(2, os.getData().toString());
-            stmt.setDouble(3, os.getValor());
-            stmt.setInt(4, os.getCliCod());
-            stmt.setInt(5, os.getMecCod());
-            stmt.setInt(6, id);
+            stmt.setString(3, os.getDescricao());
+            stmt.setString(4, os.getSituacao());
+            stmt.setInt(5, os.getCliCod());
+            stmt.setInt(6, os.getCarCod());
+            stmt.setInt(7, os.getCod());
 
             // executa
             stmt.execute();
@@ -107,7 +109,7 @@ public class OrdemServicoDao implements InterfaceDao {
 
             //cria o os
             while (rs.next()) {
-                os = new OrdemServico(rs.getString(2),rs.getInt(4),rs.getInt(5));
+                os = new OrdemServico(rs.getString(2),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
                 os.setCod(rs.getInt(1));
                 os.setData(Timestamp.valueOf(rs.getString(3)));
             }
@@ -133,7 +135,7 @@ public class OrdemServicoDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                   OrdemServico os = new OrdemServico(rs.getString(2),rs.getInt(4),rs.getInt(5));
+                OrdemServico os = new OrdemServico(rs.getString(2),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
                 os.setCod(rs.getInt(1));
                 os.setData(Timestamp.valueOf(rs.getString(3)));
                 lista.add(os);

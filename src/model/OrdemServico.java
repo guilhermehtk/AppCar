@@ -7,17 +7,19 @@ public class OrdemServico {
     private int cod;
     private String tipo;
     private Timestamp data;
-    private double valor;
+    private String situacao;
+    private String descricao;
     private int cliCod;
-    private int mecCod;
+    private int carCod;
 
-    public OrdemServico(String tipo, int cliCod, int mecCod) {
+    public OrdemServico(String tipo, String situacao, String descricao, int carCod,int cliCod) {
         this.tipo = tipo;
-        this.data = new Timestamp(System.currentTimeMillis());
+        this.situacao = situacao;
+        this.descricao = descricao;
         this.cliCod = cliCod;
-        this.mecCod = mecCod;
+        this.carCod = carCod;
     }
-    
+
     public int getCod() {
         return cod;
     }
@@ -42,12 +44,20 @@ public class OrdemServico {
         this.data = data;
     }
 
-    public double getValor() {
-        return valor;
+    public String getSituacao() {
+        return situacao;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public int getCliCod() {
@@ -58,12 +68,13 @@ public class OrdemServico {
         this.cliCod = cliCod;
     }
 
-    public int getMecCod() {
-        return mecCod;
+    public int getCarCod() {
+        return carCod;
     }
 
-    public void setMecCod(int mecCod) {
-        this.mecCod = mecCod;
+    public void setCarCod(int carCod) {
+        this.carCod = carCod;
     }
 
+    
 }
