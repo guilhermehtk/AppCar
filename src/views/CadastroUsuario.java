@@ -59,6 +59,7 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
         setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         getContentPane().setLayout(null);
 
@@ -107,17 +108,17 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(122, 87, 112, 20);
         getContentPane().add(jTextField3);
-        jTextField3.setBounds(122, 117, 227, 27);
+        jTextField3.setBounds(122, 117, 227, 20);
         getContentPane().add(jTextField4);
-        jTextField4.setBounds(120, 56, 227, 27);
+        jTextField4.setBounds(120, 56, 227, 20);
         getContentPane().add(jTextField5);
-        jTextField5.setBounds(122, 148, 227, 27);
+        jTextField5.setBounds(122, 148, 227, 20);
         getContentPane().add(jTextField6);
-        jTextField6.setBounds(122, 179, 227, 27);
+        jTextField6.setBounds(122, 179, 227, 20);
         getContentPane().add(jTextField7);
-        jTextField7.setBounds(122, 210, 227, 27);
+        jTextField7.setBounds(122, 210, 227, 20);
         getContentPane().add(jTextField8);
-        jTextField8.setBounds(122, 241, 227, 27);
+        jTextField8.setBounds(122, 241, 227, 20);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2);
@@ -153,9 +154,9 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel22);
         jLabel22.setBounds(412, 186, 82, 15);
         getContentPane().add(jTextField9);
-        jTextField9.setBounds(504, 60, 227, 27);
+        jTextField9.setBounds(504, 60, 227, 20);
         getContentPane().add(jTextField10);
-        jTextField10.setBounds(504, 91, 227, 27);
+        jTextField10.setBounds(504, 91, 227, 20);
 
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,13 +169,13 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jTextField11);
-        jTextField11.setBounds(504, 29, 227, 27);
+        jTextField11.setBounds(504, 29, 227, 20);
         getContentPane().add(jTextField12);
-        jTextField12.setBounds(504, 153, 227, 27);
+        jTextField12.setBounds(504, 153, 227, 20);
         getContentPane().add(jTextField13);
-        jTextField13.setBounds(504, 122, 227, 27);
+        jTextField13.setBounds(504, 122, 227, 20);
         getContentPane().add(jTextField14);
-        jTextField14.setBounds(504, 184, 227, 27);
+        jTextField14.setBounds(504, 184, 227, 20);
 
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

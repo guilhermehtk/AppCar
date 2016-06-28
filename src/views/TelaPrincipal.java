@@ -1,35 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 
-/**
- *
- * @author Alunos
- */
+
+
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPrincipal
-     */
+     CadastroMecanico cadastroMecanico = new CadastroMecanico();
+    CadastroUsuario  cadastroUsuario = new CadastroUsuario();
+    CadastraCarro cadastraCarro = new CadastraCarro();
+    
     public TelaPrincipal() {
-        
         initComponents();
-        
-        jLabel2.setText("1.0");
-        this.setExtendedState(MAXIMIZED_BOTH);
-        
+       jLabel2.setText("1.0");
+       this.initMaximized();
+      
     }
 
-    CadastroMecanico cadastroMecanico = new CadastroMecanico();
-    CadastroUsuario  cadastroUsuario = new CadastroUsuario();
-    CadastraCarro cadastraCarro = new CadastraCarro("Nome", true,true,true,true);
+   private void initMaximized(){
+         int inset = 50;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds(inset, inset,
+                screenSize.width - inset * 2,
+                screenSize.height - inset * 2);
+        this.setVisible(true);
+        this.setExtendedState(MAXIMIZED_BOTH);
+   }
+ 
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,6 +48,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("AppCar");
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Versão:");
@@ -145,8 +145,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cadastroMecanico.dispose();
         cadastroUsuario.dispose();
         cadastraCarro.dispose();
-         cadastraCarro.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE ); 
-    
     }
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         pega();

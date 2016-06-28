@@ -1,18 +1,11 @@
 package views;
 
-import java.awt.Window;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.WindowConstants;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
 public final class CadastraCarro extends javax.swing.JInternalFrame implements InternalFrameListener{
 
-    public CadastraCarro(String title, boolean resizable, boolean closable,
-                                boolean maximizable, boolean iconifiable) {
-       super(title,resizable,closable,maximizable,iconifiable);
+    public CadastraCarro() {
         initComponents();
     }
 
@@ -46,7 +39,7 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
         ano = new javax.swing.JTextField();
         modelo1 = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
         setTitle("Cadastro de Carro");
         getContentPane().setLayout(null);
 
@@ -92,9 +85,9 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(placa);
-        placa.setBounds(100, 240, 390, 27);
+        placa.setBounds(100, 240, 390, 20);
         jPanel1.add(km);
-        km.setBounds(100, 210, 390, 27);
+        km.setBounds(100, 210, 390, 20);
 
         labelKm.setText("Quilometragem:");
         jPanel1.add(labelKm);
@@ -140,7 +133,7 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(0, 130, 520, 10);
         jPanel1.add(jSeparator6);
-        jSeparator6.setBounds(440, 380, 4, 20);
+        jSeparator6.setBounds(440, 380, 0, 20);
 
         cor1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prata ", "Preto  ", "Branco ", "Cinza ", "Azul ", "Vermelho ", "Marrom/Bege ", "Verde ", "Amarelo/Dourado", " " }));
         cor1.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +142,7 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(cor1);
-        cor1.setBounds(340, 60, 110, 27);
+        cor1.setBounds(340, 60, 110, 20);
 
         labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         labelTitulo.setText("Cadastro de Carro");
@@ -162,7 +155,7 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(chassi1);
-        chassi1.setBounds(100, 180, 390, 27);
+        chassi1.setBounds(100, 180, 390, 20);
 
         labelAno.setText("Ano:");
         jPanel1.add(labelAno);
@@ -187,7 +180,7 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(ano);
-        ano.setBounds(100, 150, 390, 27);
+        ano.setBounds(100, 150, 390, 20);
 
         modelo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         modelo1.setMinimumSize(new java.awt.Dimension(81, 20));

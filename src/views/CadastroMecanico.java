@@ -66,6 +66,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
         setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         getContentPane().setLayout(null);
 
@@ -137,9 +138,9 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(120, 146, 227, 27);
+        jPasswordField1.setBounds(120, 146, 227, 20);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(120, 86, 227, 27);
+        jTextField1.setBounds(120, 86, 227, 20);
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,19 +148,19 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(120, 116, 227, 27);
+        jTextField2.setBounds(120, 116, 227, 20);
         getContentPane().add(jTextField3);
-        jTextField3.setBounds(122, 227, 227, 27);
+        jTextField3.setBounds(122, 227, 227, 20);
         getContentPane().add(jTextField4);
-        jTextField4.setBounds(120, 56, 227, 27);
+        jTextField4.setBounds(120, 56, 227, 20);
         getContentPane().add(jTextField5);
-        jTextField5.setBounds(122, 258, 227, 27);
+        jTextField5.setBounds(122, 258, 227, 20);
         getContentPane().add(jTextField6);
-        jTextField6.setBounds(122, 289, 227, 27);
+        jTextField6.setBounds(122, 289, 227, 20);
         getContentPane().add(jTextField7);
-        jTextField7.setBounds(122, 320, 227, 27);
+        jTextField7.setBounds(122, 320, 227, 20);
         getContentPane().add(jTextField8);
-        jTextField8.setBounds(122, 351, 227, 27);
+        jTextField8.setBounds(122, 351, 227, 20);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2);
@@ -195,9 +196,9 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel22);
         jLabel22.setBounds(412, 186, 82, 15);
         getContentPane().add(jTextField9);
-        jTextField9.setBounds(504, 60, 227, 27);
+        jTextField9.setBounds(504, 60, 227, 20);
         getContentPane().add(jTextField10);
-        jTextField10.setBounds(504, 91, 227, 27);
+        jTextField10.setBounds(504, 91, 227, 20);
 
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,13 +211,13 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jTextField11);
-        jTextField11.setBounds(504, 29, 227, 27);
+        jTextField11.setBounds(504, 29, 227, 20);
         getContentPane().add(jTextField12);
-        jTextField12.setBounds(504, 153, 227, 27);
+        jTextField12.setBounds(504, 153, 227, 20);
         getContentPane().add(jTextField13);
-        jTextField13.setBounds(504, 122, 227, 27);
+        jTextField13.setBounds(504, 122, 227, 20);
         getContentPane().add(jTextField14);
-        jTextField14.setBounds(504, 184, 227, 27);
+        jTextField14.setBounds(504, 184, 227, 20);
 
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
