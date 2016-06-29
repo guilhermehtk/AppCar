@@ -5,6 +5,8 @@
  */
 package views;
 
+import java.awt.Color;
+
 /**
  *
  * @author Alunos
@@ -16,6 +18,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
      */
     public CadastroMecanico() {
         initComponents();
+        jButton3.setBackground(Color.white);
     }
 
     /**
@@ -64,63 +67,61 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox3 = new javax.swing.JComboBox<String>();
+        labelMarca2 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
+        setResizable(true);
         setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        getContentPane().setLayout(null);
+        setNormalBounds(new java.awt.Rectangle(0, 0, 100, 100));
+        setVisible(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setText("Nome:");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(73, 58, 37, 15);
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText("Sexo:");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(82, 197, 30, 15);
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel10.setText("Telefone:");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(61, 322, 51, 15);
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setText("Telefone Fixo:");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(36, 353, 76, 15);
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("CPF:");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(85, 229, 27, 15);
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("RG:");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(91, 260, 21, 15);
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setText("Email:");
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(77, 291, 35, 15);
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel15.setText("Login:");
-        getContentPane().add(jLabel15);
-        jLabel15.setBounds(76, 88, 34, 15);
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setText("Senha:");
-        getContentPane().add(jLabel16);
-        jLabel16.setBounds(71, 118, 39, 15);
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel17.setText("Confirmar Senha:");
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(13, 148, 97, 15);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(0, 176, 388, 10);
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 660, -1));
 
         jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Homem", "Mulher", "Outro" }));
@@ -129,76 +130,57 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(122, 197, 112, 20);
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 112, 20));
 
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(120, 146, 227, 20);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(120, 86, 227, 20);
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 230, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 230, -1));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(120, 116, 227, 20);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(122, 227, 227, 20);
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(120, 56, 227, 20);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(122, 258, 227, 20);
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(122, 289, 227, 20);
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(122, 320, 227, 20);
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(122, 351, 227, 20);
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 230, -1));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 227, -1));
+        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 230, -1));
+        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 227, -1));
+        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 227, -1));
+        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 227, -1));
+        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 227, -1));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(394, 0, 14, 438);
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 14, 380));
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel9.setText("Número:");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(446, 31, 48, 15);
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel18.setText("Rua:");
-        getContentPane().add(jLabel18);
-        jLabel18.setBounds(468, 62, 26, 15);
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel19.setText("Bairro:");
-        getContentPane().add(jLabel19);
-        jLabel19.setBounds(458, 93, 36, 15);
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel20.setText("Cidade:");
-        getContentPane().add(jLabel20);
-        jLabel20.setBounds(451, 124, 43, 15);
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel21.setText("CEP:");
-        getContentPane().add(jLabel21);
-        jLabel21.setBounds(466, 155, 28, 15);
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, -1, -1));
 
         jLabel22.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel22.setText("Complemento:");
-        getContentPane().add(jLabel22);
-        jLabel22.setBounds(412, 186, 82, 15);
-        getContentPane().add(jTextField9);
-        jTextField9.setBounds(504, 60, 227, 20);
-        getContentPane().add(jTextField10);
-        jTextField10.setBounds(504, 91, 227, 20);
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, -1, -1));
+        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 227, -1));
+        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 227, -1));
 
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,46 +192,63 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
                 jTextField11KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField11);
-        jTextField11.setBounds(504, 29, 227, 20);
-        getContentPane().add(jTextField12);
-        jTextField12.setBounds(504, 153, 227, 20);
-        getContentPane().add(jTextField13);
-        jTextField13.setBounds(504, 122, 227, 20);
-        getContentPane().add(jTextField14);
-        jTextField14.setBounds(504, 184, 227, 20);
+        getContentPane().add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 227, -1));
+        getContentPane().add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 227, -1));
+        getContentPane().add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 227, -1));
+        getContentPane().add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 227, -1));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(36, 389, 110, 40);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 110, 40));
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Cancelar-25.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(621, 389, 110, 40);
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, 110, 40));
 
+        jButton3.setBackground(new java.awt.Color(204, 204, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Limpar-25.png"))); // NOI18N
         jButton3.setText("Limpar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(239, 389, 110, 40);
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 110, 40));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Placa", "Chassi", "Dono" }));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
+
+        jComboBox3.setEditable(true);
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setToolTipText("");
+        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 400, -1));
+
+        labelMarca2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        labelMarca2.setText("Por:");
+        getContentPane().add(labelMarca2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 50, 20));
+
+        labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        labelTitulo.setText("Procurar");
+        getContentPane().add(labelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 290, 400, 10));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setText("Mecânico");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 90, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setText("Cadastro de Mecânico");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 11, 180, 22);
+        jLabel1.setText("Endereço");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 110, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -293,6 +292,8 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -304,6 +305,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -313,6 +315,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -327,5 +330,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel labelMarca2;
+    private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,123 +22,244 @@ public class OrdemServico extends javax.swing.JInternalFrame {
         labelTitulo = new javax.swing.JLabel();
         labelMarca = new javax.swing.JLabel();
         tipo = new javax.swing.JTextField();
-        tipo1 = new javax.swing.JTextField();
+        labelMarca4 = new javax.swing.JLabel();
+        labelMarca5 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        cadastra1 = new javax.swing.JButton();
+        limpar1 = new javax.swing.JButton();
+        cancela1 = new javax.swing.JButton();
+        cadastra2 = new javax.swing.JButton();
+        cadastra3 = new javax.swing.JButton();
         labelMarca1 = new javax.swing.JLabel();
-        tipo2 = new javax.swing.JTextField();
         labelMarca2 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<>();
         labelMarca3 = new javax.swing.JLabel();
+        labelTitulo1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setLayout(null);
 
         labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         labelTitulo.setText("Ordem de Serviço");
+        jPanel1.add(labelTitulo);
+        labelTitulo.setBounds(220, 120, 160, 22);
 
         labelMarca.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca.setText("Tipo:");
+        labelMarca.setText("____________");
+        jPanel1.add(labelMarca);
+        labelMarca.setBounds(70, 470, 500, 20);
 
         tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoActionPerformed(evt);
             }
         });
+        jPanel1.add(tipo);
+        tipo.setBounds(70, 170, 480, 20);
 
-        tipo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo1ActionPerformed(evt);
+        labelMarca4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        labelMarca4.setText("Carro");
+        jPanel1.add(labelMarca4);
+        labelMarca4.setBounds(20, 210, 40, 20);
+
+        labelMarca5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        labelMarca5.setText("Cliente");
+        jPanel1.add(labelMarca5);
+        labelMarca5.setBounds(20, 250, 39, 20);
+
+        jComboBox2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Placa", "Chassi", "Dono" }));
+        jPanel1.add(jComboBox2);
+        jComboBox2.setBounds(70, 210, 90, 21);
+
+        jComboBox1.setEditable(true);
+        jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jComboBox1.setToolTipText("");
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(170, 210, 380, 21);
+
+        jComboBox3.setEditable(true);
+        jComboBox3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jComboBox3.setToolTipText("");
+        jPanel1.add(jComboBox3);
+        jComboBox3.setBounds(170, 250, 380, 21);
+
+        jComboBox4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CPF", "RG" }));
+        jPanel1.add(jComboBox4);
+        jComboBox4.setBounds(70, 250, 90, 21);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Código", "Nome", "Valor"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(75);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(75);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(120);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(120);
+        }
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 290, 580, 130);
+
+        cadastra1.setText("Excluir");
+        cadastra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastra1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cadastra1);
+        cadastra1.setBounds(330, 430, 110, 20);
+
+        limpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Limpar.png"))); // NOI18N
+        limpar1.setText("Limpar");
+        limpar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(limpar1);
+        limpar1.setBounds(240, 520, 120, 40);
+
+        cancela1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Cancelar-25.png"))); // NOI18N
+        cancela1.setText("Cancelar");
+        cancela1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancela1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancela1);
+        cancela1.setBounds(460, 520, 120, 40);
+
+        cadastra2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cadastra2.setText("Gerar O.S");
+        cadastra2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastra2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cadastra2);
+        cadastra2.setBounds(20, 520, 120, 40);
+
+        cadastra3.setText("Adcionar");
+        cadastra3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastra3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cadastra3);
+        cadastra3.setBounds(160, 430, 110, 20);
 
         labelMarca1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca1.setText("Data");
-
-        tipo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipo2ActionPerformed(evt);
-            }
-        });
+        labelMarca1.setText("Tipo:");
+        jPanel1.add(labelMarca1);
+        labelMarca1.setBounds(20, 170, 40, 20);
 
         labelMarca2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca2.setText("Valor");
+        labelMarca2.setText("Valor:");
+        jPanel1.add(labelMarca2);
+        labelMarca2.setBounds(30, 470, 40, 20);
+
+        jComboBox5.setEditable(true);
+        jComboBox5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jComboBox5.setToolTipText("");
+        jPanel1.add(jComboBox5);
+        jComboBox5.setBounds(130, 70, 400, 21);
+
+        jComboBox6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CPF", "RG" }));
+        jPanel1.add(jComboBox6);
+        jComboBox6.setBounds(10, 70, 90, 21);
 
         labelMarca3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca3.setText("Valor");
+        labelMarca3.setText("Por:");
+        jPanel1.add(labelMarca3);
+        labelMarca3.setBounds(10, 40, 50, 20);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(labelMarca1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(tipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(labelMarca)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelMarca3)
-                                    .addComponent(labelMarca2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(labelTitulo)
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMarca1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMarca2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(labelMarca3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
-        );
+        labelTitulo1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        labelTitulo1.setText("Procurar");
+        jPanel1.add(labelTitulo1);
+        labelTitulo1.setBounds(10, 10, 120, 22);
+        jPanel1.add(jSeparator1);
+        jSeparator1.setBounds(0, 110, 600, 10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cadastra3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastra3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cadastra3ActionPerformed
+
+    private void cadastra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastra2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cadastra2ActionPerformed
+
+    private void cancela1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancela1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancela1ActionPerformed
+
+    private void limpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar1ActionPerformed
+
+    }//GEN-LAST:event_limpar1ActionPerformed
+
+    private void cadastra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastra1ActionPerformed
+
+    }//GEN-LAST:event_cadastra1ActionPerformed
+
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoActionPerformed
-
-    private void tipo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo1ActionPerformed
-
-    private void tipo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipo2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,14 +297,29 @@ public class OrdemServico extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cadastra1;
+    private javax.swing.JButton cadastra2;
+    private javax.swing.JButton cadastra3;
+    private javax.swing.JButton cancela1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelMarca;
     private javax.swing.JLabel labelMarca1;
     private javax.swing.JLabel labelMarca2;
     private javax.swing.JLabel labelMarca3;
+    private javax.swing.JLabel labelMarca4;
+    private javax.swing.JLabel labelMarca5;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JLabel labelTitulo1;
+    private javax.swing.JButton limpar1;
     private javax.swing.JTextField tipo;
-    private javax.swing.JTextField tipo1;
-    private javax.swing.JTextField tipo2;
     // End of variables declaration//GEN-END:variables
 }

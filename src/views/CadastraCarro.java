@@ -12,10 +12,10 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        labelMarca = new javax.swing.JLabel();
         labelModelo = new javax.swing.JLabel();
         modelo = new javax.swing.JComboBox();
         labelCor = new javax.swing.JLabel();
@@ -38,22 +38,25 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
         labelAno = new javax.swing.JLabel();
         ano = new javax.swing.JTextField();
         modelo1 = new javax.swing.JComboBox();
+        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
+        jSeparator2 = new javax.swing.JSeparator();
+        labelTitulo1 = new javax.swing.JLabel();
+        labelMarca1 = new javax.swing.JLabel();
+        labelMarca2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setTitle("Cadastro de Carro");
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
-
-        labelMarca.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca.setText("Marca:");
-        jPanel1.add(labelMarca);
-        labelMarca.setBounds(10, 61, 50, 20);
 
         labelModelo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelModelo.setText("Modelo:");
         jPanel1.add(labelModelo);
-        labelModelo.setBounds(10, 100, 50, 15);
+        labelModelo.setBounds(10, 180, 50, 15);
 
         modelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         modelo.setMinimumSize(new java.awt.Dimension(81, 20));
@@ -64,20 +67,20 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(modelo);
-        modelo.setBounds(60, 60, 110, 20);
+        modelo.setBounds(60, 140, 110, 20);
 
         labelCor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelCor.setText("Cor:");
         jPanel1.add(labelCor);
-        labelCor.setBounds(290, 60, 30, 20);
+        labelCor.setBounds(290, 140, 30, 20);
 
         labelChassi.setText("Número chassi:");
         jPanel1.add(labelChassi);
-        labelChassi.setBounds(10, 180, 80, 20);
+        labelChassi.setBounds(10, 260, 80, 20);
 
         labelPlaca.setText("Placa:");
         jPanel1.add(labelPlaca);
-        labelPlaca.setBounds(10, 240, 70, 20);
+        labelPlaca.setBounds(10, 320, 70, 20);
 
         placa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,14 +88,15 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(placa);
-        placa.setBounds(100, 240, 390, 20);
+        placa.setBounds(100, 320, 390, 20);
         jPanel1.add(km);
-        km.setBounds(100, 210, 390, 20);
+        km.setBounds(100, 290, 390, 20);
 
         labelKm.setText("Quilometragem:");
         jPanel1.add(labelKm);
-        labelKm.setBounds(10, 210, 80, 20);
+        labelKm.setBounds(10, 290, 80, 20);
 
+        cadastra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
         cadastra.setText("Cadastrar");
         cadastra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,8 +104,9 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(cadastra);
-        cadastra.setBounds(20, 360, 110, 40);
+        cadastra.setBounds(30, 440, 110, 40);
 
+        limpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Limpar-25.png"))); // NOI18N
         limpar.setText("Limpar");
         limpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,8 +114,9 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(limpar);
-        limpar.setBounds(200, 360, 110, 40);
+        limpar.setBounds(200, 440, 110, 40);
 
+        cancela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Cancelar-25.png"))); // NOI18N
         cancela.setText("Cancelar");
         cancela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,20 +124,20 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(cancela);
-        cancela.setBounds(400, 360, 110, 40);
+        cancela.setBounds(400, 440, 110, 40);
 
         obs.setColumns(20);
         obs.setRows(5);
         jScrollPane1.setViewportView(obs);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(100, 270, 390, 80);
+        jScrollPane1.setBounds(80, 350, 390, 80);
 
         labelObs.setText("Observações:");
         jPanel1.add(labelObs);
-        labelObs.setBounds(10, 270, 80, 20);
+        labelObs.setBounds(10, 350, 80, 20);
         jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(0, 130, 520, 10);
+        jSeparator1.setBounds(0, 100, 540, 10);
         jPanel1.add(jSeparator6);
         jSeparator6.setBounds(440, 380, 0, 20);
 
@@ -142,12 +148,12 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(cor1);
-        cor1.setBounds(340, 60, 110, 20);
+        cor1.setBounds(340, 140, 110, 20);
 
         labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        labelTitulo.setText("Cadastro de Carro");
+        labelTitulo.setText("Procurar");
         jPanel1.add(labelTitulo);
-        labelTitulo.setBounds(20, 10, 160, 22);
+        labelTitulo.setBounds(10, 10, 120, 22);
 
         chassi1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,11 +161,11 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(chassi1);
-        chassi1.setBounds(100, 180, 390, 20);
+        chassi1.setBounds(100, 260, 390, 20);
 
         labelAno.setText("Ano:");
         jPanel1.add(labelAno);
-        labelAno.setBounds(10, 150, 70, 20);
+        labelAno.setBounds(10, 230, 70, 20);
 
         ano.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         ano.addInputMethodListener(new java.awt.event.InputMethodListener() {
@@ -180,7 +186,7 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(ano);
-        ano.setBounds(100, 150, 390, 20);
+        ano.setBounds(100, 230, 390, 20);
 
         modelo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         modelo1.setMinimumSize(new java.awt.Dimension(81, 20));
@@ -191,10 +197,45 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
             }
         });
         jPanel1.add(modelo1);
-        modelo1.setBounds(60, 100, 110, 20);
+        modelo1.setBounds(60, 180, 110, 20);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 740, 440);
+        jComboBox1.setEditable(true);
+        jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        jComboBox1.setToolTipText("");
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(130, 70, 400, 21);
+
+        jComboBox2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Placa", "Chassi", "Dono" }));
+        jPanel1.add(jComboBox2);
+        jComboBox2.setBounds(10, 70, 90, 21);
+        jPanel1.add(jSeparator2);
+        jSeparator2.setBounds(0, 210, 540, 10);
+
+        labelTitulo1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        labelTitulo1.setText("Carro");
+        jPanel1.add(labelTitulo1);
+        labelTitulo1.setBounds(220, 110, 60, 22);
+
+        labelMarca1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        labelMarca1.setText("Marca:");
+        jPanel1.add(labelMarca1);
+        labelMarca1.setBounds(10, 140, 50, 20);
+
+        labelMarca2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        labelMarca2.setText("Por:");
+        jPanel1.add(labelMarca2);
+        labelMarca2.setBounds(10, 40, 50, 20);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 649;
+        gridBagConstraints.ipady = 489;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -257,20 +298,25 @@ public final class CadastraCarro extends javax.swing.JInternalFrame implements I
     private javax.swing.JButton cancela;
     private javax.swing.JTextField chassi1;
     private javax.swing.JComboBox cor1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTextField km;
     private javax.swing.JLabel labelAno;
     private javax.swing.JLabel labelChassi;
     private javax.swing.JLabel labelCor;
     private javax.swing.JLabel labelKm;
-    private javax.swing.JLabel labelMarca;
+    private javax.swing.JLabel labelMarca1;
+    private javax.swing.JLabel labelMarca2;
     private javax.swing.JLabel labelModelo;
     private javax.swing.JLabel labelObs;
     private javax.swing.JLabel labelPlaca;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JLabel labelTitulo1;
     private javax.swing.JButton limpar;
     private javax.swing.JComboBox modelo;
     private javax.swing.JComboBox modelo1;

@@ -54,10 +54,16 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         jTextField12 = new javax.swing.JTextField();
         jTextField13 = new javax.swing.JTextField();
         jTextField14 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox3 = new javax.swing.JComboBox<String>();
+        labelMarca2 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -66,37 +72,37 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setText("Nome:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(73, 58, 37, 15);
+        jLabel7.setBounds(60, 160, 37, 15);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText("Sexo:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(82, 87, 30, 15);
+        jLabel8.setBounds(70, 210, 30, 15);
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel10.setText("Telefone:");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(61, 212, 51, 15);
+        jLabel10.setBounds(50, 340, 51, 15);
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setText("Telefone Fixo:");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(36, 243, 76, 15);
+        jLabel11.setBounds(20, 370, 76, 15);
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("CPF:");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(85, 119, 27, 15);
+        jLabel12.setBounds(70, 240, 27, 15);
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("RG:");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(91, 150, 21, 15);
+        jLabel13.setBounds(80, 280, 21, 15);
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setText("Email:");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(77, 181, 35, 15);
+        jLabel14.setBounds(60, 310, 35, 15);
 
         jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Homem", "Mulher", "Outro" }));
@@ -106,57 +112,57 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(122, 87, 112, 20);
+        jComboBox1.setBounds(110, 210, 112, 20);
         getContentPane().add(jTextField3);
-        jTextField3.setBounds(122, 117, 227, 20);
+        jTextField3.setBounds(110, 240, 227, 20);
         getContentPane().add(jTextField4);
-        jTextField4.setBounds(120, 56, 227, 20);
+        jTextField4.setBounds(110, 150, 227, 20);
         getContentPane().add(jTextField5);
-        jTextField5.setBounds(122, 148, 227, 20);
+        jTextField5.setBounds(110, 270, 227, 20);
         getContentPane().add(jTextField6);
-        jTextField6.setBounds(122, 179, 227, 20);
+        jTextField6.setBounds(110, 300, 227, 20);
         getContentPane().add(jTextField7);
-        jTextField7.setBounds(122, 210, 227, 20);
+        jTextField7.setBounds(110, 340, 227, 20);
         getContentPane().add(jTextField8);
-        jTextField8.setBounds(122, 241, 227, 20);
+        jTextField8.setBounds(110, 370, 227, 20);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(394, 0, 14, 362);
+        jSeparator2.setBounds(380, 100, 14, 300);
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel9.setText("Número:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(446, 31, 48, 15);
+        jLabel9.setBounds(430, 160, 48, 15);
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel18.setText("Rua:");
         getContentPane().add(jLabel18);
-        jLabel18.setBounds(468, 62, 26, 15);
+        jLabel18.setBounds(460, 190, 26, 15);
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel19.setText("Bairro:");
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(458, 93, 36, 15);
+        jLabel19.setBounds(450, 220, 36, 15);
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel20.setText("Cidade:");
         getContentPane().add(jLabel20);
-        jLabel20.setBounds(451, 124, 43, 15);
+        jLabel20.setBounds(440, 250, 43, 15);
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel21.setText("CEP:");
         getContentPane().add(jLabel21);
-        jLabel21.setBounds(466, 155, 28, 15);
+        jLabel21.setBounds(450, 280, 28, 15);
 
         jLabel22.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel22.setText("Complemento:");
         getContentPane().add(jLabel22);
-        jLabel22.setBounds(412, 186, 82, 15);
+        jLabel22.setBounds(400, 310, 82, 15);
         getContentPane().add(jTextField9);
-        jTextField9.setBounds(504, 60, 227, 20);
+        jTextField9.setBounds(490, 190, 227, 20);
         getContentPane().add(jTextField10);
-        jTextField10.setBounds(504, 91, 227, 20);
+        jTextField10.setBounds(490, 220, 227, 20);
 
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,14 +175,20 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jTextField11);
-        jTextField11.setBounds(504, 29, 227, 20);
+        jTextField11.setBounds(490, 150, 227, 20);
         getContentPane().add(jTextField12);
-        jTextField12.setBounds(504, 153, 227, 20);
+        jTextField12.setBounds(490, 280, 227, 20);
         getContentPane().add(jTextField13);
-        jTextField13.setBounds(504, 122, 227, 20);
+        jTextField13.setBounds(490, 250, 227, 20);
         getContentPane().add(jTextField14);
-        jTextField14.setBounds(504, 184, 227, 20);
+        jTextField14.setBounds(490, 310, 227, 20);
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel1.setText("Usuário");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(130, 110, 70, 22);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,17 +196,9 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(36, 279, 110, 40);
+        jButton1.setBounds(40, 420, 110, 40);
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(621, 279, 110, 40);
-
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Limpar-25.png"))); // NOI18N
         jButton3.setText("Limpar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,29 +206,51 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(239, 279, 110, 40);
+        jButton3.setBounds(320, 420, 110, 40);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setText("Cadastro de Usuário");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 11, 165, 22);
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Cancelar-25.png"))); // NOI18N
+        jButton2.setText("Cancelar");
+        jButton2.setMaximumSize(null);
+        jButton2.setMinimumSize(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(590, 420, 110, 40);
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(0, 100, 720, 2);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Placa", "Chassi", "Dono" }));
+        getContentPane().add(jComboBox2);
+        jComboBox2.setBounds(10, 70, 90, 20);
+
+        jComboBox3.setEditable(true);
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setToolTipText("");
+        getContentPane().add(jComboBox3);
+        jComboBox3.setBounds(130, 70, 400, 20);
+
+        labelMarca2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        labelMarca2.setText("Por:");
+        getContentPane().add(labelMarca2);
+        labelMarca2.setBounds(10, 40, 50, 20);
+
+        labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        labelTitulo.setText("Procurar");
+        getContentPane().add(labelTitulo);
+        labelTitulo.setBounds(10, 10, 120, 22);
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setText("Endereço");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(530, 110, 110, 22);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
 
@@ -237,12 +263,26 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextField11KeyTyped
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -251,12 +291,14 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -270,5 +312,7 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel labelMarca2;
+    private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }
