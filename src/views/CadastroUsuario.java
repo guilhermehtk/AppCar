@@ -7,12 +7,12 @@ package views;
 
 /**
  *
- * @author Alunos
+ * @author guilh
  */
 public class CadastroUsuario extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form CadastroMecanico
+     * Creates new form Cadastro
      */
     public CadastroUsuario() {
         initComponents();
@@ -27,6 +27,12 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        titulo = new javax.swing.JLabel();
+        panelProcurar = new javax.swing.JPanel();
+        labelPor = new javax.swing.JLabel();
+        comboTipo = new javax.swing.JComboBox<String>();
+        comboResultaods = new javax.swing.JComboBox<String>();
+        panelDados = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -34,256 +40,400 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
+        campoCpf = new javax.swing.JTextField();
+        campoNome = new javax.swing.JTextField();
+        campoRg = new javax.swing.JTextField();
+        campoEmail = new javax.swing.JTextField();
+        campoTelefone = new javax.swing.JTextField();
+        campoTelefoneFixo = new javax.swing.JTextField();
+        comboSexo = new javax.swing.JComboBox<String>();
+        panelEndereco = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jComboBox2 = new javax.swing.JComboBox<String>();
-        jComboBox3 = new javax.swing.JComboBox<String>();
-        labelMarca2 = new javax.swing.JLabel();
-        labelTitulo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        campoRua = new javax.swing.JTextField();
+        campoBairro = new javax.swing.JTextField();
+        campoNumero = new javax.swing.JTextField();
+        campoCep = new javax.swing.JTextField();
+        campoCidade = new javax.swing.JTextField();
+        campoComplemento = new javax.swing.JTextField();
+        panelButtons = new javax.swing.JPanel();
+        buttonSalvar = new javax.swing.JButton();
+        buttonLimpar = new javax.swing.JButton();
+        buttonCancelar = new javax.swing.JButton();
+        toolbarCrud = new javax.swing.JToolBar();
+        buttonAdicionar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        buttonEditar = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        buttonExcluir = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
-        setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        getContentPane().setLayout(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(826, 450));
+        setMinimumSize(new java.awt.Dimension(826, 450));
+        setPreferredSize(new java.awt.Dimension(826, 450));
+
+        titulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        titulo.setText("Usuário");
+
+        panelProcurar.setBackground(new java.awt.Color(255, 255, 255));
+        panelProcurar.setBorder(javax.swing.BorderFactory.createTitledBorder("Procurar"));
+
+        labelPor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        labelPor.setText("Por:");
+
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
+        comboTipo.setToolTipText("");
+
+        comboResultaods.setEditable(true);
+        comboResultaods.setToolTipText("");
+
+        javax.swing.GroupLayout panelProcurarLayout = new javax.swing.GroupLayout(panelProcurar);
+        panelProcurar.setLayout(panelProcurarLayout);
+        panelProcurarLayout.setHorizontalGroup(
+            panelProcurarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProcurarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelPor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboResultaods, 0, 574, Short.MAX_VALUE)
+                .addGap(22, 22, 22))
+        );
+        panelProcurarLayout.setVerticalGroup(
+            panelProcurarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProcurarLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(panelProcurarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelPor)
+                    .addComponent(comboResultaods, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
+        );
+
+        panelDados.setBackground(new java.awt.Color(255, 255, 255));
+        panelDados.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
+        panelDados.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setText("Nome:");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(60, 160, 37, 15);
+        panelDados.add(jLabel7);
+        jLabel7.setBounds(50, 30, 37, 20);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText("Sexo:");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(70, 210, 30, 15);
+        panelDados.add(jLabel8);
+        jLabel8.setBounds(50, 210, 30, 20);
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel10.setText("Telefone:");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(50, 340, 51, 15);
+        panelDados.add(jLabel10);
+        jLabel10.setBounds(30, 150, 60, 20);
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setText("Telefone Fixo:");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(20, 370, 76, 15);
+        panelDados.add(jLabel11);
+        jLabel11.setBounds(10, 180, 76, 20);
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("CPF:");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(70, 240, 27, 15);
+        panelDados.add(jLabel12);
+        jLabel12.setBounds(60, 60, 27, 20);
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("RG:");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(80, 280, 21, 15);
+        panelDados.add(jLabel13);
+        jLabel13.setBounds(60, 90, 30, 20);
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setText("Email:");
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(60, 310, 35, 15);
+        panelDados.add(jLabel14);
+        jLabel14.setBounds(50, 120, 35, 20);
+        panelDados.add(campoCpf);
+        campoCpf.setBounds(90, 60, 240, 20);
+        panelDados.add(campoNome);
+        campoNome.setBounds(90, 30, 240, 20);
+        panelDados.add(campoRg);
+        campoRg.setBounds(90, 90, 240, 20);
+        panelDados.add(campoEmail);
+        campoEmail.setBounds(90, 120, 240, 20);
+        panelDados.add(campoTelefone);
+        campoTelefone.setBounds(90, 150, 240, 20);
+        panelDados.add(campoTelefoneFixo);
+        campoTelefoneFixo.setBounds(90, 180, 240, 20);
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Homem", "Mulher", "Outro" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboSexo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
+        comboSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboSexoActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(110, 210, 112, 20);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(110, 240, 227, 20);
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(110, 150, 227, 20);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(110, 270, 227, 20);
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(110, 300, 227, 20);
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(110, 340, 227, 20);
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(110, 370, 227, 20);
+        panelDados.add(comboSexo);
+        comboSexo.setBounds(90, 210, 112, 20);
 
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(380, 100, 14, 300);
+        panelEndereco.setBackground(new java.awt.Color(255, 255, 255));
+        panelEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+        panelEndereco.setLayout(null);
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel9.setText("Número:");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(430, 160, 48, 15);
+        panelEndereco.add(jLabel9);
+        jLabel9.setBounds(50, 30, 50, 20);
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel18.setText("Rua:");
-        getContentPane().add(jLabel18);
-        jLabel18.setBounds(460, 190, 26, 15);
+        panelEndereco.add(jLabel18);
+        jLabel18.setBounds(60, 60, 30, 20);
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel19.setText("Bairro:");
-        getContentPane().add(jLabel19);
-        jLabel19.setBounds(450, 220, 36, 15);
+        panelEndereco.add(jLabel19);
+        jLabel19.setBounds(50, 90, 40, 20);
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel20.setText("Cidade:");
-        getContentPane().add(jLabel20);
-        jLabel20.setBounds(440, 250, 43, 15);
+        panelEndereco.add(jLabel20);
+        jLabel20.setBounds(50, 120, 43, 20);
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel21.setText("CEP:");
-        getContentPane().add(jLabel21);
-        jLabel21.setBounds(450, 280, 28, 15);
+        panelEndereco.add(jLabel21);
+        jLabel21.setBounds(60, 150, 40, 20);
 
         jLabel22.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel22.setText("Complemento:");
-        getContentPane().add(jLabel22);
-        jLabel22.setBounds(400, 310, 82, 15);
-        getContentPane().add(jTextField9);
-        jTextField9.setBounds(490, 190, 227, 20);
-        getContentPane().add(jTextField10);
-        jTextField10.setBounds(490, 220, 227, 20);
+        panelEndereco.add(jLabel22);
+        jLabel22.setBounds(10, 180, 82, 20);
+        panelEndereco.add(campoRua);
+        campoRua.setBounds(100, 60, 227, 20);
+        panelEndereco.add(campoBairro);
+        campoBairro.setBounds(100, 90, 227, 20);
 
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        campoNumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                campoNumeroActionPerformed(evt);
             }
         });
-        jTextField11.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField11KeyTyped(evt);
+                campoNumeroKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField11);
-        jTextField11.setBounds(490, 150, 227, 20);
-        getContentPane().add(jTextField12);
-        jTextField12.setBounds(490, 280, 227, 20);
-        getContentPane().add(jTextField13);
-        jTextField13.setBounds(490, 250, 227, 20);
-        getContentPane().add(jTextField14);
-        jTextField14.setBounds(490, 310, 227, 20);
+        panelEndereco.add(campoNumero);
+        campoNumero.setBounds(100, 30, 227, 20);
+        panelEndereco.add(campoCep);
+        campoCep.setBounds(100, 150, 227, 20);
+        panelEndereco.add(campoCidade);
+        campoCidade.setBounds(100, 120, 227, 20);
+        panelEndereco.add(campoComplemento);
+        campoComplemento.setBounds(100, 180, 227, 20);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setText("Usuário");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(130, 110, 70, 22);
+        panelButtons.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
+        buttonSalvar.setText("Salvar");
+        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonSalvarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(40, 420, 110, 40);
+        panelButtons.add(buttonSalvar);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Limpar-25.png"))); // NOI18N
-        jButton3.setText("Limpar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        buttonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Limpar-25.png"))); // NOI18N
+        buttonLimpar.setText("Limpar");
+        buttonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                buttonLimparActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(320, 420, 110, 40);
+        panelButtons.add(buttonLimpar);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Cancelar-25.png"))); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.setMaximumSize(null);
-        jButton2.setMinimumSize(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Cancelar-25.png"))); // NOI18N
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.setMaximumSize(null);
+        buttonCancelar.setMinimumSize(null);
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(590, 420, 110, 40);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(0, 100, 720, 2);
+        panelButtons.add(buttonCancelar);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Placa", "Chassi", "Dono" }));
-        getContentPane().add(jComboBox2);
-        jComboBox2.setBounds(10, 70, 90, 20);
+        toolbarCrud.setBackground(new java.awt.Color(204, 204, 255));
+        toolbarCrud.setFloatable(false);
+        toolbarCrud.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        toolbarCrud.setRollover(true);
 
-        jComboBox3.setEditable(true);
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setToolTipText("");
-        getContentPane().add(jComboBox3);
-        jComboBox3.setBounds(130, 70, 400, 20);
+        buttonAdicionar.setBackground(new java.awt.Color(204, 204, 255));
+        buttonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Adicionar-50.png"))); // NOI18N
+        buttonAdicionar.setFocusable(false);
+        buttonAdicionar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonAdicionar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAdicionarActionPerformed(evt);
+            }
+        });
+        toolbarCrud.add(buttonAdicionar);
+        toolbarCrud.add(jSeparator1);
 
-        labelMarca2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca2.setText("Por:");
-        getContentPane().add(labelMarca2);
-        labelMarca2.setBounds(10, 40, 50, 20);
+        buttonEditar.setBackground(new java.awt.Color(204, 204, 255));
+        buttonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Editar-50.png"))); // NOI18N
+        buttonEditar.setFocusable(false);
+        buttonEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarCrud.add(buttonEditar);
 
-        labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        labelTitulo.setText("Procurar");
-        getContentPane().add(labelTitulo);
-        labelTitulo.setBounds(10, 10, 120, 22);
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
+        toolbarCrud.add(jSeparator2);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel2.setText("Endereço");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(530, 110, 110, 22);
+        buttonExcluir.setBackground(new java.awt.Color(204, 204, 255));
+        buttonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Lixeira-50.png"))); // NOI18N
+        buttonExcluir.setFocusable(false);
+        buttonExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarCrud.add(buttonExcluir);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(360, 360, 360)
+                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(panelEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(panelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(titulo)
+                .addGap(8, 8, 8)
+                .addComponent(panelProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(30, 30, 30)
+                .addComponent(panelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void comboSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSexoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comboSexoActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void campoNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNumeroActionPerformed
 
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_campoNumeroActionPerformed
 
-    private void jTextField11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyTyped
+    private void campoNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNumeroKeyTyped
         String caracteres = "0123456789";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-    }//GEN-LAST:event_jTextField11KeyTyped
+    }//GEN-LAST:event_campoNumeroKeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_buttonLimparActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonCancelarActionPerformed
 
+    private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonAdicionarActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CadastroUsuario().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton buttonAdicionar;
+    private javax.swing.JButton buttonCancelar;
+    private javax.swing.JButton buttonEditar;
+    private javax.swing.JButton buttonExcluir;
+    private javax.swing.JButton buttonLimpar;
+    private javax.swing.JButton buttonSalvar;
+    private javax.swing.JTextField campoBairro;
+    private javax.swing.JTextField campoCep;
+    private javax.swing.JTextField campoCidade;
+    private javax.swing.JTextField campoComplemento;
+    private javax.swing.JTextField campoCpf;
+    private javax.swing.JTextField campoEmail;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField campoNumero;
+    private javax.swing.JTextField campoRg;
+    private javax.swing.JTextField campoRua;
+    private javax.swing.JTextField campoTelefone;
+    private javax.swing.JTextField campoTelefoneFixo;
+    private javax.swing.JComboBox<String> comboResultaods;
+    private javax.swing.JComboBox<String> comboSexo;
+    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -291,28 +441,20 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JLabel labelMarca2;
-    private javax.swing.JLabel labelTitulo;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JLabel labelPor;
+    private javax.swing.JPanel panelButtons;
+    private javax.swing.JPanel panelDados;
+    private javax.swing.JPanel panelEndereco;
+    private javax.swing.JPanel panelProcurar;
+    private javax.swing.JLabel titulo;
+    private javax.swing.JToolBar toolbarCrud;
     // End of variables declaration//GEN-END:variables
 }

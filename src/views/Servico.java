@@ -36,15 +36,21 @@ public class Servico extends javax.swing.JInternalFrame {
         cancela = new javax.swing.JButton();
         cadastra = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lista de Serviços");
+        setMaximumSize(new java.awt.Dimension(654, 557));
+        setMinimumSize(new java.awt.Dimension(654, 557));
+        setPreferredSize(new java.awt.Dimension(654, 557));
 
         jPanel1.setLayout(null);
 
         labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        labelTitulo.setText("Serviço");
+        labelTitulo.setText("Lista de Serviços");
+        labelTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(labelTitulo);
-        labelTitulo.setBounds(260, 10, 70, 22);
+        labelTitulo.setBounds(230, 10, 140, 22);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,7 +110,7 @@ public class Servico extends javax.swing.JInternalFrame {
         }
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 50, 570, 420);
+        jScrollPane1.setBounds(30, 40, 580, 420);
 
         cadastra3.setText("Adcionar");
         cadastra3.addActionListener(new java.awt.event.ActionListener() {
@@ -132,8 +138,9 @@ public class Servico extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(cancela);
-        cancela.setBounds(410, 480, 110, 40);
+        cancela.setBounds(350, 470, 110, 40);
 
+        cadastra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
         cadastra.setText("Salvar");
         cadastra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,10 +148,9 @@ public class Servico extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(cadastra);
-        cadastra.setBounds(30, 480, 110, 40);
+        cadastra.setBounds(170, 470, 110, 40);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(-1, 0, 590, 540);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

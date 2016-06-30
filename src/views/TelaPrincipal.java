@@ -7,9 +7,11 @@ import javax.swing.JInternalFrame;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    CadastroCarro cadastroCarro = new CadastroCarro();
     CadastroMecanico cadastroMecanico = new CadastroMecanico();
     CadastroUsuario cadastroUsuario = new CadastroUsuario();
-    CadastraCarro cadastroCarro = new CadastraCarro();
+    OrdemServico ordemServico = new OrdemServico();
+    Servico listaServicos = new Servico();
 
     public TelaPrincipal() {
         initComponents();
@@ -50,13 +52,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         buttonSettings = new javax.swing.JButton();
         menuPrincipal = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menuUsuario = new javax.swing.JMenuItem();
+        menuCarro = new javax.swing.JMenuItem();
         menuOs = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        menuGeraOs = new javax.swing.JMenuItem();
+        menuListaServico = new javax.swing.JMenuItem();
         menuPainelControle = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        menuMecanico = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -229,59 +231,59 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastros.setText("Cadastros");
         menuCadastros.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Usuario-25.png"))); // NOI18N
-        jMenuItem2.setText("Usuário");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Usuario-25.png"))); // NOI18N
+        menuUsuario.setText("Usuário");
+        menuUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuUsuarioActionPerformed(evt);
             }
         });
-        menuCadastros.add(jMenuItem2);
+        menuCadastros.add(menuUsuario);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Carro-25.png"))); // NOI18N
-        jMenuItem3.setText("Carros");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        menuCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Carro-25.png"))); // NOI18N
+        menuCarro.setText("Carros");
+        menuCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                menuCarroActionPerformed(evt);
             }
         });
-        menuCadastros.add(jMenuItem3);
+        menuCadastros.add(menuCarro);
 
         menuPrincipal.add(menuCadastros);
 
         menuOs.setText("O.S");
         menuOs.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/OS-25.png"))); // NOI18N
-        jMenuItem4.setText("Abrir O.S");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        menuGeraOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/OS-25.png"))); // NOI18N
+        menuGeraOs.setText("Abrir O.S");
+        menuGeraOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                menuGeraOsActionPerformed(evt);
             }
         });
-        menuOs.add(jMenuItem4);
+        menuOs.add(menuGeraOs);
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Pistao-25.png"))); // NOI18N
-        jMenuItem5.setText("Serviços ");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        menuListaServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Pistao-25.png"))); // NOI18N
+        menuListaServico.setText("Serviços ");
+        menuListaServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                menuListaServicoActionPerformed(evt);
             }
         });
-        menuOs.add(jMenuItem5);
+        menuOs.add(menuListaServico);
 
         menuPrincipal.add(menuOs);
 
         menuPainelControle.setText("Painel de Controle");
 
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Mecanico-25.png"))); // NOI18N
-        jMenuItem6.setText("Cadastro de Mecânico");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        menuMecanico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Mecanico-25.png"))); // NOI18N
+        menuMecanico.setText("Cadastro de Mecânico");
+        menuMecanico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                menuMecanicoActionPerformed(evt);
             }
         });
-        menuPainelControle.add(jMenuItem6);
+        menuPainelControle.add(menuMecanico);
 
         menuPrincipal.add(menuPainelControle);
 
@@ -306,24 +308,40 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addInternalFrame(JInternalFrame internal) {
-        jDesktopPane1.add(internal, 0);
-internal.setBounds(0, 0,300,300);
-        internal.setBackground(Color.white);
+        // Adicionando ao DesktopPane
+        jDesktopPane1.add(internal);
+
+        // Centralizando
+        centralizeInternalFrame(internal);
+
+        // Visível
         internal.setVisible(true);
     }
 
     private void disposeAll() {
+        // Fechando Todos os JInternalFrames Abertos
         JInternalFrame[] array = jDesktopPane1.getAllFrames();
         for (JInternalFrame internals : array) {
             internals.dispose();
         }
     }
 
-    private void resizeInternalsFrames() {
-        int x = jDesktopPane1.getHeight() - footer.getHeight() - jToolbarTop.getHeight();
+    private void centralizeInternalFrame(JInternalFrame internal) {
+        // Centraliza os JInternalFrames
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = internal.getSize();
+        internal.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+    }
+
+    private void onResize() {
+        // Centraliza todos os JInternalFrames quando há resize do JDesktopPane
         JInternalFrame[] array = jDesktopPane1.getAllFrames();
         for (JInternalFrame internal : array) {
-            internal.setBounds(0, jToolbarTop.getHeight(), jDesktopPane1.getWidth(), x);
+            Dimension desktopSize = jDesktopPane1.getSize();
+            Dimension jInternalFrameSize = internal.getSize();
+            internal.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                    (desktopSize.height - jInternalFrameSize.height) / 2);
         }
     }
 
@@ -331,6 +349,7 @@ internal.setBounds(0, 0,300,300);
         Boolean flag = false;
         JInternalFrame[] array = jDesktopPane1.getAllFrames();
 
+        // Removendo se estiver aberto
         for (JInternalFrame internals : array) {
             if (internals.equals(internal)) {
                 internals.dispose();
@@ -339,30 +358,32 @@ internal.setBounds(0, 0,300,300);
                 break;
             }
         }
+
+        // Adicionando caso não esteja aberto
         if (!flag) {
             addInternalFrame(internal);
         }
     }
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
         addInternal(cadastroUsuario);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menuUsuarioActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void menuMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanicoActionPerformed
         addInternal(cadastroMecanico);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_menuMecanicoActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void menuCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCarroActionPerformed
         addInternal(cadastroCarro);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_menuCarroActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        addInternal(cadastroUsuario);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void menuGeraOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGeraOsActionPerformed
+        addInternal(ordemServico);
+    }//GEN-LAST:event_menuGeraOsActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        addInternal(cadastroUsuario);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void menuListaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServicoActionPerformed
+        addInternal(listaServicos);
+    }//GEN-LAST:event_menuListaServicoActionPerformed
 
     private void buttonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUsuarioActionPerformed
         addInternal(cadastroUsuario);
@@ -373,11 +394,11 @@ internal.setBounds(0, 0,300,300);
     }//GEN-LAST:event_buttonCarroActionPerformed
 
     private void buttoOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoOsActionPerformed
-        addInternal(cadastroUsuario);
+        addInternal(ordemServico);
     }//GEN-LAST:event_buttoOsActionPerformed
 
     private void buttonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonServicoActionPerformed
-        addInternal(cadastroUsuario);
+        addInternal(listaServicos);
     }//GEN-LAST:event_buttonServicoActionPerformed
 
     private void buttonMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMecanicoActionPerformed
@@ -389,19 +410,19 @@ internal.setBounds(0, 0,300,300);
     }//GEN-LAST:event_buttonSettingsActionPerformed
 
     private void jDesktopPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentResized
-        resizeInternalsFrames();
+        onResize();
     }//GEN-LAST:event_jDesktopPane1ComponentResized
 
     private void jDesktopPane1AncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jDesktopPane1AncestorResized
-     
+
     }//GEN-LAST:event_jDesktopPane1AncestorResized
 
     private void jDesktopPane1AncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jDesktopPane1AncestorMoved
-       
+
     }//GEN-LAST:event_jDesktopPane1AncestorMoved
 
     private void jDesktopPane1ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentMoved
-      
+
     }//GEN-LAST:event_jDesktopPane1ComponentMoved
 
     /**
@@ -453,17 +474,17 @@ internal.setBounds(0, 0,300,300);
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar jToolbarTop;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuCadastros;
+    private javax.swing.JMenuItem menuCarro;
+    private javax.swing.JMenuItem menuGeraOs;
+    private javax.swing.JMenuItem menuListaServico;
+    private javax.swing.JMenuItem menuMecanico;
     private javax.swing.JMenu menuOs;
     private javax.swing.JMenu menuPainelControle;
     private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JMenuItem menuUsuario;
     // End of variables declaration//GEN-END:variables
 }
