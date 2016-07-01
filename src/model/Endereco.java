@@ -10,7 +10,7 @@ public class Endereco {
     private String complemento;
     private String cep;
 
-    public Endereco(String numero, String rua, String bairro, String cidade, String cep,String complemento) {
+    public Endereco(String numero, String rua, String bairro, String cidade, String cep, String complemento) {
         this.numero = numero;
         this.rua = rua;
         this.bairro = bairro;

@@ -30,7 +30,7 @@ public class OrdemServicoDao implements InterfaceDao {
             stmt.setString(1, os.getTipo());
             stmt.setString(2, os.getData().toString());
             stmt.setString(3, os.getDescricao());
-             stmt.setString(4, os.getSituacao());
+            stmt.setString(4, os.getSituacao());
             stmt.setInt(5, os.getCliCod());
             stmt.setInt(6, os.getCarCod());
 
@@ -75,7 +75,7 @@ public class OrdemServicoDao implements InterfaceDao {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // seta os valores
-             stmt.setString(1, os.getTipo());
+            stmt.setString(1, os.getTipo());
             stmt.setString(2, os.getData().toString());
             stmt.setString(3, os.getDescricao());
             stmt.setString(4, os.getSituacao());
@@ -109,7 +109,7 @@ public class OrdemServicoDao implements InterfaceDao {
 
             //cria o os
             while (rs.next()) {
-                os = new OrdemServico(rs.getString(2),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
+                os = new OrdemServico(rs.getString(2), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7));
                 os.setCod(rs.getInt(1));
                 os.setData(Timestamp.valueOf(rs.getString(3)));
             }
@@ -135,7 +135,7 @@ public class OrdemServicoDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                OrdemServico os = new OrdemServico(rs.getString(2),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
+                OrdemServico os = new OrdemServico(rs.getString(2), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7));
                 os.setCod(rs.getInt(1));
                 os.setData(Timestamp.valueOf(rs.getString(3)));
                 lista.add(os);

@@ -9,9 +9,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     CadastroCarro cadastroCarro = new CadastroCarro();
     CadastroMecanico cadastroMecanico = new CadastroMecanico();
-    CadastroUsuario cadastroUsuario = new CadastroUsuario();
+    CadastroCliente cadastroCliente = new CadastroCliente();
     OrdemServico ordemServico = new OrdemServico();
-    Servico listaServicos = new Servico();
+    ListaServicos listaServicos = new ListaServicos();
 
     public TelaPrincipal() {
         initComponents();
@@ -60,6 +60,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuPainelControle = new javax.swing.JMenu();
         menuMecanico = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
+        menuMecanico1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AppCar");
@@ -232,7 +233,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastros.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         menuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Usuario-25.png"))); // NOI18N
-        menuUsuario.setText("Usuário");
+        menuUsuario.setText("Cliente");
         menuUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuUsuarioActionPerformed(evt);
@@ -264,7 +265,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuOs.add(menuGeraOs);
 
         menuListaServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Pistao-25.png"))); // NOI18N
-        menuListaServico.setText("Serviços ");
+        menuListaServico.setText("Lista de Serviços ");
         menuListaServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuListaServicoActionPerformed(evt);
@@ -289,6 +290,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuAjuda.setText("Ajuda");
         menuAjuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        menuMecanico1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
+        menuMecanico1.setText("Sobre");
+        menuMecanico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMecanico1ActionPerformed(evt);
+            }
+        });
+        menuAjuda.add(menuMecanico1);
+
         menuPrincipal.add(menuAjuda);
 
         setJMenuBar(menuPrincipal);
@@ -366,7 +377,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
-        addInternal(cadastroUsuario);
+        addInternal(cadastroCliente);
     }//GEN-LAST:event_menuUsuarioActionPerformed
 
     private void menuMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanicoActionPerformed
@@ -386,7 +397,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuListaServicoActionPerformed
 
     private void buttonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUsuarioActionPerformed
-        addInternal(cadastroUsuario);
+        addInternal(cadastroCliente);
     }//GEN-LAST:event_buttonUsuarioActionPerformed
 
     private void buttonCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarroActionPerformed
@@ -406,7 +417,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonMecanicoActionPerformed
 
     private void buttonSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSettingsActionPerformed
-        addInternal(cadastroUsuario);
+        addInternal(cadastroCliente);
     }//GEN-LAST:event_buttonSettingsActionPerformed
 
     private void jDesktopPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentResized
@@ -424,6 +435,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jDesktopPane1ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentMoved
 
     }//GEN-LAST:event_jDesktopPane1ComponentMoved
+
+    private void menuMecanico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanico1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuMecanico1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,6 +497,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuGeraOs;
     private javax.swing.JMenuItem menuListaServico;
     private javax.swing.JMenuItem menuMecanico;
+    private javax.swing.JMenuItem menuMecanico1;
     private javax.swing.JMenu menuOs;
     private javax.swing.JMenu menuPainelControle;
     private javax.swing.JMenuBar menuPrincipal;

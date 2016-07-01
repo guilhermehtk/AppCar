@@ -18,7 +18,7 @@ public class ServicoDao implements InterfaceDao {
 
     public int add(Object ser) {
         // cria a query
-        String sql = "insert into Servicos (serDescricao,serValor,ser_osCod,ser_mecCod) values (?,?,?,?)";
+        String sql = "insert into Servicos (svcDescricao,svcValor) values (?,?)";
         // cast
         Servico servico = (Servico) ser;
         try {
@@ -28,8 +28,6 @@ public class ServicoDao implements InterfaceDao {
             // seta os valores
             stmt.setString(1, servico.getDescricao());
             stmt.setDouble(2, servico.getValor());
-            stmt.setInt(3, servico.getOsCod());
-             stmt.setInt(3, servico.getMecCod());
             // executa
             stmt.execute();
             // fecha a conexão
@@ -44,7 +42,7 @@ public class ServicoDao implements InterfaceDao {
 
     public void remove(int id) {
         // cria a query
-        String sql = "delete from Servicos where serCod=?;";
+        String sql = "delete from Servicos where svcCod=?;";
         try {
             // prepared statement para deleção
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -63,7 +61,7 @@ public class ServicoDao implements InterfaceDao {
 
     public void altera(int id, Object ser) {
         // cria a query
-        String sql = "update Servicos set serDescricao=?,serValor=?,ser_osCod=?,ser_mecCod=? where serCod=?";
+        String sql = "update Servico set svcDescricao=?,svcValor=? where svcCod=?";
         // cast
         Servico servico = (Servico) ser;
         try {
@@ -73,9 +71,7 @@ public class ServicoDao implements InterfaceDao {
             // seta os valores
             stmt.setString(1, servico.getDescricao());
             stmt.setDouble(2, servico.getValor());
-            stmt.setInt(3, servico.getOsCod());
-            stmt.setInt(4, servico.getMecCod());
-            stmt.setInt(5, id);
+            stmt.setInt(3, servico.getCod());
 
             // executa
             stmt.execute();
@@ -89,7 +85,7 @@ public class ServicoDao implements InterfaceDao {
     @Override
     public Servico get(int id) {
         // cria a query
-        String sql = "select * from Servicos where serCod=?;";
+        String sql = "select * from Servicos where svcCod=?;";
         Servico servico = null;
         try {
             // prepared statement para seleção
@@ -103,7 +99,7 @@ public class ServicoDao implements InterfaceDao {
 
             //cria o servico
             while (rs.next()) {
-                servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4),rs.getInt(5));
+                servico = new Servico(rs.getString(2), rs.getDouble(3));
                 servico.setCod(rs.getInt(1));
             }
             // fecha a conexão
@@ -113,8 +109,8 @@ public class ServicoDao implements InterfaceDao {
         }
         return servico;
     }
-    
-      public ArrayList<Servico> getAll() {
+
+    public ArrayList<Servico> getAll() {
         // cria a query
         String sql = "select * from Servicos;";
         // cria o ArrayList
@@ -128,7 +124,7 @@ public class ServicoDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                Servico servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4),rs.getInt(5));
+                Servico servico = new Servico(rs.getString(2), rs.getDouble(3));
                 servico.setCod(rs.getInt(1));
                 lista.add(servico);
             }
@@ -139,35 +135,4 @@ public class ServicoDao implements InterfaceDao {
         }
         return lista;
     }
-
-
-    public ArrayList<Servico> getOS(int os) {
-        // cria a query
-        String sql = "select * from Servicos where ser_osCod=?;";
-        // cria o ArrayList
-        ArrayList<Servico> lista = null;
-        try {
-            // prepared statement para inserção
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-             // seta os valores
-            stmt.setInt(1, os);
-            
-            // executa
-            ResultSet rs = stmt.executeQuery();
-
-            //cria a lista
-            while (rs.next()) {
-                Servico servico = new Servico(rs.getString(2), rs.getDouble(3), rs.getInt(4),rs.getInt(5));
-                servico.setCod(rs.getInt(1));
-                lista.add(servico);
-            }
-            // fecha a conexão
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return lista;
-    }
-
 }

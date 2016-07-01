@@ -7,24 +7,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LastInsertDao {
-    
+
     private Connection con;
-    
-    public LastInsertDao(){
-        this.con=getConnection();
+
+    public LastInsertDao() {
+        this.con = getConnection();
     }
-    
-    public int getLastInsert(){
+
+    public int getLastInsert() {
         // cria a query
         String sql = "SELECT LAST_INSERT_ID()";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
-            
-             ResultSet rs = stmt.executeQuery();
+
+            ResultSet rs = stmt.executeQuery();
 
             //pega resultado
             while (rs.next()) {
-               return rs.getInt(1);
+                return rs.getInt(1);
             }
             stmt.close();
         } catch (SQLException e) {

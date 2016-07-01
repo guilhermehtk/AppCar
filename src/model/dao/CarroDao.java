@@ -18,7 +18,7 @@ public class CarroDao implements InterfaceDao {
 
     public int add(Object car) {
         // cria a query
-        String sql = "insert into carros (carMarca,carModelo,carCor,carAno,carNumeroChassi,carQuilometragem,carPlaca,carObs) values (?,?,?,?,?,?,?,?)";      
+        String sql = "insert into carros (carMarca,carModelo,carCor,carAno,carNumeroChassi,carQuilometragem,carPlaca,carObs) values (?,?,?,?,?,?,?,?)";
         // cast
         Carro carro = (Carro) car;
         // cria int de id
@@ -39,14 +39,14 @@ public class CarroDao implements InterfaceDao {
 
             // executa
             stmt.execute();
-           
+
             // pega o id
             id = this.getLastInsert();
-            
-           // adiciona um dono na tabela n para n
+
+            // adiciona um dono na tabela n para n
             this.addDono(id, carro.getDono());
-            
-           // fecha a conexão
+
+            // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -54,18 +54,18 @@ public class CarroDao implements InterfaceDao {
         // retorna o id
         return id;
     }
-    
-    public int getLastInsert(){
+
+    public int getLastInsert() {
         // cria a query
         String sql = "SELECT LAST_INSERT_ID()";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
-            
-             ResultSet rs = stmt.executeQuery();
+
+            ResultSet rs = stmt.executeQuery();
 
             //pega resultado
             while (rs.next()) {
-               return rs.getInt(1);
+                return rs.getInt(1);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -110,8 +110,7 @@ public class CarroDao implements InterfaceDao {
             stmt.setString(6, carro.getKm());
             stmt.setString(5, carro.getPlaca());
             stmt.setString(6, carro.getObs());
-            stmt.setInt(7,id);
-            
+            stmt.setInt(7, id);
 
             // executa
             stmt.execute();
@@ -139,7 +138,7 @@ public class CarroDao implements InterfaceDao {
 
             //cria o carro
             while (rs.next()) {
-                carro = new Carro(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
+                carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
                 carro.setCod(rs.getInt(1));
             }
             // fecha a conexão
@@ -164,7 +163,7 @@ public class CarroDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                Carro carro = new Carro(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
+                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
                 carro.setCod(rs.getInt(1));
                 lista.add(carro);
             }
@@ -175,15 +174,15 @@ public class CarroDao implements InterfaceDao {
         }
         return lista;
     }
-    
+
     private void addDono(int idCarro, int idDono) {
         // cria a query
-        String sql = "insert into Carros_Pessoas (ccl_carCod,ccl_pesCod) values" + "(" + idCarro + "," + idDono + ");";   
-        
+        String sql = "insert into Carros_Pessoas (ccl_carCod,ccl_pesCod) values" + "(" + idCarro + "," + idDono + ");";
+
         try {
             // prepara o statement
             PreparedStatement stmt = con.prepareStatement(sql);
-            
+
             // executa
             stmt.execute();
         } catch (SQLException e) {

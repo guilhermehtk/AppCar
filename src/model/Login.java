@@ -1,6 +1,7 @@
 package model;
 
 public class Login {
+
     private int cod;
     private String usuario;
     private String senha;
@@ -33,6 +34,5 @@ public class Login {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
 
 }

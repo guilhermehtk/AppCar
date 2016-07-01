@@ -103,7 +103,5 @@ public class Carro {
     public void setDono(int dono) {
         this.dono = dono;
     }
-    
-    
 
 }

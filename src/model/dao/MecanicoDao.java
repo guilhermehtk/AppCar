@@ -39,7 +39,7 @@ public class MecanicoDao implements InterfaceDao {
             stmt.setString(7, mecanico.getRg());
             stmt.setInt(8, mecanico.getTipo());
             stmt.setInt(9, endDao.add(mecanico.getEndereco()));
-            stmt.setInt(10,loginDao.add(mecanico.getLogin()));
+            stmt.setInt(10, loginDao.add(mecanico.getLogin()));
 
             // executa
             stmt.execute();
@@ -104,7 +104,7 @@ public class MecanicoDao implements InterfaceDao {
 
             // altera o endereço
             endDao.altera(mecanico.getEndereco().getCod(), mecanico.getEndereco());
-            
+
             // altera o login
             loginDao.altera(mecanico.getLogin().getCod(), mecanico.getLogin());
         } catch (SQLException e) {
@@ -133,7 +133,7 @@ public class MecanicoDao implements InterfaceDao {
 
             //cria o mecanico
             while (rs.next()) {
-                mecanico = new Mecanico(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),endDao.get(rs.getInt(9)),loginDao.get(rs.getInt(10)));
+                mecanico = new Mecanico(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), endDao.get(rs.getInt(9)), loginDao.get(rs.getInt(10)));
                 mecanico.setCodigo(rs.getInt(1));
             }
             // fecha a conexão
@@ -147,7 +147,7 @@ public class MecanicoDao implements InterfaceDao {
     public ArrayList<Mecanico> getAll() {
         // dao para inserir o endereco
         EnderecoDao endDao = new EnderecoDao();
-           // dao para sleecionar o login
+        // dao para sleecionar o login
         LoginDao loginDao = new LoginDao();
         // cria a query
         String sql = "select * from pessoas where pesTipo=3;";
@@ -162,7 +162,7 @@ public class MecanicoDao implements InterfaceDao {
 
             //joga resultado da consulta no ArrayList
             while (rs.next()) {
-                Mecanico mecanico = new Mecanico(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),endDao.get(rs.getInt(9)), loginDao.get(rs.getInt(10)));
+                Mecanico mecanico = new Mecanico(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), endDao.get(rs.getInt(9)), loginDao.get(rs.getInt(10)));
                 mecanico.setCodigo(rs.getInt(1));
                 lista.add(mecanico);
             }

@@ -12,7 +12,7 @@ public class OrdemServico {
     private int cliCod;
     private int carCod;
 
-    public OrdemServico(String tipo, String situacao, String descricao, int carCod,int cliCod) {
+    public OrdemServico(String tipo, String situacao, String descricao, int carCod, int cliCod) {
         this.tipo = tipo;
         this.situacao = situacao;
         this.descricao = descricao;
@@ -76,5 +76,4 @@ public class OrdemServico {
         this.carCod = carCod;
     }
 
-    
 }

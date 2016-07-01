@@ -1,28 +1,15 @@
 package model;
 
 public class Servico {
+
     private int cod;
     private String descricao;
-    private int osCod;
-    private int mecCod;
     private double valor;
 
-    public Servico(String descricao,double valor, int osCod,int mecCod) {
+    public Servico(String descricao, double valor) {
         this.descricao = descricao;
-        this.osCod = osCod;
         this.valor = valor;
-        this.mecCod = mecCod;
     }
-
-    public int getMecCod() {
-        return mecCod;
-    }
-
-    public void setMecCod(int mecCod) {
-        this.mecCod = mecCod;
-    }
-    
-    
 
     public double getValor() {
         return valor;
@@ -31,7 +18,7 @@ public class Servico {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    
+
     public int getCod() {
         return cod;
     }
@@ -46,14 +33,6 @@ public class Servico {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public int getOsCod() {
-        return osCod;
-    }
-
-    public void setOsCod(int osCod) {
-        this.osCod = osCod;
     }
 
 }

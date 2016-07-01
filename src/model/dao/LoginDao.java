@@ -70,7 +70,7 @@ public class LoginDao implements InterfaceDao {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // seta os valores
-               stmt.setString(1, login.getUsuario());
+            stmt.setString(1, login.getUsuario());
             stmt.setString(2, login.getSenha());
             stmt.setInt(3, id);
 
@@ -100,7 +100,7 @@ public class LoginDao implements InterfaceDao {
 
             //cria o login
             while (rs.next()) {
-                login = new Login(rs.getString(1),rs.getString(2));
+                login = new Login(rs.getString(1), rs.getString(2));
                 login.setCod(rs.getInt(1));
             }
             // fecha a conexão
@@ -125,7 +125,7 @@ public class LoginDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                Login login = new Login(rs.getString(1),rs.getString(2));
+                Login login = new Login(rs.getString(1), rs.getString(2));
                 login.setCod(rs.getInt(1));
                 lista.add(login);
             }
