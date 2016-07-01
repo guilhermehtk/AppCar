@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JInternalFrame;
+import model.Mecanico;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -12,12 +13,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     CadastroCliente cadastroCliente = new CadastroCliente();
     OrdemServico ordemServico = new OrdemServico();
     ListaServicos listaServicos = new ListaServicos();
+    Mecanico usuario;
 
     public TelaPrincipal() {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         this.initMaximized();
-        jLabel2.setText("1.0");
+        labelVersao.setText("1.0");
+        labelUsuario.setText(this.usuario.getNome());
         jToolbarTop.setFloatable(false);
     }
 
@@ -37,11 +40,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         footer = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        labelVersao = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        labelUsuario = new javax.swing.JLabel();
         imagemFundo = new javax.swing.JLabel();
         jToolbarTop = new javax.swing.JToolBar();
         buttonUsuario = new javax.swing.JButton();
@@ -88,7 +91,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         footer.setBackground(new java.awt.Color(255, 255, 255));
         footer.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jLabel2.setText("1.0");
+        labelVersao.setText("1.0");
 
         jLabel3.setText("Versão:");
 
@@ -96,7 +99,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel4.setText(" Usuário:");
 
-        jLabel5.setText("Guilherme Henrique ");
+        labelUsuario.setText("Guilherme Henrique ");
 
         javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
         footer.setLayout(footerLayout);
@@ -105,13 +108,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerLayout.createSequentialGroup()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addComponent(labelUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(4, 4, 4)
-                .addComponent(jLabel2)
+                .addComponent(labelVersao)
                 .addGap(6, 6, 6))
         );
         footerLayout.setVerticalGroup(
@@ -120,12 +123,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
+                        .addComponent(labelVersao)
                         .addComponent(jLabel3))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(jLabel5))))
+                        .addComponent(labelUsuario))))
         );
 
         imagemFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -485,12 +488,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel footer;
     private javax.swing.JLabel imagemFundo;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar jToolbarTop;
+    private javax.swing.JLabel labelUsuario;
+    private javax.swing.JLabel labelVersao;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenuItem menuCarro;

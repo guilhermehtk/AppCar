@@ -136,5 +136,31 @@ public class LoginDao implements InterfaceDao {
         }
         return lista;
     }
+    
+    public Login get(Login log) {
+        // cria a query
+        String sql = "select * from logins where loginUsuario=?;";
+        Login login = null;
+        try {
+            // prepared statement para seleção
+            PreparedStatement stmt = con.prepareStatement(sql);
 
+            // seta os valores
+            stmt.setString(1, log.getUsuario());
+
+            // executa
+            ResultSet rs = stmt.executeQuery();
+
+            //cria o login
+            while (rs.next()) {
+                login = new Login(rs.getString(2),rs.getString(3));
+                login.setCod(rs.getInt(1));
+            }
+            // fecha a conexão
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return login;
+    }
 }

@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Projeto/AppCar/src/model/dao/InterfaceDao.java</file>
             <file>file:/D:/Projeto/AppCar/src/views/TelaPrincipal.java</file>
-            <file>file:/D:/Projeto/AppCar/src/views/CadastroCarro.java</file>
+            <file>file:/D:/Projeto/AppCar/src/control/LoginController.java</file>
+            <file>file:/D:/Projeto/AppCar/src/control/InterfaceControllerCrud.java</file>
+            <file>file:/D:/Projeto/AppCar/src/views/LoginView.java</file>
         </group>
     </open-files>
 </project-private>

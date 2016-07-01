@@ -174,4 +174,35 @@ public class MecanicoDao implements InterfaceDao {
         return lista;
     }
 
+    public Mecanico getLogin(int idLogin){
+        // dao para inserir o endereco
+        EnderecoDao endDao = new EnderecoDao();
+        // dao para sleecionar o login
+        LoginDao loginDao = new LoginDao();
+        // cria a query
+        String sql = "select * from pessoas where pes_loginCod=?;";
+         // cria o objeto
+        Mecanico mecanico = null;
+        try {
+            // prepared statement para inserção
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+               // seta o codigo
+            stmt.setInt(1, idLogin);
+            
+            // executa
+            ResultSet rs = stmt.executeQuery();
+
+            //joga resultado da consulta no ArrayList
+            while (rs.next()) {
+                mecanico = new Mecanico(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), endDao.get(rs.getInt(9)), loginDao.get(rs.getInt(10)));
+                mecanico.setCodigo(rs.getInt(1));
+            }
+            // fecha a conexão
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return mecanico;
+    }
 }

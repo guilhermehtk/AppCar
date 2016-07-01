@@ -1,8 +1,14 @@
 package views;
 
-public class Login extends javax.swing.JFrame {
+import control.LoginController;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+import model.Login;
+import model.Mecanico;
 
-    public Login() {
+public class LoginView extends javax.swing.JFrame {
+
+    public LoginView() {
         initComponents();
     }
 
@@ -95,7 +101,7 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//
     private void campoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoLoginActionPerformed
@@ -105,11 +111,13 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_campoSenhaActionPerformed
 
     private void buttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntrarActionPerformed
-        // TODO add your handling code here:
+        LoginController loginController = new LoginController();
+        Login login = new Login(campoLogin.getText(), Arrays.toString(campoSenha.getPassword()));
+
     }//GEN-LAST:event_buttonEntrarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     public static void main(String args[]) {
@@ -126,20 +134,21 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new LoginView().setVisible(true);
             }
         });
     }
