@@ -92,7 +92,7 @@ public class CarroDao implements InterfaceDao {
         }
     }
 
-    public void altera(int id, Object car) {
+    public void altera(Object car) {
         // cria a query
         String sql = "update carros set carMarca=?,carModelo=?,carCor=?,carAno=?,carNumeroChassi=?,carQuilometragem=?,carPlaca=?,carObs=? where carCod=?";
         // cast
@@ -110,7 +110,7 @@ public class CarroDao implements InterfaceDao {
             stmt.setString(6, carro.getKm());
             stmt.setString(5, carro.getPlaca());
             stmt.setString(6, carro.getObs());
-            stmt.setInt(7, id);
+            stmt.setInt(7, carro.getCod());
 
             // executa
             stmt.execute();

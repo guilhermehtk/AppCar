@@ -60,7 +60,7 @@ public class LoginDao implements InterfaceDao {
         }
     }
 
-    public void altera(int id, Object log) {
+    public void altera(Object log) {
         // cria a query
         String sql = "update logins set loginUsuario=?,loginSenha=? where loginCod=?";
         // cast
@@ -72,7 +72,7 @@ public class LoginDao implements InterfaceDao {
             // seta os valores
             stmt.setString(1, login.getUsuario());
             stmt.setString(2, login.getSenha());
-            stmt.setInt(3, id);
+            stmt.setInt(3, login.getCod());
 
             // executa
             stmt.execute();
@@ -137,7 +137,7 @@ public class LoginDao implements InterfaceDao {
         return lista;
     }
     
-    public Login get(Login log) {
+    public Login getUsuario(Login log) {
         // cria a query
         String sql = "select * from logins where loginUsuario=?;";
         Login login = null;

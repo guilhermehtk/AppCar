@@ -74,7 +74,7 @@ public class MecanicoDao implements InterfaceDao {
     }
 
     @Override
-    public void altera(int id, Object mec) {
+    public void altera(Object mec) {
         // dao para alterar o endereco
         EnderecoDao endDao = new EnderecoDao();
         // dao para alterar o login
@@ -95,7 +95,7 @@ public class MecanicoDao implements InterfaceDao {
             stmt.setString(5, mecanico.getTelefoneF());
             stmt.setString(6, mecanico.getCpf());
             stmt.setString(7, mecanico.getRg());
-            stmt.setInt(8, id);
+            stmt.setInt(8,mecanico.getCodigo());
 
             // executa
             stmt.execute();
@@ -103,10 +103,10 @@ public class MecanicoDao implements InterfaceDao {
             stmt.close();
 
             // altera o endereço
-            endDao.altera(mecanico.getEndereco().getCod(), mecanico.getEndereco());
+            endDao.altera(mecanico.getEndereco());
 
             // altera o login
-            loginDao.altera(mecanico.getLogin().getCod(), mecanico.getLogin());
+            loginDao.altera(mecanico.getLogin());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -15,10 +15,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     ListaServicos listaServicos = new ListaServicos();
     Mecanico usuario;
 
-    public TelaPrincipal() {
+    public TelaPrincipal(int idUsuario) {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         this.initMaximized();
+        
         labelVersao.setText("1.0");
         labelUsuario.setText(this.usuario.getNome());
         jToolbarTop.setFloatable(false);
@@ -473,7 +474,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                new TelaPrincipal(0).setVisible(true);
             }
         });
     }

@@ -7,15 +7,13 @@ public class OrdemServico {
     private int cod;
     private String tipo;
     private Timestamp data;
-    private String situacao;
-    private String descricao;
+    private int situacao;
     private int cliCod;
     private int carCod;
 
-    public OrdemServico(String tipo, String situacao, String descricao, int carCod, int cliCod) {
+    public OrdemServico(String tipo, int situacao, int carCod, int cliCod) {
         this.tipo = tipo;
         this.situacao = situacao;
-        this.descricao = descricao;
         this.cliCod = cliCod;
         this.carCod = carCod;
     }
@@ -44,20 +42,12 @@ public class OrdemServico {
         this.data = data;
     }
 
-    public String getSituacao() {
+    public int getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(String situacao) {
+    public void setSituacao(int situacao) {
         this.situacao = situacao;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public int getCliCod() {

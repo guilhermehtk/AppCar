@@ -13,8 +13,8 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         titulo = new javax.swing.JLabel();
         panelProcurar = new javax.swing.JPanel();
         labelPor = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<String>();
-        comboResultaods = new javax.swing.JComboBox<String>();
+        comboTipo = new javax.swing.JComboBox<>();
+        comboResultaods = new javax.swing.JComboBox<>();
         panelDados = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -29,7 +29,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         campoEmail = new javax.swing.JTextField();
         campoTelefone = new javax.swing.JTextField();
         campoTelefoneFixo = new javax.swing.JTextField();
-        comboSexo = new javax.swing.JComboBox<String>();
+        comboSexo = new javax.swing.JComboBox<>();
         panelDados1 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -44,12 +44,8 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         campoEmail1 = new javax.swing.JTextField();
         campoTelefone1 = new javax.swing.JTextField();
         campoTelefoneFixo1 = new javax.swing.JTextField();
-        comboSexo1 = new javax.swing.JComboBox<String>();
+        comboSexo1 = new javax.swing.JComboBox<>();
         panelEndereco = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         campoRua = new javax.swing.JTextField();
@@ -58,6 +54,10 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         campoCep = new javax.swing.JTextField();
         campoCidade = new javax.swing.JTextField();
         campoComplemento = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         panelButtons = new javax.swing.JPanel();
         buttonSalvar = new javax.swing.JButton();
         buttonLimpar = new javax.swing.JButton();
@@ -87,7 +87,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         campoEmail3 = new javax.swing.JTextField();
         campoTelefone3 = new javax.swing.JTextField();
         campoTelefoneFixo3 = new javax.swing.JTextField();
-        comboSexo3 = new javax.swing.JComboBox<String>();
+        comboSexo3 = new javax.swing.JComboBox<>();
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
 
@@ -104,7 +104,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         labelPor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelPor.setText("Por:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CPF", "RG" }));
         comboTipo.setToolTipText("");
 
         comboResultaods.setEditable(true);
@@ -138,9 +138,9 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         panelDados.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setText("Nome:");
+        jLabel7.setText("Nome*:");
         panelDados.add(jLabel7);
-        jLabel7.setBounds(50, 30, 37, 20);
+        jLabel7.setBounds(37, 30, 50, 20);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText("Sexo:");
@@ -148,7 +148,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         jLabel8.setBounds(50, 210, 30, 20);
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel10.setText("Telefone:");
+        jLabel10.setText("Telefone*:");
         panelDados.add(jLabel10);
         jLabel10.setBounds(30, 150, 60, 20);
 
@@ -158,12 +158,12 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         jLabel11.setBounds(10, 180, 76, 20);
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel12.setText("CPF:");
+        jLabel12.setText("CPF*:");
         panelDados.add(jLabel12);
-        jLabel12.setBounds(60, 60, 27, 20);
+        jLabel12.setBounds(47, 60, 40, 20);
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel13.setText("RG:");
+        jLabel13.setText("RG*:");
         panelDados.add(jLabel13);
         jLabel13.setBounds(60, 90, 30, 20);
 
@@ -197,7 +197,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         campoTelefoneFixo.setBounds(90, 180, 240, 20);
 
         comboSexo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outro" }));
         comboSexo.setEnabled(false);
         comboSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +259,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         campoTelefoneFixo1.setBounds(90, 180, 240, 20);
 
         comboSexo1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboSexo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
+        comboSexo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outro" }));
         comboSexo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboSexo1ActionPerformed(evt);
@@ -273,26 +273,6 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
 
         panelEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
         panelEndereco.setLayout(null);
-
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel9.setText("Número:");
-        panelEndereco.add(jLabel9);
-        jLabel9.setBounds(50, 30, 50, 20);
-
-        jLabel18.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel18.setText("Rua:");
-        panelEndereco.add(jLabel18);
-        jLabel18.setBounds(60, 60, 30, 20);
-
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel19.setText("Bairro:");
-        panelEndereco.add(jLabel19);
-        jLabel19.setBounds(50, 90, 40, 20);
-
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel20.setText("Cidade:");
-        panelEndereco.add(jLabel20);
-        jLabel20.setBounds(50, 120, 43, 20);
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel21.setText("CEP:");
@@ -337,6 +317,26 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         campoComplemento.setEnabled(false);
         panelEndereco.add(campoComplemento);
         campoComplemento.setBounds(100, 180, 227, 20);
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setText("Número*:");
+        panelEndereco.add(jLabel9);
+        jLabel9.setBounds(40, 30, 60, 20);
+
+        jLabel18.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel18.setText("Rua*:");
+        panelEndereco.add(jLabel18);
+        jLabel18.setBounds(60, 60, 40, 20);
+
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel19.setText("Bairro*:");
+        panelEndereco.add(jLabel19);
+        jLabel19.setBounds(50, 90, 41, 20);
+
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel20.setText("Cidade*:");
+        panelEndereco.add(jLabel20);
+        jLabel20.setBounds(45, 120, 48, 20);
 
         buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
@@ -476,7 +476,7 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         campoTelefoneFixo3.setBounds(90, 180, 240, 20);
 
         comboSexo3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboSexo3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
+        comboSexo3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outro" }));
         comboSexo3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboSexo3ActionPerformed(evt);
@@ -548,17 +548,6 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboSexoActionPerformed
 
-    private void campoNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNumeroActionPerformed
-
-    }//GEN-LAST:event_campoNumeroActionPerformed
-
-    private void campoNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNumeroKeyTyped
-        String caracteres = "0123456789";
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_campoNumeroKeyTyped
-
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonSalvarActionPerformed
@@ -582,6 +571,17 @@ public class CadastroMecanico extends javax.swing.JInternalFrame {
     private void comboSexo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSexo3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboSexo3ActionPerformed
+
+    private void campoNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNumeroKeyTyped
+        String caracteres = "0123456789";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_campoNumeroKeyTyped
+
+    private void campoNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNumeroActionPerformed
+
+    }//GEN-LAST:event_campoNumeroActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionar;

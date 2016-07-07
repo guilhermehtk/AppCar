@@ -60,7 +60,7 @@ public class Servico_OSDao implements InterfaceDao {
         }
     }
 
-    public void altera(int id, Object ser) {
+    public void altera(Object ser) {
         // cria a query
         String sql = "update Servicos_OS set ser_osCod=?,ser_mecCod=?,ser_svcCod=? where serCod=?";
         // cast
@@ -73,7 +73,7 @@ public class Servico_OSDao implements InterfaceDao {
             stmt.setInt(1, servico_OS.getOsCod());
             stmt.setInt(2, servico_OS.getMecCod());
             stmt.setInt(3, servico_OS.getSvcCod());
-            stmt.setInt(4, id);
+            stmt.setInt(4, servico_OS.getCod());
 
             // executa
             stmt.execute();

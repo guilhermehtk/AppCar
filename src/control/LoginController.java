@@ -1,7 +1,6 @@
 package control;
 
 import model.Login;
-import model.Mecanico;
 import model.dao.LoginDao;
 import model.dao.MecanicoDao;
 
@@ -11,14 +10,21 @@ public class LoginController {
     MecanicoDao mecanicoDao = new MecanicoDao();
     Login log;
 
-    public Mecanico validaLogin(Login login) {
-        log = loginDao.get(login);
-        if (log.getCod() != 0) {
+    public int validaLogin(Login login) {
+        log = loginDao.getUsuario(login);
+        if (log != null) {
             if (login.getSenha().equals(log.getSenha())) {
-                return mecanicoDao.getLogin(log.getCod());
+                // Validou -> Retorna ID do usuário
+                return mecanicoDao.getLogin(log.getCod()).getCodigo();
+            } else {
+                // Senha Incorreta
+                return 0;
             }
+        } else {
+            // Usuario Incorreto
+            return 1;
         }
-        return null;
+
     }
 
 }

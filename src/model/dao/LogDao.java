@@ -62,7 +62,7 @@ public class LogDao implements InterfaceDao {
         }
     }
 
-    public void altera(int id, Object logs) {
+    public void altera(Object logs) {
         // cria a query
         String sql = "update logs set logDescricao=?,logData=?,log_mecCod=? where logCod=?";
         // cast
@@ -75,7 +75,7 @@ public class LogDao implements InterfaceDao {
          stmt.setString(1, log.getDescricao());
             stmt.setString(2, log.getData().toString());
             stmt.setInt(3, log.getMecCod());
-            stmt.setInt(4, id);
+            stmt.setInt(4, log.getCod());
 
             // executa
             stmt.execute();

@@ -8,7 +8,7 @@ public interface InterfaceDao {
 
     void remove(int id);
 
-    void altera(int id, Object objeto);
+    void altera(Object objeto);
 
     Object get(int id);
 

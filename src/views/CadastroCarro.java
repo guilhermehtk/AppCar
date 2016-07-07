@@ -16,8 +16,8 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         buttonCancelar = new javax.swing.JButton();
         panelProcurar = new javax.swing.JPanel();
         labelPor = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<String>();
-        comboResultaods = new javax.swing.JComboBox<String>();
+        comboTipo = new javax.swing.JComboBox<>();
+        comboResultaods = new javax.swing.JComboBox<>();
         titulo = new javax.swing.JLabel();
         panelDados = new javax.swing.JPanel();
         labelModelo2 = new javax.swing.JLabel();
@@ -84,7 +84,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         labelPor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelPor.setText("Por:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Placa", "Chassi", "Dono" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Placa", "Chassi", "Dono" }));
         comboTipo.setToolTipText("");
 
         comboResultaods.setEditable(true);
@@ -123,7 +123,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.setLayout(null);
 
         labelModelo2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelModelo2.setText("Modelo:");
+        labelModelo2.setText("Modelo*:");
         panelDados.add(labelModelo2);
         labelModelo2.setBounds(10, 70, 50, 15);
 
@@ -148,7 +148,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.add(labelChassi);
         labelChassi.setBounds(10, 150, 80, 20);
 
-        labelPlaca.setText("Placa:");
+        labelPlaca.setText("Placa*:");
         panelDados.add(labelPlaca);
         labelPlaca.setBounds(10, 210, 70, 20);
 
@@ -243,7 +243,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         jSeparator2.setBounds(10, 100, 520, 10);
 
         labelMarca1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca1.setText("Marca:");
+        labelMarca1.setText("Marca:*");
         panelDados.add(labelMarca1);
         labelMarca1.setBounds(10, 30, 50, 20);
 

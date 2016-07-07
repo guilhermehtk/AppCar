@@ -13,8 +13,8 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         titulo = new javax.swing.JLabel();
         panelProcurar = new javax.swing.JPanel();
         labelPor = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<String>();
-        comboResultaods = new javax.swing.JComboBox<String>();
+        comboTipo = new javax.swing.JComboBox<>();
+        comboResultaods = new javax.swing.JComboBox<>();
         panelDados = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -29,7 +29,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         campoEmail = new javax.swing.JTextField();
         campoTelefone = new javax.swing.JTextField();
         campoTelefoneFixo = new javax.swing.JTextField();
-        comboSexo = new javax.swing.JComboBox<String>();
+        comboSexo = new javax.swing.JComboBox<>();
         panelEndereco = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -70,7 +70,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         labelPor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelPor.setText("Por:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CPF", "RG" }));
         comboTipo.setToolTipText("");
 
         comboResultaods.setEditable(true);
@@ -104,17 +104,17 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         panelDados.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setText("Nome:");
+        jLabel7.setText("Nome*:");
         panelDados.add(jLabel7);
-        jLabel7.setBounds(50, 30, 37, 20);
+        jLabel7.setBounds(37, 30, 50, 20);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel8.setText("Sexo:");
+        jLabel8.setText("Sexo*:");
         panelDados.add(jLabel8);
-        jLabel8.setBounds(50, 210, 30, 20);
+        jLabel8.setBounds(50, 210, 35, 20);
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel10.setText("Telefone:");
+        jLabel10.setText("Telefone*:");
         panelDados.add(jLabel10);
         jLabel10.setBounds(30, 150, 60, 20);
 
@@ -124,12 +124,12 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jLabel11.setBounds(10, 180, 76, 20);
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel12.setText("CPF:");
+        jLabel12.setText("CPF*:");
         panelDados.add(jLabel12);
-        jLabel12.setBounds(60, 60, 27, 20);
+        jLabel12.setBounds(47, 60, 40, 20);
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel13.setText("RG:");
+        jLabel13.setText("RG*:");
         panelDados.add(jLabel13);
         jLabel13.setBounds(60, 90, 30, 20);
 
@@ -163,7 +163,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         campoTelefoneFixo.setBounds(90, 180, 240, 20);
 
         comboSexo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outro" }));
         comboSexo.setEnabled(false);
         comboSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,24 +177,24 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         panelEndereco.setLayout(null);
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel9.setText("Número:");
+        jLabel9.setText("Número*:");
         panelEndereco.add(jLabel9);
-        jLabel9.setBounds(50, 30, 50, 20);
+        jLabel9.setBounds(40, 30, 60, 20);
 
         jLabel18.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel18.setText("Rua:");
+        jLabel18.setText("Rua*:");
         panelEndereco.add(jLabel18);
-        jLabel18.setBounds(60, 60, 30, 20);
+        jLabel18.setBounds(50, 60, 40, 20);
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel19.setText("Bairro:");
+        jLabel19.setText("Bairro*:");
         panelEndereco.add(jLabel19);
-        jLabel19.setBounds(50, 90, 40, 20);
+        jLabel19.setBounds(49, 90, 41, 20);
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel20.setText("Cidade:");
+        jLabel20.setText("Cidade*:");
         panelEndereco.add(jLabel20);
-        jLabel20.setBounds(50, 120, 43, 20);
+        jLabel20.setBounds(45, 120, 48, 20);
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel21.setText("CEP:");

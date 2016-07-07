@@ -64,7 +64,7 @@ public class EnderecoDao implements InterfaceDao {
         }
     }
 
-    public void altera(int id, Object end) {
+    public void altera(Object end) {
         // cria a query
         String sql = "update enderecos set endNumero=?,endRua=?,endBairro=?,endCidade=?,endCep=?,endComplemento=? where endCod=?";
         // cast
@@ -80,7 +80,7 @@ public class EnderecoDao implements InterfaceDao {
             stmt.setString(4, endereco.getCidade());
             stmt.setString(5, endereco.getCep());
             stmt.setString(6, endereco.getComplemento());
-            stmt.setInt(6, id);
+            stmt.setInt(7, endereco.getCod());
 
             // executa
             stmt.execute();

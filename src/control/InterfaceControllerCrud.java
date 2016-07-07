@@ -8,12 +8,12 @@ public interface InterfaceControllerCrud {
 
     void remove(int id);
 
-    void altera(int id, Object objeto);
+    void altera(Object objeto);
 
     Object get(int id);
 
     ArrayList getAll();
     
-    Object valida(Object objeto);
+    ArrayList<String> valida(Object objeto);
     
 }

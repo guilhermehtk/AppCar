@@ -153,7 +153,7 @@ public class OrdemServico extends javax.swing.JInternalFrame {
         panelDados.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
 
         labelMarca1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca1.setText("Tipo:");
+        labelMarca1.setText("Tipo*:");
 
         tipo.setEnabled(false);
         tipo.addActionListener(new java.awt.event.ActionListener() {
@@ -183,10 +183,10 @@ public class OrdemServico extends javax.swing.JInternalFrame {
         comboTipoCliente.setEnabled(false);
 
         labelMarca5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca5.setText("Cliente:");
+        labelMarca5.setText("Cliente*:");
 
         labelMarca4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelMarca4.setText("Carro:");
+        labelMarca4.setText("Carro*:");
 
         javax.swing.GroupLayout panelDadosLayout = new javax.swing.GroupLayout(panelDados);
         panelDados.setLayout(panelDadosLayout);
@@ -196,9 +196,9 @@ public class OrdemServico extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDadosLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(20, 20, 20)
                         .addComponent(labelMarca1)
-                        .addGap(17, 17, 17)
+                        .addGap(3, 3, 3)
                         .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDadosLayout.createSequentialGroup()
                         .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,7 +295,7 @@ public class OrdemServico extends javax.swing.JInternalFrame {
         panelTabelaServicosLayout.setHorizontalGroup(
             panelTabelaServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTabelaServicosLayout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonExc, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)

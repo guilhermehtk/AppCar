@@ -71,7 +71,7 @@ public class ClienteDao implements InterfaceDao {
     }
 
     @Override
-    public void altera(int id, Object cli) {
+    public void altera(Object cli) {
         // dao para alterar o endereco
         EnderecoDao endDao = new EnderecoDao();
         // cria a query
@@ -90,7 +90,7 @@ public class ClienteDao implements InterfaceDao {
             stmt.setString(5, cliente.getTelefoneF());
             stmt.setString(6, cliente.getCpf());
             stmt.setString(7, cliente.getRg());
-            stmt.setInt(8, id);
+            stmt.setInt(8, cliente.getCodigo());
 
             // executa
             stmt.execute();
@@ -98,7 +98,7 @@ public class ClienteDao implements InterfaceDao {
             stmt.close();
 
             // altera o endereço
-            endDao.altera(cliente.getEndereco().getCod(), cliente.getEndereco());
+            endDao.altera(cliente.getEndereco());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
