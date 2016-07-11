@@ -21,7 +21,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.initMaximized();
         
         labelVersao.setText("1.0");
-        labelUsuario.setText(this.usuario.getNome());
+        // labelUsuario.setText(this.usuario.getNome());
         jToolbarTop.setFloatable(false);
     }
 

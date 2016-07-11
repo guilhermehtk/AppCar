@@ -24,8 +24,7 @@ public class ClienteController implements InterfaceControllerCrud {
        cliDao.altera(mec);
     }
 
-    @Override
-    public Object get(int id) {
+    public Cliente get(int id) {
          return cliDao.get(id);
     }
 

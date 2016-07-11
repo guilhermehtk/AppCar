@@ -162,4 +162,36 @@ public class ClienteDao implements InterfaceDao {
         return lista;
     }
 
+    public ArrayList<Cliente> getNome(String nome) {
+        // dao para inserir o endereco
+        EnderecoDao endDao = new EnderecoDao();
+        // cria a query
+        String sql = "select * from pessoas where pesTipo=2 and pesNome like '%?%';";
+        // cria o ArrayList
+        ArrayList<Cliente> lista = new ArrayList();
+        try {
+            // prepared statement para inserção
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // seta os valores
+            stmt.setString(1, nome);
+            
+            // executa
+            ResultSet rs = stmt.executeQuery();
+
+            //joga resultado da consulta no ArrayList
+            while (rs.next()) {
+                Cliente cliente = new Cliente(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), endDao.get(rs.getInt(10)));
+                cliente.setCodigo(rs.getInt(1));
+                lista.add(cliente);
+            }
+            // fecha a conexão
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+    
+    
 }

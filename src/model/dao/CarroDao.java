@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Carro;
+import model.Cliente;
 
 public class CarroDao implements InterfaceDao {
 
@@ -153,10 +154,97 @@ public class CarroDao implements InterfaceDao {
         // cria a query
         String sql = "select * from carros;";
         // cria o ArrayList
+        ArrayList<Carro> lista = new ArrayList();
+        try {
+            // prepared statement para inserção
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // executa
+            ResultSet rs = stmt.executeQuery();
+
+            //cria a lista
+            while (rs.next()) {
+                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                carro.setCod(rs.getInt(1));
+                lista.add(carro);
+            }
+            // fecha a conexão
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+
+    public ArrayList<Carro> getPlaca(String placa) {
+        // cria a query
+        String sql = "select * from carros where carPlaca like '%?%' order by carCod;";
+        // cria o ArrayList
         ArrayList<Carro> lista = null;
         try {
             // prepared statement para inserção
             PreparedStatement stmt = con.prepareStatement(sql);
+
+            // seta os valores
+            stmt.setString(1, placa);
+
+            // executa
+            ResultSet rs = stmt.executeQuery();
+
+            //cria a lista
+            while (rs.next()) {
+                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                carro.setCod(rs.getInt(1));
+                lista.add(carro);
+            }
+            // fecha a conexão
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+
+    public ArrayList<Carro> getChassi(String chassi) {
+        // cria a query
+        String sql = "select * from carros where carChassi like '%?%' order by carCod;";
+        // cria o ArrayList
+        ArrayList<Carro> lista = null;
+        try {
+            // prepared statement para inserção
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // seta os valores
+            stmt.setString(1, chassi);
+
+            // executa
+            ResultSet rs = stmt.executeQuery();
+
+            //cria a lista
+            while (rs.next()) {
+                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                carro.setCod(rs.getInt(1));
+                lista.add(carro);
+            }
+            // fecha a conexão
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+    
+    public ArrayList<Carro> getDono(String nomeDono) {
+        // cria a query
+        String sql = "select * from carros join pessoas where pesNome like '%?%' and car_pesCod=pesCod order by car_pesCod;";
+        // cria o ArrayList
+        ArrayList<Carro> lista = null;
+        try {
+            // prepared statement para inserção
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            // seta os valores
+            stmt.setString(1, nomeDono);
 
             // executa
             ResultSet rs = stmt.executeQuery();

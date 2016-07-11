@@ -1,7 +1,6 @@
 package views;
 
 import control.LoginController;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 import model.Login;
 

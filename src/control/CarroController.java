@@ -50,4 +50,29 @@ public class CarroController implements InterfaceControllerCrud {
 
         return erros;
     }
+
+    public ArrayList<Carro> procurar(String input, int tipo) {
+        ArrayList<Carro> arrayCarro = new ArrayList();
+        switch (tipo) {
+            case 0:
+                // Código
+                for (Carro carro : carDao.getAll()) {
+                    if (carro.getCod() == Integer.valueOf(input)) {
+                        arrayCarro.add(carro);
+                    }
+                }
+                return arrayCarro;
+            case 1:
+                // Placa
+                return carDao.getPlaca(input);
+            case 2:
+                // Chassi
+                return carDao.getChassi(input);
+            case 3:
+                // Dono
+              return carDao.getDono(input);
+        }
+        return null;
+        
+    }
 }

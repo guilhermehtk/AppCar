@@ -1,9 +1,61 @@
 package views;
 
+import control.CarroController;
+import control.ClienteController;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import model.Carro;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 public class CadastroCarro extends javax.swing.JInternalFrame {
+
+    CarroController carControl = new CarroController();
+    ClienteController cliControl = new ClienteController();
+    ArrayList<Carro> carros;
 
     public CadastroCarro() {
         initComponents();
+        AutoCompleteDecorator.decorate(comboResultados);
+        createModel(comboTipo.getSelectedIndex());
+    }
+
+    private void createModel(int tipo) {
+        carros = carControl.getAll();
+        String[] comboBoxArray = new String[carros.size()];
+
+        switch (tipo) {
+            case 0:
+                // Código
+                for (int i = 0; i < carros.size(); i++) {
+                    Carro carro = carros.get(i);
+                    comboBoxArray[i] = carro.getCod() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca();
+                }
+                break;
+            case 1:
+                // Placa
+                for (int i = 0; i < carros.size(); i++) {
+                    Carro carro = carros.get(i);
+                    comboBoxArray[i] = carro.getPlaca() + " | " + carro.getMarca() + " " + carro.getModelo() + " | Código " + carro.getCod();
+                }
+                break;
+            case 2:
+                // Chassi
+                for (int i = 0; i < carros.size(); i++) {
+                    Carro carro = carros.get(i);
+                    comboBoxArray[i] = carro.getChassi() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca();
+                }
+                break;
+            case 3:
+                // Dono
+                for (int i = 0; i < carros.size(); i++) {
+                    Carro carro = carros.get(i);
+                    comboBoxArray[i] = cliControl.get(carro.getDono()).getNome() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca();
+                }
+                break;
+        }
+
+        DefaultComboBoxModel cbArray = new DefaultComboBoxModel(comboBoxArray);
+        comboResultados.setModel(cbArray);
     }
 
     @SuppressWarnings("unchecked")
@@ -16,8 +68,8 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         buttonCancelar = new javax.swing.JButton();
         panelProcurar = new javax.swing.JPanel();
         labelPor = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>();
-        comboResultaods = new javax.swing.JComboBox<>();
+        comboTipo = new javax.swing.JComboBox<String>();
+        comboResultados = new javax.swing.JComboBox<String>();
         titulo = new javax.swing.JLabel();
         panelDados = new javax.swing.JPanel();
         labelModelo2 = new javax.swing.JLabel();
@@ -84,12 +136,22 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         labelPor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelPor.setText("Por:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Placa", "Chassi", "Dono" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Placa", "Chassi", "Dono" }));
         comboTipo.setToolTipText("");
+        comboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoActionPerformed(evt);
+            }
+        });
 
-        comboResultaods.setEditable(true);
-        comboResultaods.setToolTipText("");
-        comboResultaods.setFocusCycleRoot(true);
+        comboResultados.setEditable(true);
+        comboResultados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
+        comboResultados.setToolTipText("");
+        comboResultados.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                comboResultadosPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelProcurarLayout = new javax.swing.GroupLayout(panelProcurar);
         panelProcurar.setLayout(panelProcurarLayout);
@@ -101,8 +163,8 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboResultaods, 0, 393, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
+                .addComponent(comboResultados, 0, 405, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelProcurarLayout.setVerticalGroup(
             panelProcurarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +173,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
                 .addGroup(panelProcurarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelPor)
-                    .addComponent(comboResultaods, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5))
         );
 
@@ -372,6 +434,14 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
+    private void comboResultadosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboResultadosPropertyChange
+
+    }//GEN-LAST:event_comboResultadosPropertyChange
+
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        createModel(comboTipo.getSelectedIndex());
+    }//GEN-LAST:event_comboTipoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ano;
@@ -382,7 +452,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonLimpar;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JTextField chassi1;
-    private javax.swing.JComboBox<String> comboResultaods;
+    private javax.swing.JComboBox<String> comboResultados;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JComboBox cor1;
     private javax.swing.JScrollPane jScrollPane1;
