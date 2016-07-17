@@ -21,24 +21,33 @@ public class Servico_OSDao implements InterfaceDao {
         String sql = "insert into Servicos_OS (ser_osCod,ser_mecCod,ser_svcCod) values (?,?,?)";
         // cast
         Servico_OS servico_OS = (Servico_OS) ser;
+        // id
+        int id = 0;
         try {
             // prepara o statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // seta os valores
             stmt.setInt(1, servico_OS.getOsCod());
             stmt.setInt(2, servico_OS.getMecCod());
             stmt.setInt(2, servico_OS.getSvcCod());
+
             // executa
             stmt.execute();
+
+            // pega o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
             // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         // retorna o id
-        LastInsertDao id = new LastInsertDao();
-        return id.getLastInsert();
+        return id;
     }
 
     public void remove(int id) {

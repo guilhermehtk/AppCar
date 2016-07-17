@@ -26,8 +26,10 @@ public class MecanicoDao implements InterfaceDao {
         String sql = "insert into pessoas (pesNome,pesSexo,pesEmail,pesTelefoneM,pesTelefoneF,pesCpf,pesRg,pesTipo,pes_endCodigo) values (?,?,?,?,?,?,?,?,?)";
         // cast
         Mecanico mecanico = (Mecanico) mec;
+        // id
+        int id = 0;
         try {
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // seta os valores
             stmt.setString(1, mecanico.getNome());
@@ -43,14 +45,20 @@ public class MecanicoDao implements InterfaceDao {
 
             // executa
             stmt.execute();
+
+            // pega o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
             // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         // retorna o id
-        LastInsertDao id = new LastInsertDao();
-        return id.getLastInsert();
+        return id;
     }
 
     @Override
@@ -95,7 +103,7 @@ public class MecanicoDao implements InterfaceDao {
             stmt.setString(5, mecanico.getTelefoneF());
             stmt.setString(6, mecanico.getCpf());
             stmt.setString(7, mecanico.getRg());
-            stmt.setInt(8,mecanico.getCodigo());
+            stmt.setInt(8, mecanico.getCodigo());
 
             // executa
             stmt.execute();
@@ -174,22 +182,22 @@ public class MecanicoDao implements InterfaceDao {
         return lista;
     }
 
-    public Mecanico getLogin(int idLogin){
+    public Mecanico getLogin(int idLogin) {
         // dao para inserir o endereco
         EnderecoDao endDao = new EnderecoDao();
         // dao para sleecionar o login
         LoginDao loginDao = new LoginDao();
         // cria a query
         String sql = "select * from pessoas where pes_loginCod=?;";
-         // cria o objeto
+        // cria o objeto
         Mecanico mecanico = null;
         try {
             // prepared statement para inserção
             PreparedStatement stmt = con.prepareStatement(sql);
 
-               // seta o codigo
+            // seta o codigo
             stmt.setInt(1, idLogin);
-            
+
             // executa
             ResultSet rs = stmt.executeQuery();
 

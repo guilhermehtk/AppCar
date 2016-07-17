@@ -21,23 +21,31 @@ public class ServicoDao implements InterfaceDao {
         String sql = "insert into Servicos (svcDescricao,svcValor) values (?,?)";
         // cast
         Servico servico = (Servico) ser;
+        // id
+        int id = 0;
         try {
             // prepara o statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // seta os valores
             stmt.setString(1, servico.getDescricao());
             stmt.setDouble(2, servico.getValor());
             // executa
             stmt.execute();
+
+            // pega o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
             // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         // retorna o id
-        LastInsertDao id = new LastInsertDao();
-        return id.getLastInsert();
+        return id;
     }
 
     public void remove(int id) {

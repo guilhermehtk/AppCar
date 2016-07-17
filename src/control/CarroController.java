@@ -40,10 +40,10 @@ public class CarroController implements InterfaceControllerCrud {
     public ArrayList<String> valida(Object carro) {
         Carro car = (Carro) carro;
         ArrayList<String> erros = new ArrayList();
-        if (car.getMarca().isEmpty()) {
+        if (car.getMarca().equals("Selecione...")) {
             erros.add("Marca");
         }
-        if (car.getModelo().isEmpty()) {
+        if (car.getModelo().equals("Selecione...")) {
             erros.add("Modelo");
         }
         if (car.getPlaca().isEmpty()) {

@@ -21,11 +21,13 @@ public class ClienteDao implements InterfaceDao {
         // dao para inserir o endereco
         EnderecoDao endDao = new EnderecoDao();
         // cria a query
-        String sql = "insert into pessoas (pesNome,pesSexo,pesEmail,pesTelefoneM,pesTelefoneF,pesCpf,pesRg,pesTipo,pes_endCodigo) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into pessoas (pesNome,pesSexo,pesEmail,pesTelefoneM,pesTelefoneF,pesCpf,pesRg,pesTipo,pes_endCod) values (?,?,?,?,?,?,?,?,?)";
         // cast
         Cliente cliente = (Cliente) cli;
+        // id
+        int id = 0;
         try {
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // seta os valores
             stmt.setString(1, cliente.getNome());
@@ -40,14 +42,20 @@ public class ClienteDao implements InterfaceDao {
 
             // executa
             stmt.execute();
+
+            // pega o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
             // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         // retorna o id
-        LastInsertDao id = new LastInsertDao();
-        return id.getLastInsert();
+        return id;
     }
 
     @Override
@@ -175,7 +183,7 @@ public class ClienteDao implements InterfaceDao {
 
             // seta os valores
             stmt.setString(1, nome);
-            
+
             // executa
             ResultSet rs = stmt.executeQuery();
 
@@ -192,6 +200,5 @@ public class ClienteDao implements InterfaceDao {
         }
         return lista;
     }
-    
-    
+
 }

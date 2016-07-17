@@ -13,6 +13,10 @@ public class Carro {
     private String obs;
     private int dono;
 
+    public Carro(){
+        
+    }
+    
     public Carro(String marca, String modelo, String cor, String ano, String chassi, String km, String placa, String obs) {
         this.marca = marca;
         this.modelo = modelo;

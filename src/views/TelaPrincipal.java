@@ -7,12 +7,7 @@ import javax.swing.JInternalFrame;
 import model.Mecanico;
 
 public class TelaPrincipal extends javax.swing.JFrame {
-
-    CadastroCarro cadastroCarro = new CadastroCarro();
-    CadastroMecanico cadastroMecanico = new CadastroMecanico();
-    CadastroCliente cadastroCliente = new CadastroCliente();
-    OrdemServico ordemServico = new OrdemServico();
-    ListaServicos listaServicos = new ListaServicos();
+  
     Mecanico usuario;
 
     public TelaPrincipal(int idUsuario) {
@@ -381,47 +376,47 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
-        addInternal(cadastroCliente);
+        addInternal(new CadastroCliente());
     }//GEN-LAST:event_menuUsuarioActionPerformed
 
     private void menuMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanicoActionPerformed
-        addInternal(cadastroMecanico);
+        addInternal(new CadastroMecanico());
     }//GEN-LAST:event_menuMecanicoActionPerformed
 
     private void menuCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCarroActionPerformed
-        addInternal(cadastroCarro);
+        addInternal(new CadastroCarro());
     }//GEN-LAST:event_menuCarroActionPerformed
 
     private void menuGeraOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGeraOsActionPerformed
-        addInternal(ordemServico);
+        addInternal(new OrdemServico());
     }//GEN-LAST:event_menuGeraOsActionPerformed
 
     private void menuListaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServicoActionPerformed
-        addInternal(listaServicos);
+        addInternal(new ListaServicos());
     }//GEN-LAST:event_menuListaServicoActionPerformed
 
     private void buttonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUsuarioActionPerformed
-        addInternal(cadastroCliente);
+        addInternal(new CadastroCliente());
     }//GEN-LAST:event_buttonUsuarioActionPerformed
 
     private void buttonCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarroActionPerformed
-        addInternal(cadastroCarro);
+        addInternal(new CadastroCarro());
     }//GEN-LAST:event_buttonCarroActionPerformed
 
     private void buttoOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoOsActionPerformed
-        addInternal(ordemServico);
+        addInternal(new OrdemServico());
     }//GEN-LAST:event_buttoOsActionPerformed
 
     private void buttonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonServicoActionPerformed
-        addInternal(listaServicos);
+        addInternal(new ListaServicos());
     }//GEN-LAST:event_buttonServicoActionPerformed
 
     private void buttonMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMecanicoActionPerformed
-        addInternal(cadastroMecanico);
+        addInternal(new CadastroMecanico());
     }//GEN-LAST:event_buttonMecanicoActionPerformed
 
     private void buttonSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSettingsActionPerformed
-        addInternal(cadastroCliente);
+        addInternal(new CadastroCliente());
     }//GEN-LAST:event_buttonSettingsActionPerformed
 
     private void jDesktopPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentResized

@@ -22,11 +22,12 @@ public class CarroDao implements InterfaceDao {
         String sql = "insert into carros (carMarca,carModelo,carCor,carAno,carNumeroChassi,carQuilometragem,carPlaca,carObs) values (?,?,?,?,?,?,?,?)";
         // cast
         Carro carro = (Carro) car;
-        // cria int de id
+        // cria id
         int id = 0;
+        
         try {
             // prepara o statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // seta os valores
             stmt.setString(1, carro.getMarca());
@@ -41,8 +42,11 @@ public class CarroDao implements InterfaceDao {
             // executa
             stmt.execute();
 
-            // pega o id
-            id = this.getLastInsert();
+            // pega o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
 
             // adiciona um dono na tabela n para n
             this.addDono(id, carro.getDono());
@@ -54,24 +58,6 @@ public class CarroDao implements InterfaceDao {
         }
         // retorna o id
         return id;
-    }
-
-    public int getLastInsert() {
-        // cria a query
-        String sql = "SELECT LAST_INSERT_ID()";
-        try {
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            ResultSet rs = stmt.executeQuery();
-
-            //pega resultado
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return 0;
     }
 
     public void remove(int id) {

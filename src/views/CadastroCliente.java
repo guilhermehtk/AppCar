@@ -2,35 +2,84 @@ package views;
 
 import control.ClienteController;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Cliente;
+import model.Endereco;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class CadastroCliente extends javax.swing.JInternalFrame {
-    ClienteController carControl = new ClienteController();
-    ArrayList<Cliente> carros;
 
-     public CadastroCliente() {
+    ClienteController cliControl = new ClienteController();
+    ArrayList<Cliente> clientes;
+
+    public CadastroCliente() {
         initComponents();
         AutoCompleteDecorator.decorate(comboResultados);
         this.preencheProcurar();
     }
-    
-    private void preencheProcurar(){
-        carros = carControl.getAll();
-       // comboResultados.setModel(carControl.procurar(comboTipo.getSelectedIndex()));
+
+    private void preencheProcurar() {
+        clientes = cliControl.getAll();
+        comboResultados.setModel(cliControl.procurar(comboTipo.getSelectedIndex()));
+        comboResultados.setSelectedIndex(0);
     }
-        
 
-    private void preencher(Cliente carro) {
+    private boolean valida() {
+        return Erros.errosValidacao(cliControl.valida(newCliente()));
+    }
 
+    private void preencher(Cliente cliente) {
+        campoNome.setText(cliente.getNome());
+        campoCpf.setText(cliente.getCpf());
+        campoRg.setText(cliente.getRg());
+        campoEmail.setText(cliente.getEmail());
+        campoTelefone.setText(cliente.getTelefoneM());
+        campoTelefoneFixo.setText(cliente.getTelefoneF());
+        comboSexo.setSelectedItem(cliente.getSexo());
+        // Endereço
+        campoNumero.setText(cliente.getEndereco().getNumero());
+        campoRua.setText(cliente.getEndereco().getRua());
+        campoBairro.setText(cliente.getEndereco().getBairro());
+        campoCidade.setText(cliente.getEndereco().getCidade());
+        campoCep.setText(cliente.getEndereco().getCep());
+        campoComplemento.setText(cliente.getEndereco().getComplemento());
     }
 
     private void limpar() {
-
+        campoNome.setText("");
+        campoCpf.setText("");
+        campoRg.setText("");
+        campoEmail.setText("");
+        campoTelefone.setText("");
+        campoTelefoneFixo.setText("");
+        comboSexo.setSelectedItem("");
+        // Endereço
+        campoNumero.setText("");
+        campoRua.setText("");
+        campoBairro.setText("");
+        campoCidade.setText("");
+        campoCep.setText("");
+        campoComplemento.setText("");
+        // Procurar
+        comboTipo.setSelectedIndex(0);
+        comboResultados.setSelectedIndex(0);
     }
 
     private void editable(boolean flag) {
-
+        campoNome.setEnabled(flag);
+        campoCpf.setEnabled(flag);
+        campoRg.setEnabled(flag);
+        campoEmail.setEnabled(flag);
+        campoTelefone.setEnabled(flag);
+        campoTelefoneFixo.setEnabled(flag);
+        comboSexo.setEnabled(flag);
+        // Endereço
+        campoNumero.setEnabled(flag);
+        campoRua.setEnabled(flag);
+        campoBairro.setEnabled(flag);
+        campoCidade.setEnabled(flag);
+        campoCep.setEnabled(flag);
+        campoComplemento.setEnabled(flag);
     }
 
     private void somenteNumeros(java.awt.event.KeyEvent evt) {
@@ -41,13 +90,43 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     }
 
     private Cliente newCliente() {
-        Cliente cliente = null;
-
+        Cliente cliente = new Cliente();
+        cliente.setNome(campoNome.getText());
+        cliente.setCpf(campoCpf.getText());
+        cliente.setRg(campoRg.getText());
+        cliente.setEmail(campoEmail.getText());
+        cliente.setTelefoneF(campoTelefoneFixo.getText());
+        cliente.setTelefoneM(campoTelefone.getText());
+        cliente.setSexo(comboSexo.getSelectedItem().toString());
+        Endereco endereco = new Endereco();
+        endereco.setNumero(campoNumero.getText());
+        endereco.setRua(campoRua.getText());
+        endereco.setBairro(campoBairro.getText());
+        endereco.setCidade(campoCidade.getText());
+        endereco.setComplemento(campoComplemento.getText());
+        endereco.setCep(campoCep.getText());
+        cliente.setEndereco(endereco);
         return cliente;
     }
-    
-   
 
+    private Cliente alteraCliente(Cliente cliente) {
+        cliente.setNome(campoNome.getText());
+        cliente.setCpf(campoCpf.getText());
+        cliente.setRg(campoRg.getText());
+        cliente.setEmail(campoEmail.getText());
+        cliente.setTelefoneF(campoTelefoneFixo.getText());
+        cliente.setTelefoneM(campoTelefone.getText());
+        cliente.setSexo(comboSexo.getSelectedItem().toString());
+        Endereco endereco = cliente.getEndereco();
+        endereco.setNumero(campoNumero.getText());
+        endereco.setRua(campoRua.getText());
+        endereco.setBairro(campoBairro.getText());
+        endereco.setCidade(campoCidade.getText());
+        endereco.setComplemento(campoComplemento.getText());
+        endereco.setCep(campoCep.getText());
+        cliente.setEndereco(endereco);
+        return cliente;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -122,7 +201,13 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         });
 
         comboResultados.setEditable(true);
+        comboResultados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
         comboResultados.setToolTipText("");
+        comboResultados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboResultadosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelProcurarLayout = new javax.swing.GroupLayout(panelProcurar);
         panelProcurar.setLayout(panelProcurarLayout);
@@ -192,7 +277,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         campoNome.setEnabled(false);
         panelDados.add(campoNome);
-        campoNome.setBounds(90, 30, 240, 27);
+        campoNome.setBounds(90, 30, 240, 20);
 
         campoRg.setEnabled(false);
         panelDados.add(campoRg);
@@ -203,12 +288,17 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         campoEmail.setBounds(90, 120, 240, 20);
 
         campoTelefone.setEnabled(false);
+        campoTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoTelefoneKeyTyped(evt);
+            }
+        });
         panelDados.add(campoTelefone);
-        campoTelefone.setBounds(90, 150, 240, 27);
+        campoTelefone.setBounds(90, 150, 240, 20);
 
         campoTelefoneFixo.setEnabled(false);
         panelDados.add(campoTelefoneFixo);
-        campoTelefoneFixo.setBounds(90, 180, 240, 27);
+        campoTelefoneFixo.setBounds(90, 180, 240, 20);
 
         comboSexo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         comboSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
@@ -256,11 +346,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         campoRua.setEnabled(false);
         panelEndereco.add(campoRua);
-        campoRua.setBounds(100, 60, 227, 27);
+        campoRua.setBounds(100, 60, 227, 20);
 
         campoBairro.setEnabled(false);
         panelEndereco.add(campoBairro);
-        campoBairro.setBounds(100, 90, 227, 27);
+        campoBairro.setBounds(100, 90, 227, 20);
 
         campoNumero.setEnabled(false);
         campoNumero.addActionListener(new java.awt.event.ActionListener() {
@@ -274,19 +364,19 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             }
         });
         panelEndereco.add(campoNumero);
-        campoNumero.setBounds(100, 30, 227, 27);
+        campoNumero.setBounds(100, 30, 227, 20);
 
         campoCep.setEnabled(false);
         panelEndereco.add(campoCep);
-        campoCep.setBounds(100, 150, 227, 27);
+        campoCep.setBounds(100, 150, 227, 20);
 
         campoCidade.setEnabled(false);
         panelEndereco.add(campoCidade);
-        campoCidade.setBounds(100, 120, 227, 27);
+        campoCidade.setBounds(100, 120, 227, 20);
 
         campoComplemento.setEnabled(false);
         panelEndereco.add(campoComplemento);
-        campoComplemento.setBounds(100, 180, 227, 27);
+        campoComplemento.setBounds(100, 180, 227, 20);
 
         buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
@@ -340,6 +430,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         buttonEditar.setFocusable(false);
         buttonEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditarActionPerformed(evt);
+            }
+        });
         toolbarCrud.add(buttonEditar);
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
@@ -350,6 +445,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         buttonExcluir.setFocusable(false);
         buttonExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExcluirActionPerformed(evt);
+            }
+        });
         toolbarCrud.add(buttonExcluir);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -403,31 +503,60 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoNumeroActionPerformed
 
     private void campoNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNumeroKeyTyped
-        String caracteres = "0123456789";
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
+        this.somenteNumeros(evt);
     }//GEN-LAST:event_campoNumeroKeyTyped
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        // TODO add your handling code here:
+        if (comboResultados.getSelectedIndex() == 0 && this.valida()) {
+            if (cliControl.add(newCliente()) != 0) {
+                JOptionPane.showMessageDialog(this, "Inserido com Sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+                this.editable(false);
+            }
+        } else if (this.valida()) {
+            cliControl.altera(alteraCliente(clientes.get(comboResultados.getSelectedIndex())));
+            JOptionPane.showMessageDialog(this, "Alterado com Sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
-        // TODO add your handling code here:
+        this.limpar();
     }//GEN-LAST:event_buttonLimparActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-        // TODO add your handling code here:
+        this.limpar();
+        this.editable(true);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-        // TODO add your handling code here:
+         comboResultados.setModel(cliControl.procurar(comboTipo.getSelectedIndex()));
     }//GEN-LAST:event_comboTipoActionPerformed
+
+    private void comboResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboResultadosActionPerformed
+        if ((comboResultados.getSelectedIndex() != 0) && (comboResultados.getSelectedIndex() != -1)) {
+            this.limpar();
+            this.editable(false);
+            this.preencher(clientes.get(comboResultados.getSelectedIndex()));
+        }
+    }//GEN-LAST:event_comboResultadosActionPerformed
+
+    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
+        this.editable(true);
+    }//GEN-LAST:event_buttonEditarActionPerformed
+
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+        cliControl.remove(clientes.get(comboResultados.getSelectedIndex()).getCodigo());
+        this.editable(false);
+        this.limpar();
+        this.preencheProcurar();
+    }//GEN-LAST:event_buttonExcluirActionPerformed
+
+    private void campoTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoTelefoneKeyTyped
+       this.somenteNumeros(evt);
+    }//GEN-LAST:event_campoTelefoneKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -49,8 +49,10 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         dTable.addColumn("Valor");
         tabelaServicos.setModel(dTable);
         servicos = serCon.getAll();
-        for (Servico servico : servicos) {
+        if (!servicos.isEmpty()){
+               for (Servico servico : servicos) {
             dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), servico.getValor()});
+        }
         }
         tabelaServicos.setModel(dTable);
     }

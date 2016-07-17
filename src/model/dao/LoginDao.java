@@ -21,9 +21,11 @@ public class LoginDao implements InterfaceDao {
         String sql = "insert into logins (loginUsuario,loginSenha) values (?,?)";
         // cast
         Login login = (Login) end;
+        // id
+        int id = 0;
         try {
             // prepara o statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // seta os valores
             stmt.setString(1, login.getUsuario());
@@ -31,14 +33,20 @@ public class LoginDao implements InterfaceDao {
 
             // executa
             stmt.execute();
+
+            // pega o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
             // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         // retorna o id
-        LastInsertDao id = new LastInsertDao();
-        return id.getLastInsert();
+        return id;
     }
 
     public void remove(int id) {
@@ -136,7 +144,7 @@ public class LoginDao implements InterfaceDao {
         }
         return lista;
     }
-    
+
     public Login getUsuario(Login log) {
         // cria a query
         String sql = "select * from logins where loginUsuario=?;";
@@ -153,7 +161,7 @@ public class LoginDao implements InterfaceDao {
 
             //cria o login
             while (rs.next()) {
-                login = new Login(rs.getString(2),rs.getString(3));
+                login = new Login(rs.getString(2), rs.getString(3));
                 login.setCod(rs.getInt(1));
             }
             // fecha a conexão

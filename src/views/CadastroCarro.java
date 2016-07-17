@@ -2,8 +2,8 @@ package views;
 
 import control.CarroController;
 import control.ClienteController;
+import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.Carro;
 import model.Cliente;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -19,36 +19,18 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         initComponents();
         AutoCompleteDecorator.decorate(comboResultados);
         this.preencheProcurar();
-        clientes = cliControl.getAll();
     }
-    
-    private void preencheProcurar(){
+
+    private void preencheProcurar() {
+        clientes = cliControl.getAll();
         carros = carControl.getAll();
         comboResultados.setModel(carControl.procurar(comboTipo.getSelectedIndex()));
+        comboResultados.setSelectedIndex(0);
     }
-    
-    private boolean valida(){
-        ArrayList<String> erros = carControl.valida(newCarro());
-        if(erros.isEmpty()){
-           return true; 
-        } else {
-            if (erros.size()==1){
-            JOptionPane.showMessageDialog(this, "O campo "+erros.get(0)+" não foi preenchido","Erro",JOptionPane.ERROR_MESSAGE);
-            } else {
-                  String mensagem = null;
-               for (String erro : erros) {
-                if (erros.get(0).equals(erro)){
-                    mensagem = erro;
-                    break;
-                }
-                mensagem = mensagem + " ,"+erro;    
-            }
-               JOptionPane.showMessageDialog(this, "Os campos "+mensagem+" não foram preenchidos","Erro",JOptionPane.ERROR_MESSAGE);
-            }
-                return false;
-        }
+
+    private boolean valida() {
+        return Erros.errosValidacao(carControl.valida(newCarro()));
     }
-        
 
     private void preencher(Carro carro) {
         cbCor.setSelectedItem(carro.getCor());
@@ -60,11 +42,10 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         tfObs.setText(carro.getObs());
         tfPlaca.setText(carro.getPlaca());
         for (Cliente dono : clientes) {
-            if (dono.getCodigo()==carro.getDono()){
+            if (dono.getCodigo() == carro.getDono()) {
                 cbDono.setSelectedIndex(clientes.indexOf(dono));
             }
         }
-        
     }
 
     private void limpar() {
@@ -78,6 +59,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         tfPlaca.setText("");
         cbTipoDono.setSelectedIndex(0);
         cbDono.setSelectedIndex(0);
+        comboResultados.setSelectedIndex(0);
     }
 
     private void editable(boolean flag) {
@@ -88,6 +70,11 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         tfChassi.setEnabled(flag);
         tfKm.setEnabled(flag);
         tfObs.setEnabled(flag);
+        if (flag) {
+            tfObs.setBackground(Color.WHITE);
+        } else {
+            tfObs.setBackground(Color.GRAY);
+        }
         tfPlaca.setEnabled(flag);
         cbTipoDono.setEnabled(flag);
         cbDono.setEnabled(flag);
@@ -110,11 +97,11 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         carro.setModelo(cbModelo.getSelectedItem().toString());
         carro.setObs(tfObs.getText());
         carro.setPlaca(tfPlaca.getText());
-        carro.setDono(clientes.get(cbDono.getSelectedIndex()).getCodigo());
+//        carro.setDono(clientes.get(cbDono.getSelectedIndex()).getCodigo());
         return carro;
     }
-    
-       private Carro alteraCarro(Carro carro) {
+
+    private Carro alteraCarro(Carro carro) {
         carro.setAno(tfAno.getText());
         carro.setChassi(tfAno.getText());
         carro.setCor(cbCor.getSelectedItem().toString());
@@ -264,9 +251,9 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         labelModelo2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelModelo2.setText("Modelo*:");
         panelDados.add(labelModelo2);
-        labelModelo2.setBounds(220, 70, 50, 15);
+        labelModelo2.setBounds(190, 70, 50, 20);
 
-        cbMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        cbMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "FIAT", "GM - Chevrolet" }));
         cbMarca.setEnabled(false);
         cbMarca.setMinimumSize(new java.awt.Dimension(81, 20));
         cbMarca.setPreferredSize(new java.awt.Dimension(81, 20));
@@ -298,7 +285,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
             }
         });
         panelDados.add(tfPlaca);
-        tfPlaca.setBounds(100, 210, 390, 27);
+        tfPlaca.setBounds(100, 210, 390, 20);
 
         tfKm.setEnabled(false);
         tfKm.addActionListener(new java.awt.event.ActionListener() {
@@ -312,13 +299,15 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
             }
         });
         panelDados.add(tfKm);
-        tfKm.setBounds(100, 180, 390, 27);
+        tfKm.setBounds(100, 180, 390, 20);
 
         labelKm.setText("Quilometragem:");
         panelDados.add(labelKm);
         labelKm.setBounds(10, 180, 80, 20);
 
+        tfObs.setBackground(new java.awt.Color(240, 240, 240));
         tfObs.setColumns(20);
+        tfObs.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tfObs.setRows(4);
         tfObs.setEnabled(false);
         jScrollPane1.setViewportView(tfObs);
@@ -330,9 +319,9 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.add(labelObs);
         labelObs.setBounds(10, 240, 80, 20);
         panelDados.add(jSeparator6);
-        jSeparator6.setBounds(440, 380, 4, 20);
+        jSeparator6.setBounds(440, 380, 0, 20);
 
-        cbCor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prata ", "Preto  ", "Branco ", "Cinza ", "Azul ", "Vermelho ", "Marrom/Bege ", "Verde ", "Amarelo/Dourado", " " }));
+        cbCor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prata ", "Preto  ", "Branco ", "Cinza ", "Azul ", "Vermelho ", "Marrom/Bege ", "Verde ", "Amarelo/Dourado", "Outro", " " }));
         cbCor.setEnabled(false);
         cbCor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,7 +329,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
             }
         });
         panelDados.add(cbCor);
-        cbCor.setBounds(420, 70, 110, 27);
+        cbCor.setBounds(410, 70, 110, 20);
 
         tfChassi.setEnabled(false);
         tfChassi.addActionListener(new java.awt.event.ActionListener() {
@@ -349,7 +338,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
             }
         });
         panelDados.add(tfChassi);
-        tfChassi.setBounds(100, 150, 390, 27);
+        tfChassi.setBounds(100, 150, 390, 20);
 
         labelAno.setText("Ano:");
         panelDados.add(labelAno);
@@ -375,9 +364,9 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
             }
         });
         panelDados.add(tfAno);
-        tfAno.setBounds(100, 120, 390, 27);
+        tfAno.setBounds(100, 120, 390, 20);
 
-        cbModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        cbModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Uno" }));
         cbModelo.setEnabled(false);
         cbModelo.setMinimumSize(new java.awt.Dimension(81, 20));
         cbModelo.setPreferredSize(new java.awt.Dimension(81, 20));
@@ -387,7 +376,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
             }
         });
         panelDados.add(cbModelo);
-        cbModelo.setBounds(270, 70, 110, 20);
+        cbModelo.setBounds(240, 70, 110, 20);
         panelDados.add(jSeparator2);
         jSeparator2.setBounds(10, 100, 520, 10);
 
@@ -399,7 +388,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         labelCor1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelCor1.setText("Cor:");
         panelDados.add(labelCor1);
-        labelCor1.setBounds(390, 70, 30, 30);
+        labelCor1.setBounds(380, 70, 30, 20);
 
         cbTipoDono.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
         cbTipoDono.setToolTipText("");
@@ -410,9 +399,10 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
             }
         });
         panelDados.add(cbTipoDono);
-        cbTipoDono.setBounds(50, 30, 80, 27);
+        cbTipoDono.setBounds(50, 30, 80, 20);
 
         cbDono.setEditable(true);
+        cbDono.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
         cbDono.setToolTipText("");
         cbDono.setEnabled(false);
         cbDono.addActionListener(new java.awt.event.ActionListener() {
@@ -421,7 +411,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
             }
         });
         panelDados.add(cbDono);
-        cbDono.setBounds(130, 30, 400, 27);
+        cbDono.setBounds(130, 30, 400, 20);
 
         toolbarCrud.setBackground(new java.awt.Color(204, 204, 255));
         toolbarCrud.setFloatable(false);
@@ -540,12 +530,11 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbModeloActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-      this.valida();
-        // if (comboResultados.getSelectedIndex() == 0) {
-       //     carControl.add(newCarro());
-     //   } else {
-      //     carControl.altera(alteraCarro(carros.get(comboResultados.getSelectedIndex())));
-    //    }
+        if (comboResultados.getSelectedIndex() == 0 && this.valida()) {
+            carControl.add(newCarro());
+        } else if (this.valida()) {
+            carControl.altera(alteraCarro(carros.get(comboResultados.getSelectedIndex())));
+        }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
@@ -553,12 +542,12 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonLimparActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-    this.dispose();
+        this.dispose();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
         this.limpar();
-        comboResultados.setSelectedIndex(0);
+        this.editable(true);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void comboResultadosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboResultadosPropertyChange
@@ -590,10 +579,10 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfKmKeyTyped
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-       carControl.remove(carros.get(comboResultados.getSelectedIndex()).getCod());
-       this.editable(false);
-       this.limpar();
-       this.preencheProcurar();
+        carControl.remove(carros.get(comboResultados.getSelectedIndex()).getCod());
+        this.editable(false);
+        this.limpar();
+        this.preencheProcurar();
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void cbTipoDonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoDonoActionPerformed

@@ -22,9 +22,11 @@ public class OrdemServicoDao implements InterfaceDao {
         String sql = "insert into OrdemServicos (osTipo,osData,osSituacao,os_cliCod,os_carCod) values (?,?,?,?,?)";
         // cast
         OrdemServico os = (OrdemServico) ordemser;
+        // id
+        int id = 0;
         try {
             // prepara o statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // seta os valores
             stmt.setString(1, os.getTipo());
@@ -35,14 +37,20 @@ public class OrdemServicoDao implements InterfaceDao {
 
             // executa
             stmt.execute();
+
+            // pega o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
             // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         // retorna o id
-        LastInsertDao id = new LastInsertDao();
-        return id.getLastInsert();
+        return id;
     }
 
     public void remove(int id) {
@@ -107,7 +115,7 @@ public class OrdemServicoDao implements InterfaceDao {
 
             //cria o os
             while (rs.next()) {
-                os = new OrdemServico(rs.getString(2), rs.getInt(4),rs.getInt(5), rs.getInt(6));
+                os = new OrdemServico(rs.getString(2), rs.getInt(4), rs.getInt(5), rs.getInt(6));
                 os.setCod(rs.getInt(1));
                 os.setData(Timestamp.valueOf(rs.getString(3)));
             }
@@ -133,7 +141,7 @@ public class OrdemServicoDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                OrdemServico  os = new OrdemServico(rs.getString(2), rs.getInt(4),rs.getInt(5), rs.getInt(6));
+                OrdemServico os = new OrdemServico(rs.getString(2), rs.getInt(4), rs.getInt(5), rs.getInt(6));
                 os.setCod(rs.getInt(1));
                 os.setData(Timestamp.valueOf(rs.getString(3)));
                 lista.add(os);

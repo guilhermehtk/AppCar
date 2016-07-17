@@ -21,9 +21,11 @@ public class EnderecoDao implements InterfaceDao {
         String sql = "insert into enderecos (endNumero,endRua,endBairro,endCidade,endCep,endComplemento) values (?,?,?,?,?,?)";
         // cast
         Endereco endereco = (Endereco) end;
+        // id
+        int id = 0;
         try {
             // prepara o statement
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // seta os valores
             stmt.setString(1, endereco.getNumero());
@@ -35,14 +37,20 @@ public class EnderecoDao implements InterfaceDao {
 
             // executa
             stmt.execute();
+
+            // pega o id gerado
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
             // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         // retorna o id
-        LastInsertDao id = new LastInsertDao();
-        return id.getLastInsert();
+        return id;
     }
 
     public void remove(int id) {
@@ -52,7 +60,7 @@ public class EnderecoDao implements InterfaceDao {
             // prepared statement para deleção
             PreparedStatement stmt = con.prepareStatement(sql);
 
-// seta os valores
+            // seta os valores
             stmt.setInt(1, id);
 
             // executa

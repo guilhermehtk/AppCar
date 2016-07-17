@@ -222,15 +222,17 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="70" width="50" height="-1"/>
+              <AbsoluteConstraints x="190" y="70" width="50" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbMarca">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="1">
-                <StringItem index="0" value=" "/>
+              <StringArray count="3">
+                <StringItem index="0" value="Selecione..."/>
+                <StringItem index="1" value="FIAT"/>
+                <StringItem index="2" value="GM - Chevrolet"/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
@@ -334,7 +336,13 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="tfObs">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="0"/>
+                </Property>
                 <Property name="rows" type="int" value="4"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -361,7 +369,7 @@
         <Component class="javax.swing.JComboBox" name="cbCor">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="10">
+              <StringArray count="11">
                 <StringItem index="0" value="Prata "/>
                 <StringItem index="1" value="Preto  "/>
                 <StringItem index="2" value="Branco "/>
@@ -371,7 +379,8 @@
                 <StringItem index="6" value="Marrom/Bege "/>
                 <StringItem index="7" value="Verde "/>
                 <StringItem index="8" value="Amarelo/Dourado"/>
-                <StringItem index="9" value=" "/>
+                <StringItem index="9" value="Outro"/>
+                <StringItem index="10" value=" "/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
@@ -381,7 +390,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="420" y="70" width="110" height="-1"/>
+              <AbsoluteConstraints x="410" y="70" width="110" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -429,8 +438,9 @@
         <Component class="javax.swing.JComboBox" name="cbModelo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="1">
-                <StringItem index="0" value=" "/>
+              <StringArray count="2">
+                <StringItem index="0" value="Selecione..."/>
+                <StringItem index="1" value="Uno"/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
@@ -446,7 +456,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="270" y="70" width="110" height="-1"/>
+              <AbsoluteConstraints x="240" y="70" width="110" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -479,7 +489,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="390" y="70" width="30" height="30"/>
+              <AbsoluteConstraints x="380" y="70" width="30" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -512,7 +522,9 @@
           <Properties>
             <Property name="editable" type="boolean" value="true"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="1">
+                <StringItem index="0" value="Selecione..."/>
+              </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="enabled" type="boolean" value="false"/>

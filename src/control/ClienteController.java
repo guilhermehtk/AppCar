@@ -1,6 +1,8 @@
 package control;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import model.Cliente;
 import model.Cliente;
 import model.dao.ClienteDao;
 
@@ -29,9 +31,8 @@ public class ClienteController implements InterfaceControllerCrud {
     }
 
     @Override
-    public ArrayList getAll() {
+    public ArrayList<Cliente> getAll() {
         return cliDao.getAll();
-
     }
 
     @Override
@@ -56,4 +57,36 @@ public class ClienteController implements InterfaceControllerCrud {
         return erros;
     }
 
+     public DefaultComboBoxModel procurar(int tipo) {
+        DefaultComboBoxModel cbArray = new DefaultComboBoxModel();
+        cbArray.insertElementAt("Selecione...", 0);
+        switch (tipo) {
+            case 0:
+                // Código
+                for (Cliente cliente : getAll()) {
+                    cbArray.addElement(cliente.getCodigo() + " | " + cliente.getNome());
+                }
+                break;
+            case 1:
+                // Nome
+                for (Cliente cliente : getAll()) {
+                    cbArray.addElement(cliente.getNome() + " | " + cliente.getCpf()+ "| Código " + cliente.getCodigo());
+                }
+                break;
+            case 2:
+                // CPF
+                for (Cliente cliente : getAll()) {
+                    cbArray.addElement(cliente.getCpf() + " | " + cliente.getNome());
+                }
+                break;
+            case 3:
+                // RG
+                for (Cliente cliente : getAll()) {
+                    cbArray.addElement(cliente.getRg() + " | " + cliente.getNome());
+                }
+                break;
+        }
+
+        return cbArray;
+    }
 }
