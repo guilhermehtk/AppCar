@@ -1,10 +1,53 @@
 package views;
 
-public class CadastroCliente extends javax.swing.JInternalFrame {
+import control.ClienteController;
+import java.util.ArrayList;
+import model.Cliente;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-    public CadastroCliente() {
+public class CadastroCliente extends javax.swing.JInternalFrame {
+    ClienteController carControl = new ClienteController();
+    ArrayList<Cliente> carros;
+
+     public CadastroCliente() {
         initComponents();
+        AutoCompleteDecorator.decorate(comboResultados);
+        this.preencheProcurar();
     }
+    
+    private void preencheProcurar(){
+        carros = carControl.getAll();
+       // comboResultados.setModel(carControl.procurar(comboTipo.getSelectedIndex()));
+    }
+        
+
+    private void preencher(Cliente carro) {
+
+    }
+
+    private void limpar() {
+
+    }
+
+    private void editable(boolean flag) {
+
+    }
+
+    private void somenteNumeros(java.awt.event.KeyEvent evt) {
+        String caracteres = "0123456789";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }
+
+    private Cliente newCliente() {
+        Cliente cliente = null;
+
+        return cliente;
+    }
+    
+   
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -13,8 +56,8 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         titulo = new javax.swing.JLabel();
         panelProcurar = new javax.swing.JPanel();
         labelPor = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>();
-        comboResultaods = new javax.swing.JComboBox<>();
+        comboTipo = new javax.swing.JComboBox<String>();
+        comboResultados = new javax.swing.JComboBox<String>();
         panelDados = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -29,7 +72,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         campoEmail = new javax.swing.JTextField();
         campoTelefone = new javax.swing.JTextField();
         campoTelefoneFixo = new javax.swing.JTextField();
-        comboSexo = new javax.swing.JComboBox<>();
+        comboSexo = new javax.swing.JComboBox<String>();
         panelEndereco = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -70,11 +113,16 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         labelPor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelPor.setText("Por:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CPF", "RG" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
         comboTipo.setToolTipText("");
+        comboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoActionPerformed(evt);
+            }
+        });
 
-        comboResultaods.setEditable(true);
-        comboResultaods.setToolTipText("");
+        comboResultados.setEditable(true);
+        comboResultados.setToolTipText("");
 
         javax.swing.GroupLayout panelProcurarLayout = new javax.swing.GroupLayout(panelProcurar);
         panelProcurar.setLayout(panelProcurarLayout);
@@ -86,7 +134,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboResultaods, 0, 574, Short.MAX_VALUE)
+                .addComponent(comboResultados, 0, 574, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
         );
         panelProcurarLayout.setVerticalGroup(
@@ -96,7 +144,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                 .addGroup(panelProcurarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelPor)
-                    .addComponent(comboResultaods, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5))
         );
 
@@ -144,7 +192,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         campoNome.setEnabled(false);
         panelDados.add(campoNome);
-        campoNome.setBounds(90, 30, 240, 20);
+        campoNome.setBounds(90, 30, 240, 27);
 
         campoRg.setEnabled(false);
         panelDados.add(campoRg);
@@ -156,14 +204,14 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         campoTelefone.setEnabled(false);
         panelDados.add(campoTelefone);
-        campoTelefone.setBounds(90, 150, 240, 20);
+        campoTelefone.setBounds(90, 150, 240, 27);
 
         campoTelefoneFixo.setEnabled(false);
         panelDados.add(campoTelefoneFixo);
-        campoTelefoneFixo.setBounds(90, 180, 240, 20);
+        campoTelefoneFixo.setBounds(90, 180, 240, 27);
 
         comboSexo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outro" }));
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
         comboSexo.setEnabled(false);
         comboSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,11 +256,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         campoRua.setEnabled(false);
         panelEndereco.add(campoRua);
-        campoRua.setBounds(100, 60, 227, 20);
+        campoRua.setBounds(100, 60, 227, 27);
 
         campoBairro.setEnabled(false);
         panelEndereco.add(campoBairro);
-        campoBairro.setBounds(100, 90, 227, 20);
+        campoBairro.setBounds(100, 90, 227, 27);
 
         campoNumero.setEnabled(false);
         campoNumero.addActionListener(new java.awt.event.ActionListener() {
@@ -226,19 +274,19 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             }
         });
         panelEndereco.add(campoNumero);
-        campoNumero.setBounds(100, 30, 227, 20);
+        campoNumero.setBounds(100, 30, 227, 27);
 
         campoCep.setEnabled(false);
         panelEndereco.add(campoCep);
-        campoCep.setBounds(100, 150, 227, 20);
+        campoCep.setBounds(100, 150, 227, 27);
 
         campoCidade.setEnabled(false);
         panelEndereco.add(campoCidade);
-        campoCidade.setBounds(100, 120, 227, 20);
+        campoCidade.setBounds(100, 120, 227, 27);
 
         campoComplemento.setEnabled(false);
         panelEndereco.add(campoComplemento);
-        campoComplemento.setBounds(100, 180, 227, 20);
+        campoComplemento.setBounds(100, 180, 227, 27);
 
         buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
@@ -377,6 +425,10 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTipoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionar;
@@ -397,7 +449,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoRua;
     private javax.swing.JTextField campoTelefone;
     private javax.swing.JTextField campoTelefoneFixo;
-    private javax.swing.JComboBox<String> comboResultaods;
+    private javax.swing.JComboBox<String> comboResultados;
     private javax.swing.JComboBox<String> comboSexo;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JLabel jLabel10;

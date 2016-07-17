@@ -3,8 +3,9 @@ package views;
 import control.CarroController;
 import control.ClienteController;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import model.Carro;
+import model.Cliente;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class CadastroCarro extends javax.swing.JInternalFrame {
@@ -12,50 +13,118 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     CarroController carControl = new CarroController();
     ClienteController cliControl = new ClienteController();
     ArrayList<Carro> carros;
+    ArrayList<Cliente> clientes;
 
     public CadastroCarro() {
         initComponents();
         AutoCompleteDecorator.decorate(comboResultados);
-        createModel(comboTipo.getSelectedIndex());
+        this.preencheProcurar();
+        clientes = cliControl.getAll();
+    }
+    
+    private void preencheProcurar(){
+        carros = carControl.getAll();
+        comboResultados.setModel(carControl.procurar(comboTipo.getSelectedIndex()));
+    }
+    
+    private boolean valida(){
+        ArrayList<String> erros = carControl.valida(newCarro());
+        if(erros.isEmpty()){
+           return true; 
+        } else {
+            if (erros.size()==1){
+            JOptionPane.showMessageDialog(this, "O campo "+erros.get(0)+" não foi preenchido","Erro",JOptionPane.ERROR_MESSAGE);
+            } else {
+                  String mensagem = null;
+               for (String erro : erros) {
+                if (erros.get(0).equals(erro)){
+                    mensagem = erro;
+                    break;
+                }
+                mensagem = mensagem + " ,"+erro;    
+            }
+               JOptionPane.showMessageDialog(this, "Os campos "+mensagem+" não foram preenchidos","Erro",JOptionPane.ERROR_MESSAGE);
+            }
+                return false;
+        }
+    }
+        
+
+    private void preencher(Carro carro) {
+        cbCor.setSelectedItem(carro.getCor());
+        cbMarca.setSelectedItem(carro.getMarca());
+        cbModelo.setSelectedItem(carro.getModelo());
+        tfAno.setText(carro.getAno());
+        tfChassi.setText(carro.getChassi());
+        tfKm.setText(carro.getKm());
+        tfObs.setText(carro.getObs());
+        tfPlaca.setText(carro.getPlaca());
+        for (Cliente dono : clientes) {
+            if (dono.getCodigo()==carro.getDono()){
+                cbDono.setSelectedIndex(clientes.indexOf(dono));
+            }
+        }
+        
     }
 
-    private void createModel(int tipo) {
-        carros = carControl.getAll();
-        String[] comboBoxArray = new String[carros.size()];
+    private void limpar() {
+        cbCor.setSelectedItem(0);
+        cbMarca.setSelectedItem(0);
+        cbModelo.setSelectedItem(0);
+        tfAno.setText("");
+        tfChassi.setText("");
+        tfKm.setText("");
+        tfObs.setText("");
+        tfPlaca.setText("");
+        cbTipoDono.setSelectedIndex(0);
+        cbDono.setSelectedIndex(0);
+    }
 
-        switch (tipo) {
-            case 0:
-                // Código
-                for (int i = 0; i < carros.size(); i++) {
-                    Carro carro = carros.get(i);
-                    comboBoxArray[i] = carro.getCod() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca();
-                }
-                break;
-            case 1:
-                // Placa
-                for (int i = 0; i < carros.size(); i++) {
-                    Carro carro = carros.get(i);
-                    comboBoxArray[i] = carro.getPlaca() + " | " + carro.getMarca() + " " + carro.getModelo() + " | Código " + carro.getCod();
-                }
-                break;
-            case 2:
-                // Chassi
-                for (int i = 0; i < carros.size(); i++) {
-                    Carro carro = carros.get(i);
-                    comboBoxArray[i] = carro.getChassi() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca();
-                }
-                break;
-            case 3:
-                // Dono
-                for (int i = 0; i < carros.size(); i++) {
-                    Carro carro = carros.get(i);
-                    comboBoxArray[i] = cliControl.get(carro.getDono()).getNome() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca();
-                }
-                break;
+    private void editable(boolean flag) {
+        cbCor.setEnabled(flag);
+        cbMarca.setEnabled(flag);
+        cbModelo.setEnabled(flag);
+        tfAno.setEnabled(flag);
+        tfChassi.setEnabled(flag);
+        tfKm.setEnabled(flag);
+        tfObs.setEnabled(flag);
+        tfPlaca.setEnabled(flag);
+        cbTipoDono.setEnabled(flag);
+        cbDono.setEnabled(flag);
+    }
+
+    private void somenteNumeros(java.awt.event.KeyEvent evt) {
+        String caracteres = "0123456789";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
         }
+    }
 
-        DefaultComboBoxModel cbArray = new DefaultComboBoxModel(comboBoxArray);
-        comboResultados.setModel(cbArray);
+    private Carro newCarro() {
+        Carro carro = new Carro();
+        carro.setAno(tfAno.getText());
+        carro.setChassi(tfAno.getText());
+        carro.setCor(cbCor.getSelectedItem().toString());
+        carro.setKm(tfKm.getText());
+        carro.setMarca(cbMarca.getSelectedItem().toString());
+        carro.setModelo(cbModelo.getSelectedItem().toString());
+        carro.setObs(tfObs.getText());
+        carro.setPlaca(tfPlaca.getText());
+        carro.setDono(clientes.get(cbDono.getSelectedIndex()).getCodigo());
+        return carro;
+    }
+    
+       private Carro alteraCarro(Carro carro) {
+        carro.setAno(tfAno.getText());
+        carro.setChassi(tfAno.getText());
+        carro.setCor(cbCor.getSelectedItem().toString());
+        carro.setKm(tfKm.getText());
+        carro.setMarca(cbMarca.getSelectedItem().toString());
+        carro.setModelo(cbModelo.getSelectedItem().toString());
+        carro.setObs(tfObs.getText());
+        carro.setPlaca(tfPlaca.getText());
+        carro.setDono(clientes.get(cbDono.getSelectedIndex()).getCodigo());
+        return carro;
     }
 
     @SuppressWarnings("unchecked")
@@ -73,24 +142,27 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         titulo = new javax.swing.JLabel();
         panelDados = new javax.swing.JPanel();
         labelModelo2 = new javax.swing.JLabel();
-        modelo2 = new javax.swing.JComboBox();
+        cbMarca = new javax.swing.JComboBox();
         labelCor = new javax.swing.JLabel();
         labelChassi = new javax.swing.JLabel();
         labelPlaca = new javax.swing.JLabel();
-        placa = new javax.swing.JTextField();
-        km = new javax.swing.JTextField();
+        tfPlaca = new javax.swing.JTextField();
+        tfKm = new javax.swing.JTextField();
         labelKm = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        obs = new javax.swing.JTextArea();
+        tfObs = new javax.swing.JTextArea();
         labelObs = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
-        cor1 = new javax.swing.JComboBox();
-        chassi1 = new javax.swing.JTextField();
+        cbCor = new javax.swing.JComboBox();
+        tfChassi = new javax.swing.JTextField();
         labelAno = new javax.swing.JLabel();
-        ano = new javax.swing.JTextField();
-        modelo3 = new javax.swing.JComboBox();
+        tfAno = new javax.swing.JTextField();
+        cbModelo = new javax.swing.JComboBox();
         jSeparator2 = new javax.swing.JSeparator();
         labelMarca1 = new javax.swing.JLabel();
+        labelCor1 = new javax.swing.JLabel();
+        cbTipoDono = new javax.swing.JComboBox<String>();
+        cbDono = new javax.swing.JComboBox<String>();
         toolbarCrud = new javax.swing.JToolBar();
         buttonAdicionar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -147,6 +219,11 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         comboResultados.setEditable(true);
         comboResultados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
         comboResultados.setToolTipText("");
+        comboResultados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboResultadosActionPerformed(evt);
+            }
+        });
         comboResultados.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 comboResultadosPropertyChange(evt);
@@ -187,24 +264,24 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         labelModelo2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelModelo2.setText("Modelo*:");
         panelDados.add(labelModelo2);
-        labelModelo2.setBounds(10, 70, 50, 15);
+        labelModelo2.setBounds(220, 70, 50, 15);
 
-        modelo2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-        modelo2.setEnabled(false);
-        modelo2.setMinimumSize(new java.awt.Dimension(81, 20));
-        modelo2.setPreferredSize(new java.awt.Dimension(81, 20));
-        modelo2.addActionListener(new java.awt.event.ActionListener() {
+        cbMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        cbMarca.setEnabled(false);
+        cbMarca.setMinimumSize(new java.awt.Dimension(81, 20));
+        cbMarca.setPreferredSize(new java.awt.Dimension(81, 20));
+        cbMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modelo2ActionPerformed(evt);
+                cbMarcaActionPerformed(evt);
             }
         });
-        panelDados.add(modelo2);
-        modelo2.setBounds(60, 30, 110, 20);
+        panelDados.add(cbMarca);
+        cbMarca.setBounds(60, 70, 110, 20);
 
         labelCor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        labelCor.setText("Cor:");
+        labelCor.setText("Dono:");
         panelDados.add(labelCor);
-        labelCor.setBounds(310, 30, 30, 20);
+        labelCor.setBounds(10, 30, 40, 20);
 
         labelChassi.setText("Número chassi:");
         panelDados.add(labelChassi);
@@ -214,27 +291,37 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.add(labelPlaca);
         labelPlaca.setBounds(10, 210, 70, 20);
 
-        placa.setEnabled(false);
-        placa.addActionListener(new java.awt.event.ActionListener() {
+        tfPlaca.setEnabled(false);
+        tfPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                placaActionPerformed(evt);
+                tfPlacaActionPerformed(evt);
             }
         });
-        panelDados.add(placa);
-        placa.setBounds(100, 210, 390, 20);
+        panelDados.add(tfPlaca);
+        tfPlaca.setBounds(100, 210, 390, 27);
 
-        km.setEnabled(false);
-        panelDados.add(km);
-        km.setBounds(100, 180, 390, 20);
+        tfKm.setEnabled(false);
+        tfKm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfKmActionPerformed(evt);
+            }
+        });
+        tfKm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfKmKeyTyped(evt);
+            }
+        });
+        panelDados.add(tfKm);
+        tfKm.setBounds(100, 180, 390, 27);
 
         labelKm.setText("Quilometragem:");
         panelDados.add(labelKm);
         labelKm.setBounds(10, 180, 80, 20);
 
-        obs.setColumns(20);
-        obs.setRows(4);
-        obs.setEnabled(false);
-        jScrollPane1.setViewportView(obs);
+        tfObs.setColumns(20);
+        tfObs.setRows(4);
+        tfObs.setEnabled(false);
+        jScrollPane1.setViewportView(tfObs);
 
         panelDados.add(jScrollPane1);
         jScrollPane1.setBounds(100, 240, 390, 80);
@@ -243,71 +330,98 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.add(labelObs);
         labelObs.setBounds(10, 240, 80, 20);
         panelDados.add(jSeparator6);
-        jSeparator6.setBounds(440, 380, 0, 20);
+        jSeparator6.setBounds(440, 380, 4, 20);
 
-        cor1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prata ", "Preto  ", "Branco ", "Cinza ", "Azul ", "Vermelho ", "Marrom/Bege ", "Verde ", "Amarelo/Dourado", " " }));
-        cor1.setEnabled(false);
-        cor1.addActionListener(new java.awt.event.ActionListener() {
+        cbCor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prata ", "Preto  ", "Branco ", "Cinza ", "Azul ", "Vermelho ", "Marrom/Bege ", "Verde ", "Amarelo/Dourado", " " }));
+        cbCor.setEnabled(false);
+        cbCor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cor1ActionPerformed(evt);
+                cbCorActionPerformed(evt);
             }
         });
-        panelDados.add(cor1);
-        cor1.setBounds(340, 30, 110, 20);
+        panelDados.add(cbCor);
+        cbCor.setBounds(420, 70, 110, 27);
 
-        chassi1.setEnabled(false);
-        chassi1.addActionListener(new java.awt.event.ActionListener() {
+        tfChassi.setEnabled(false);
+        tfChassi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chassi1ActionPerformed(evt);
+                tfChassiActionPerformed(evt);
             }
         });
-        panelDados.add(chassi1);
-        chassi1.setBounds(100, 150, 390, 20);
+        panelDados.add(tfChassi);
+        tfChassi.setBounds(100, 150, 390, 27);
 
         labelAno.setText("Ano:");
         panelDados.add(labelAno);
         labelAno.setBounds(10, 120, 30, 20);
 
-        ano.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        ano.setEnabled(false);
-        ano.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        tfAno.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        tfAno.setEnabled(false);
+        tfAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfAnoActionPerformed(evt);
+            }
+        });
+        tfAno.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                anoInputMethodTextChanged(evt);
+                tfAnoInputMethodTextChanged(evt);
             }
         });
-        ano.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anoActionPerformed(evt);
-            }
-        });
-        ano.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfAno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                anoKeyTyped(evt);
+                tfAnoKeyTyped(evt);
             }
         });
-        panelDados.add(ano);
-        ano.setBounds(100, 120, 390, 20);
+        panelDados.add(tfAno);
+        tfAno.setBounds(100, 120, 390, 27);
 
-        modelo3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-        modelo3.setEnabled(false);
-        modelo3.setMinimumSize(new java.awt.Dimension(81, 20));
-        modelo3.setPreferredSize(new java.awt.Dimension(81, 20));
-        modelo3.addActionListener(new java.awt.event.ActionListener() {
+        cbModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        cbModelo.setEnabled(false);
+        cbModelo.setMinimumSize(new java.awt.Dimension(81, 20));
+        cbModelo.setPreferredSize(new java.awt.Dimension(81, 20));
+        cbModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modelo3ActionPerformed(evt);
+                cbModeloActionPerformed(evt);
             }
         });
-        panelDados.add(modelo3);
-        modelo3.setBounds(60, 70, 110, 20);
+        panelDados.add(cbModelo);
+        cbModelo.setBounds(270, 70, 110, 20);
         panelDados.add(jSeparator2);
         jSeparator2.setBounds(10, 100, 520, 10);
 
         labelMarca1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelMarca1.setText("Marca:*");
         panelDados.add(labelMarca1);
-        labelMarca1.setBounds(10, 30, 50, 20);
+        labelMarca1.setBounds(10, 70, 50, 20);
+
+        labelCor1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        labelCor1.setText("Cor:");
+        panelDados.add(labelCor1);
+        labelCor1.setBounds(390, 70, 30, 30);
+
+        cbTipoDono.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
+        cbTipoDono.setToolTipText("");
+        cbTipoDono.setEnabled(false);
+        cbTipoDono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoDonoActionPerformed(evt);
+            }
+        });
+        panelDados.add(cbTipoDono);
+        cbTipoDono.setBounds(50, 30, 80, 27);
+
+        cbDono.setEditable(true);
+        cbDono.setToolTipText("");
+        cbDono.setEnabled(false);
+        cbDono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDonoActionPerformed(evt);
+            }
+        });
+        panelDados.add(cbDono);
+        cbDono.setBounds(130, 30, 400, 27);
 
         toolbarCrud.setBackground(new java.awt.Color(204, 204, 255));
         toolbarCrud.setFloatable(false);
@@ -332,6 +446,11 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         buttonEditar.setFocusable(false);
         buttonEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditarActionPerformed(evt);
+            }
+        });
         toolbarCrud.add(buttonEditar);
 
         jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
@@ -342,6 +461,11 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         buttonExcluir.setFocusable(false);
         buttonExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExcluirActionPerformed(evt);
+            }
+        });
         toolbarCrud.add(buttonExcluir);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -355,7 +479,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
                     .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -380,58 +504,61 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void modelo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelo2ActionPerformed
+    private void cbMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMarcaActionPerformed
 
-    }//GEN-LAST:event_modelo2ActionPerformed
+    }//GEN-LAST:event_cbMarcaActionPerformed
 
-    private void placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaActionPerformed
+    private void tfPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPlacaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_placaActionPerformed
+    }//GEN-LAST:event_tfPlacaActionPerformed
 
-    private void cor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cor1ActionPerformed
+    private void cbCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cor1ActionPerformed
+    }//GEN-LAST:event_cbCorActionPerformed
 
-    private void chassi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chassi1ActionPerformed
+    private void tfChassiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfChassiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_chassi1ActionPerformed
+    }//GEN-LAST:event_tfChassiActionPerformed
 
-    private void anoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_anoInputMethodTextChanged
+    private void tfAnoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tfAnoInputMethodTextChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_anoInputMethodTextChanged
+    }//GEN-LAST:event_tfAnoInputMethodTextChanged
 
-    private void anoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anoActionPerformed
+    private void tfAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnoActionPerformed
 
-    }//GEN-LAST:event_anoActionPerformed
+    }//GEN-LAST:event_tfAnoActionPerformed
 
-    private void anoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anoKeyTyped
-        String caracteres = "0123456789";
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
+    private void tfAnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnoKeyTyped
+        this.somenteNumeros(evt);
+        if (tfAno.getText().length() == 4) {
             evt.consume();
         }
-        if (ano.getText().length() == 4) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_anoKeyTyped
+    }//GEN-LAST:event_tfAnoKeyTyped
 
-    private void modelo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelo3ActionPerformed
+    private void cbModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbModeloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_modelo3ActionPerformed
+    }//GEN-LAST:event_cbModeloActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        // TODO add your handling code here:
+      this.valida();
+        // if (comboResultados.getSelectedIndex() == 0) {
+       //     carControl.add(newCarro());
+     //   } else {
+      //     carControl.altera(alteraCarro(carros.get(comboResultados.getSelectedIndex())));
+    //    }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
-        // TODO add your handling code here:
+        this.limpar();
     }//GEN-LAST:event_buttonLimparActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        // TODO add your handling code here:
+    this.dispose();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-        // TODO add your handling code here:
+        this.limpar();
+        comboResultados.setSelectedIndex(0);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void comboResultadosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboResultadosPropertyChange
@@ -439,44 +566,82 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboResultadosPropertyChange
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-        createModel(comboTipo.getSelectedIndex());
+        comboResultados.setModel(carControl.procurar(comboTipo.getSelectedIndex()));
     }//GEN-LAST:event_comboTipoActionPerformed
+
+    private void comboResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboResultadosActionPerformed
+        if ((comboResultados.getSelectedIndex() != 0) && (comboResultados.getSelectedIndex() != -1)) {
+            this.limpar();
+            this.editable(false);
+            this.preencher(carros.get(comboResultados.getSelectedIndex()));
+        }
+    }//GEN-LAST:event_comboResultadosActionPerformed
+
+    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
+        this.editable(true);
+    }//GEN-LAST:event_buttonEditarActionPerformed
+
+    private void tfKmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfKmActionPerformed
+
+    private void tfKmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfKmKeyTyped
+        this.somenteNumeros(evt);
+    }//GEN-LAST:event_tfKmKeyTyped
+
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+       carControl.remove(carros.get(comboResultados.getSelectedIndex()).getCod());
+       this.editable(false);
+       this.limpar();
+       this.preencheProcurar();
+    }//GEN-LAST:event_buttonExcluirActionPerformed
+
+    private void cbTipoDonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoDonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoDonoActionPerformed
+
+    private void cbDonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDonoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ano;
     private javax.swing.JButton buttonAdicionar;
     private javax.swing.JButton buttonCancelar;
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JButton buttonLimpar;
     private javax.swing.JButton buttonSalvar;
-    private javax.swing.JTextField chassi1;
+    private javax.swing.JComboBox cbCor;
+    private javax.swing.JComboBox<String> cbDono;
+    private javax.swing.JComboBox cbMarca;
+    private javax.swing.JComboBox cbModelo;
+    private javax.swing.JComboBox<String> cbTipoDono;
     private javax.swing.JComboBox<String> comboResultados;
     private javax.swing.JComboBox<String> comboTipo;
-    private javax.swing.JComboBox cor1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTextField km;
     private javax.swing.JLabel labelAno;
     private javax.swing.JLabel labelChassi;
     private javax.swing.JLabel labelCor;
+    private javax.swing.JLabel labelCor1;
     private javax.swing.JLabel labelKm;
     private javax.swing.JLabel labelMarca1;
     private javax.swing.JLabel labelModelo2;
     private javax.swing.JLabel labelObs;
     private javax.swing.JLabel labelPlaca;
     private javax.swing.JLabel labelPor;
-    private javax.swing.JComboBox modelo2;
-    private javax.swing.JComboBox modelo3;
-    private javax.swing.JTextArea obs;
     private javax.swing.JPanel panelButtons;
     private javax.swing.JPanel panelDados;
     private javax.swing.JPanel panelProcurar;
-    private javax.swing.JTextField placa;
+    private javax.swing.JTextField tfAno;
+    private javax.swing.JTextField tfChassi;
+    private javax.swing.JTextField tfKm;
+    private javax.swing.JTextArea tfObs;
+    private javax.swing.JTextField tfPlaca;
     private javax.swing.JLabel titulo;
     private javax.swing.JToolBar toolbarCrud;
     // End of variables declaration//GEN-END:variables

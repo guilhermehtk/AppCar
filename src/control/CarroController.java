@@ -1,12 +1,14 @@
 package control;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import model.Carro;
 import model.dao.CarroDao;
 
 public class CarroController implements InterfaceControllerCrud {
 
     CarroDao carDao = new CarroDao();
+    ClienteController cliControl = new ClienteController();
 
     @Override
     public int add(Object car) {
@@ -30,7 +32,7 @@ public class CarroController implements InterfaceControllerCrud {
     }
 
     @Override
-    public ArrayList getAll() {
+    public ArrayList<Carro> getAll() {
         return carDao.getAll();
     }
 
@@ -51,28 +53,36 @@ public class CarroController implements InterfaceControllerCrud {
         return erros;
     }
 
-    public ArrayList<Carro> procurar(String input, int tipo) {
-        ArrayList<Carro> arrayCarro = new ArrayList();
+    public DefaultComboBoxModel procurar(int tipo) {
+        DefaultComboBoxModel cbArray = new DefaultComboBoxModel();
+        cbArray.insertElementAt("Selecione...", 0);
         switch (tipo) {
             case 0:
                 // Código
-                for (Carro carro : carDao.getAll()) {
-                    if (carro.getCod() == Integer.valueOf(input)) {
-                        arrayCarro.add(carro);
-                    }
+                for (Carro carro : getAll()) {
+                    cbArray.addElement(carro.getCod() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca());
                 }
-                return arrayCarro;
+                break;
             case 1:
                 // Placa
-                return carDao.getPlaca(input);
+                for (Carro carro : getAll()) {
+                    cbArray.addElement(carro.getPlaca() + " | " + carro.getMarca() + " " + carro.getModelo() + " | Código " + carro.getCod());
+                }
+                break;
             case 2:
                 // Chassi
-                return carDao.getChassi(input);
+                for (Carro carro : getAll()) {
+                    cbArray.addElement(carro.getChassi() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca());
+                }
+                break;
             case 3:
                 // Dono
-              return carDao.getDono(input);
+                for (Carro carro : getAll()) {
+                    cbArray.addElement(cliControl.get(carro.getDono()).getNome() + " | " + carro.getMarca() + " " + carro.getModelo() + " | " + carro.getPlaca());
+                }
+                break;
         }
-        return null;
-        
+
+        return cbArray;
     }
 }
