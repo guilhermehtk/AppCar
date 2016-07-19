@@ -3,7 +3,7 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import views.Erros;
+import views.Mensagens;
 
 public class ConnectionFactory {
 
@@ -25,7 +25,7 @@ public class ConnectionFactory {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
-          Erros.erroBD(e.toString());
+          Mensagens.erroBD(e.toString());
           System.exit(0);
         }
         return connection;

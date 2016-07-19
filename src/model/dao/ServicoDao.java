@@ -122,7 +122,7 @@ public class ServicoDao implements InterfaceDao {
         // cria a query
         String sql = "select * from Servicos;";
         // cria o ArrayList
-        ArrayList<Servico> lista = null;
+        ArrayList<Servico> lista = new ArrayList<>();
         try {
             // prepared statement para inserção
             PreparedStatement stmt = con.prepareStatement(sql);

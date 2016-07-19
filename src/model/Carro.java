@@ -17,7 +17,7 @@ public class Carro {
         
     }
     
-    public Carro(String marca, String modelo, String cor, String ano, String chassi, String km, String placa, String obs) {
+    public Carro(String marca, String modelo, String cor, String ano, String chassi, String km, String placa, String obs, int dono) {
         this.marca = marca;
         this.modelo = modelo;
         this.cor = cor;
@@ -26,6 +26,7 @@ public class Carro {
         this.km = km;
         this.placa = placa;
         this.obs = obs;
+        this.dono=dono;
     }
 
     public int getCod() {

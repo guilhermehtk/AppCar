@@ -17,19 +17,20 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
 
     public CadastroCarro() {
         initComponents();
-        AutoCompleteDecorator.decorate(comboResultados);
         this.preencheProcurar();
+        AutoCompleteDecorator.decorate(comboResultados);
     }
 
-    private void preencheProcurar() {
+    private void preencheProcurar() { 
         clientes = cliControl.getAll();
         carros = carControl.getAll();
         comboResultados.setModel(carControl.procurar(comboTipo.getSelectedIndex()));
-        comboResultados.setSelectedIndex(0);
+        comboDono.setModel(cliControl.procurar(comboTipoDono.getSelectedIndex()));
+         comboResultados.setSelectedIndex(0);
     }
 
     private boolean valida() {
-        return Erros.errosValidacao(carControl.valida(newCarro()));
+        return Mensagens.errosValidacao(carControl.valida(newCarro()));
     }
 
     private void preencher(Carro carro) {
@@ -40,25 +41,39 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         tfChassi.setText(carro.getChassi());
         tfKm.setText(carro.getKm());
         tfObs.setText(carro.getObs());
+        tfObs.setBackground(Color.white);
         tfPlaca.setText(carro.getPlaca());
+        comboTipoDono.setSelectedIndex(0);
+        if (carro.getDono()==0){
+            comboDono.setSelectedIndex(0);
+        }
         for (Cliente dono : clientes) {
             if (dono.getCodigo() == carro.getDono()) {
-                cbDono.setSelectedIndex(clientes.indexOf(dono));
+                comboDono.setSelectedIndex(clientes.indexOf(dono)+1);
+            }
+        }
+    }
+    
+    private void setCarroResultado(int id){
+       this.preencheProcurar();
+        for (Carro car : carros) {
+            if (car.getCod() == id) {
+                comboResultados.setSelectedIndex(carros.indexOf(car)+1);
             }
         }
     }
 
     private void limpar() {
-        cbCor.setSelectedItem(0);
-        cbMarca.setSelectedItem(0);
-        cbModelo.setSelectedItem(0);
+        cbCor.setSelectedIndex(0);
+        cbMarca.setSelectedIndex(0);
+        cbModelo.setSelectedIndex(0);
         tfAno.setText("");
         tfChassi.setText("");
-        tfKm.setText("");
-        tfObs.setText("");
         tfPlaca.setText("");
-        cbTipoDono.setSelectedIndex(0);
-        cbDono.setSelectedIndex(0);
+        tfObs.setText("");
+        tfKm.setText("");
+        comboTipoDono.setSelectedIndex(0);
+        comboDono.setSelectedIndex(0);
         comboResultados.setSelectedIndex(0);
     }
 
@@ -66,38 +81,38 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         cbCor.setEnabled(flag);
         cbMarca.setEnabled(flag);
         cbModelo.setEnabled(flag);
-        tfAno.setEnabled(flag);
-        tfChassi.setEnabled(flag);
-        tfKm.setEnabled(flag);
-        tfObs.setEnabled(flag);
-        if (flag) {
-            tfObs.setBackground(Color.WHITE);
+        tfAno.setEditable(flag);
+        tfChassi.setEditable(flag);
+        tfAno.setEditable(flag);
+        tfKm.setEditable(flag);
+        tfPlaca.setEditable(flag);
+        tfObs.setEditable(flag);
+        comboTipoDono.setEnabled(flag);
+        comboDono.setEnabled(flag);
+        if (flag){
+            tfObs.setBackground(Color.white);
         } else {
-            tfObs.setBackground(Color.GRAY);
-        }
-        tfPlaca.setEnabled(flag);
-        cbTipoDono.setEnabled(flag);
-        cbDono.setEnabled(flag);
-    }
-
-    private void somenteNumeros(java.awt.event.KeyEvent evt) {
-        String caracteres = "0123456789";
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
+            tfObs.setBackground(this.getBackground());
         }
     }
 
     private Carro newCarro() {
         Carro carro = new Carro();
         carro.setAno(tfAno.getText());
-        carro.setChassi(tfAno.getText());
+        carro.setChassi(tfChassi.getText());
         carro.setCor(cbCor.getSelectedItem().toString());
         carro.setKm(tfKm.getText());
         carro.setMarca(cbMarca.getSelectedItem().toString());
         carro.setModelo(cbModelo.getSelectedItem().toString());
         carro.setObs(tfObs.getText());
         carro.setPlaca(tfPlaca.getText());
-//        carro.setDono(clientes.get(cbDono.getSelectedIndex()).getCodigo());
+        System.out.println("Combo : " + comboDono.getSelectedIndex());
+        if (comboDono.getSelectedIndex()!=0){
+            System.out.println("Entrou");
+        carro.setDono(clientes.get(comboDono.getSelectedIndex() - 1).getCodigo()); 
+            System.out.println("Donooo"+carro.getDono());
+        }
+        System.out.println("");
         return carro;
     }
 
@@ -110,7 +125,10 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         carro.setModelo(cbModelo.getSelectedItem().toString());
         carro.setObs(tfObs.getText());
         carro.setPlaca(tfPlaca.getText());
-        carro.setDono(clientes.get(cbDono.getSelectedIndex()).getCodigo());
+        if (comboDono.getSelectedIndex()==0){
+            carro.setDono(0);
+        }
+        carro.setDono(clientes.get(comboDono.getSelectedIndex()-1).getCodigo());
         return carro;
     }
 
@@ -133,7 +151,6 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         labelCor = new javax.swing.JLabel();
         labelChassi = new javax.swing.JLabel();
         labelPlaca = new javax.swing.JLabel();
-        tfPlaca = new javax.swing.JTextField();
         tfKm = new javax.swing.JTextField();
         labelKm = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -143,13 +160,14 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         cbCor = new javax.swing.JComboBox();
         tfChassi = new javax.swing.JTextField();
         labelAno = new javax.swing.JLabel();
-        tfAno = new javax.swing.JTextField();
         cbModelo = new javax.swing.JComboBox();
         jSeparator2 = new javax.swing.JSeparator();
         labelMarca1 = new javax.swing.JLabel();
         labelCor1 = new javax.swing.JLabel();
-        cbTipoDono = new javax.swing.JComboBox<String>();
-        cbDono = new javax.swing.JComboBox<String>();
+        comboTipoDono = new javax.swing.JComboBox<String>();
+        comboDono = new javax.swing.JComboBox<String>();
+        tfPlaca = new javax.swing.JFormattedTextField();
+        tfAno = new javax.swing.JTextField();
         toolbarCrud = new javax.swing.JToolBar();
         buttonAdicionar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -206,6 +224,18 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         comboResultados.setEditable(true);
         comboResultados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
         comboResultados.setToolTipText("");
+        comboResultados.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboResultadosItemStateChanged(evt);
+            }
+        });
+        comboResultados.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                comboResultadosCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         comboResultados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboResultadosActionPerformed(evt);
@@ -214,6 +244,11 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         comboResultados.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 comboResultadosPropertyChange(evt);
+            }
+        });
+        comboResultados.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                comboResultadosVetoableChange(evt);
             }
         });
 
@@ -278,16 +313,6 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.add(labelPlaca);
         labelPlaca.setBounds(10, 210, 70, 20);
 
-        tfPlaca.setEnabled(false);
-        tfPlaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPlacaActionPerformed(evt);
-            }
-        });
-        panelDados.add(tfPlaca);
-        tfPlaca.setBounds(100, 210, 390, 20);
-
-        tfKm.setEnabled(false);
         tfKm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKmActionPerformed(evt);
@@ -305,11 +330,9 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.add(labelKm);
         labelKm.setBounds(10, 180, 80, 20);
 
-        tfObs.setBackground(new java.awt.Color(240, 240, 240));
         tfObs.setColumns(20);
         tfObs.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tfObs.setRows(4);
-        tfObs.setEnabled(false);
         jScrollPane1.setViewportView(tfObs);
 
         panelDados.add(jScrollPane1);
@@ -331,7 +354,6 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.add(cbCor);
         cbCor.setBounds(410, 70, 110, 20);
 
-        tfChassi.setEnabled(false);
         tfChassi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfChassiActionPerformed(evt);
@@ -343,28 +365,6 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         labelAno.setText("Ano:");
         panelDados.add(labelAno);
         labelAno.setBounds(10, 120, 30, 20);
-
-        tfAno.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        tfAno.setEnabled(false);
-        tfAno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfAnoActionPerformed(evt);
-            }
-        });
-        tfAno.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                tfAnoInputMethodTextChanged(evt);
-            }
-        });
-        tfAno.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfAnoKeyTyped(evt);
-            }
-        });
-        panelDados.add(tfAno);
-        tfAno.setBounds(100, 120, 390, 20);
 
         cbModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Uno" }));
         cbModelo.setEnabled(false);
@@ -390,28 +390,54 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         panelDados.add(labelCor1);
         labelCor1.setBounds(380, 70, 30, 20);
 
-        cbTipoDono.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
-        cbTipoDono.setToolTipText("");
-        cbTipoDono.setEnabled(false);
-        cbTipoDono.addActionListener(new java.awt.event.ActionListener() {
+        comboTipoDono.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
+        comboTipoDono.setToolTipText("");
+        comboTipoDono.setEnabled(false);
+        comboTipoDono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoDonoActionPerformed(evt);
+                comboTipoDonoActionPerformed(evt);
             }
         });
-        panelDados.add(cbTipoDono);
-        cbTipoDono.setBounds(50, 30, 80, 20);
+        panelDados.add(comboTipoDono);
+        comboTipoDono.setBounds(50, 30, 60, 20);
 
-        cbDono.setEditable(true);
-        cbDono.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
-        cbDono.setToolTipText("");
-        cbDono.setEnabled(false);
-        cbDono.addActionListener(new java.awt.event.ActionListener() {
+        comboDono.setEditable(true);
+        comboDono.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
+        comboDono.setToolTipText("");
+        comboDono.setEnabled(false);
+        comboDono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDonoActionPerformed(evt);
+                comboDonoActionPerformed(evt);
             }
         });
-        panelDados.add(cbDono);
-        cbDono.setBounds(130, 30, 400, 20);
+        panelDados.add(comboDono);
+        comboDono.setBounds(120, 30, 400, 20);
+
+        try {
+            tfPlaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("UUU-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfPlaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPlacaActionPerformed(evt);
+            }
+        });
+        panelDados.add(tfPlaca);
+        tfPlaca.setBounds(100, 210, 390, 20);
+
+        tfAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfAnoActionPerformed(evt);
+            }
+        });
+        tfAno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfAnoKeyTyped(evt);
+            }
+        });
+        panelDados.add(tfAno);
+        tfAno.setBounds(100, 120, 390, 20);
 
         toolbarCrud.setBackground(new java.awt.Color(204, 204, 255));
         toolbarCrud.setFloatable(false);
@@ -498,10 +524,6 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_cbMarcaActionPerformed
 
-    private void tfPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPlacaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPlacaActionPerformed
-
     private void cbCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCorActionPerformed
@@ -510,31 +532,24 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfChassiActionPerformed
 
-    private void tfAnoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tfAnoInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfAnoInputMethodTextChanged
-
-    private void tfAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnoActionPerformed
-
-    }//GEN-LAST:event_tfAnoActionPerformed
-
-    private void tfAnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnoKeyTyped
-        this.somenteNumeros(evt);
-        if (tfAno.getText().length() == 4) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_tfAnoKeyTyped
-
     private void cbModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbModeloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbModeloActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        if (comboResultados.getSelectedIndex() == 0 && this.valida()) {
-            carControl.add(newCarro());
-        } else if (this.valida()) {
-            carControl.altera(alteraCarro(carros.get(comboResultados.getSelectedIndex())));
+       if (this.valida()){
+           if (comboResultados.getSelectedIndex() == 0) {
+               int id = carControl.add(newCarro());
+            if (id != 0) {
+                Mensagens.sucessoCreate();
+                this.setCarroResultado(id);
+            }
+        } else {
+            carControl.altera(alteraCarro(carros.get(comboResultados.getSelectedIndex()-1)));
+            this.setCarroResultado(carros.get(comboResultados.getSelectedIndex()-1).getCod());
+            Mensagens.sucessoAlterar();
         }
+       }    
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
@@ -559,24 +574,12 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboTipoActionPerformed
 
     private void comboResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboResultadosActionPerformed
-        if ((comboResultados.getSelectedIndex() != 0) && (comboResultados.getSelectedIndex() != -1)) {
-            this.limpar();
-            this.editable(false);
-            this.preencher(carros.get(comboResultados.getSelectedIndex()));
-        }
+
     }//GEN-LAST:event_comboResultadosActionPerformed
 
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         this.editable(true);
     }//GEN-LAST:event_buttonEditarActionPerformed
-
-    private void tfKmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKmActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfKmActionPerformed
-
-    private void tfKmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfKmKeyTyped
-        this.somenteNumeros(evt);
-    }//GEN-LAST:event_tfKmKeyTyped
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         carControl.remove(carros.get(comboResultados.getSelectedIndex()).getCod());
@@ -585,13 +588,54 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
         this.preencheProcurar();
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
-    private void cbTipoDonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoDonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoDonoActionPerformed
+    private void comboTipoDonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoDonoActionPerformed
+        comboDono.setModel(cliControl.procurar(comboTipoDono.getSelectedIndex()));
+    }//GEN-LAST:event_comboTipoDonoActionPerformed
 
-    private void cbDonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDonoActionPerformed
+    private void comboDonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDonoActionPerformed
+    }//GEN-LAST:event_comboDonoActionPerformed
+
+    private void tfKmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfKmKeyTyped
+        Mensagens.somenteNumeros(evt);
+    }//GEN-LAST:event_tfKmKeyTyped
+
+    private void tfKmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbDonoActionPerformed
+    }//GEN-LAST:event_tfKmActionPerformed
+
+    private void tfPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPlacaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPlacaActionPerformed
+
+    private void tfAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfAnoActionPerformed
+
+    private void tfAnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnoKeyTyped
+        Mensagens.somenteNumeros(evt);
+        if (tfAno.getText().length()==4){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfAnoKeyTyped
+
+    private void comboResultadosCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_comboResultadosCaretPositionChanged
+            
+        
+      
+       
+    }//GEN-LAST:event_comboResultadosCaretPositionChanged
+
+    private void comboResultadosVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_comboResultadosVetoableChange
+         
+    }//GEN-LAST:event_comboResultadosVetoableChange
+
+    private void comboResultadosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboResultadosItemStateChanged
+        System.out.println(comboResultados.getSelectedIndex());
+        if ((comboResultados.getSelectedIndex() != 0) && (comboResultados.getSelectedIndex() != -1)) {
+            this.preencher(carros.get(comboResultados.getSelectedIndex()-1));
+            this.editable(false);
+        }
+    }//GEN-LAST:event_comboResultadosItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -602,12 +646,12 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonLimpar;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JComboBox cbCor;
-    private javax.swing.JComboBox<String> cbDono;
     private javax.swing.JComboBox cbMarca;
     private javax.swing.JComboBox cbModelo;
-    private javax.swing.JComboBox<String> cbTipoDono;
+    private javax.swing.JComboBox<String> comboDono;
     private javax.swing.JComboBox<String> comboResultados;
     private javax.swing.JComboBox<String> comboTipo;
+    private javax.swing.JComboBox<String> comboTipoDono;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -630,7 +674,7 @@ public class CadastroCarro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfChassi;
     private javax.swing.JTextField tfKm;
     private javax.swing.JTextArea tfObs;
-    private javax.swing.JTextField tfPlaca;
+    private javax.swing.JFormattedTextField tfPlaca;
     private javax.swing.JLabel titulo;
     private javax.swing.JToolBar toolbarCrud;
     // End of variables declaration//GEN-END:variables

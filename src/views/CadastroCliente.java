@@ -25,7 +25,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     }
 
     private boolean valida() {
-        return Erros.errosValidacao(cliControl.valida(newCliente()));
+        return Mensagens.errosValidacao(cliControl.valida(newCliente()));
     }
 
     private void preencher(Cliente cliente) {
@@ -509,12 +509,12 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         if (comboResultados.getSelectedIndex() == 0 && this.valida()) {
             if (cliControl.add(newCliente()) != 0) {
-                JOptionPane.showMessageDialog(this, "Inserido com Sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+                Mensagens.sucessoCreate();
                 this.editable(false);
             }
         } else if (this.valida()) {
             cliControl.altera(alteraCliente(clientes.get(comboResultados.getSelectedIndex())));
-            JOptionPane.showMessageDialog(this, "Alterado com Sucesso!", "Sucesso", JOptionPane.PLAIN_MESSAGE);
+           Mensagens.sucessoAlterar();
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 

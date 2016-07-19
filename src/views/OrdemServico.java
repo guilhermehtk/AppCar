@@ -1,11 +1,67 @@
 package views;
 
-public class OrdemServico extends javax.swing.JInternalFrame {
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.Servico;
 
+public class OrdemServico extends javax.swing.JInternalFrame {
+    ArrayList<Servico> servicos = new ArrayList();
+    DefaultTableModel dTable;
+    TabelaServicos ts = new TabelaServicos(this);
+    
     public OrdemServico() {
         initComponents();
+        povoaTabela();
+    }
+    
+    public void povoaTabela() {
+        dTable = criaTabela();
+        dTable.addColumn("Código");
+        dTable.addColumn("Nome");
+        dTable.addColumn("Valor");
+        for (Servico servico : servicos) {
+            dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), servico.getValor()});
+        }
+        tableServicos.setModel(dTable);
+    }
+     private DefaultTableModel criaTabela() {
+
+        DefaultTableModel dTable = new DefaultTableModel() {
+
+            Class[] types = new Class[]{
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean[]{
+                false, false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        ;
+
+        };
+    return dTable;
     }
 
+     public void setServicos(ArrayList<Servico> servicos) {
+         dTable = (DefaultTableModel) tableServicos.getModel();
+            for (Servico servico : servicos) {
+            dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), servico.getValor()});
+        }
+        tableServicos.setModel(dTable);
+        this.atualizaValor();
+     }
+     
+     public void atualizaValor(){
+         double a = 0;
+         for (int i = 0; i < dTable.getRowCount(); i++) {      
+                   a = a + (double)dTable.getValueAt(i,2);
+         }
+        labelValor.setText(String.valueOf(a));
+     }
+     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -245,6 +301,7 @@ public class OrdemServico extends javax.swing.JInternalFrame {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
+                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -277,6 +334,7 @@ public class OrdemServico extends javax.swing.JInternalFrame {
         }
 
         buttonAdd.setText("Adicionar");
+        buttonAdd.setEnabled(false);
         buttonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAddActionPerformed(evt);
@@ -284,6 +342,7 @@ public class OrdemServico extends javax.swing.JInternalFrame {
         });
 
         buttonExc.setText("Excluir");
+        buttonExc.setEnabled(false);
         buttonExc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonExcActionPerformed(evt);
@@ -393,7 +452,8 @@ public class OrdemServico extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        // TODO add your handling code here:
+        ts.setVisible(true);
+        
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcActionPerformed

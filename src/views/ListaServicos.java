@@ -36,9 +36,6 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         ;
 
         };
-         
-
-    
     return dTable;
     }
 
@@ -49,10 +46,9 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         dTable.addColumn("Valor");
         tabelaServicos.setModel(dTable);
         servicos = serCon.getAll();
-        if (!servicos.isEmpty()){
-               for (Servico servico : servicos) {
+
+        for (Servico servico : servicos) {
             dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), servico.getValor()});
-        }
         }
         tabelaServicos.setModel(dTable);
     }
@@ -365,7 +361,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         Servico servico = servicos.get(retornaLinha());
-        serCon.remove(servico.getCod()); 
+        serCon.remove(servico.getCod());
         this.povoaTabela();
     }//GEN-LAST:event_buttonExcluirActionPerformed
 

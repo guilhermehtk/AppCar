@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Carro;
-import model.Cliente;
 
 public class CarroDao implements InterfaceDao {
 
@@ -19,12 +18,12 @@ public class CarroDao implements InterfaceDao {
 
     public int add(Object car) {
         // cria a query
-        String sql = "insert into carros (carMarca,carModelo,carCor,carAno,carNumeroChassi,carQuilometragem,carPlaca,carObs) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into carros (carMarca,carModelo,carCor,carAno,carNumeroChassi,carQuilometragem,carPlaca,carObs,car_pesCod) values (?,?,?,?,?,?,?,?,?)";
         // cast
         Carro carro = (Carro) car;
         // cria id
         int id = 0;
-        
+
         try {
             // prepara o statement
             PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -36,9 +35,14 @@ public class CarroDao implements InterfaceDao {
             stmt.setString(4, carro.getAno());
             stmt.setString(5, carro.getChassi());
             stmt.setString(6, carro.getKm());
-            stmt.setString(5, carro.getPlaca());
-            stmt.setString(6, carro.getObs());
-
+            stmt.setString(7, carro.getPlaca());
+            stmt.setString(8, carro.getObs());
+            if (carro.getDono()!=0){
+                stmt.setInt(9, carro.getDono());
+            } else {
+                stmt.setNull(9, 4);
+            }    
+            
             // executa
             stmt.execute();
 
@@ -47,9 +51,6 @@ public class CarroDao implements InterfaceDao {
             if (rs.next()) {
                 id = rs.getInt(1);
             }
-
-            // adiciona um dono na tabela n para n
-            this.addDono(id, carro.getDono());
 
             // fecha a conexão
             stmt.close();
@@ -81,7 +82,7 @@ public class CarroDao implements InterfaceDao {
 
     public void altera(Object car) {
         // cria a query
-        String sql = "update carros set carMarca=?,carModelo=?,carCor=?,carAno=?,carNumeroChassi=?,carQuilometragem=?,carPlaca=?,carObs=? where carCod=?";
+        String sql = "update carros set carMarca=?,carModelo=?,carCor=?,carAno=?,carNumeroChassi=?,carQuilometragem=?,carPlaca=?,carObs=?,car_pesCod=? where carCod=?";
         // cast
         Carro carro = (Carro) car;
         try {
@@ -95,9 +96,10 @@ public class CarroDao implements InterfaceDao {
             stmt.setString(4, carro.getAno());
             stmt.setString(5, carro.getChassi());
             stmt.setString(6, carro.getKm());
-            stmt.setString(5, carro.getPlaca());
-            stmt.setString(6, carro.getObs());
-            stmt.setInt(7, carro.getCod());
+            stmt.setString(7, carro.getPlaca());
+            stmt.setString(8, carro.getObs());
+             stmt.setInt(9, carro.getDono());
+            stmt.setInt(10, carro.getCod());
 
             // executa
             stmt.execute();
@@ -125,7 +127,7 @@ public class CarroDao implements InterfaceDao {
 
             //cria o carro
             while (rs.next()) {
-                carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
                 carro.setCod(rs.getInt(1));
             }
             // fecha a conexão
@@ -150,7 +152,7 @@ public class CarroDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
                 carro.setCod(rs.getInt(1));
                 lista.add(carro);
             }
@@ -162,106 +164,5 @@ public class CarroDao implements InterfaceDao {
         return lista;
     }
 
-    public ArrayList<Carro> getPlaca(String placa) {
-        // cria a query
-        String sql = "select * from carros where carPlaca like '%?%' order by carCod;";
-        // cria o ArrayList
-        ArrayList<Carro> lista = null;
-        try {
-            // prepared statement para inserção
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            // seta os valores
-            stmt.setString(1, placa);
-
-            // executa
-            ResultSet rs = stmt.executeQuery();
-
-            //cria a lista
-            while (rs.next()) {
-                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-                carro.setCod(rs.getInt(1));
-                lista.add(carro);
-            }
-            // fecha a conexão
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return lista;
-    }
-
-    public ArrayList<Carro> getChassi(String chassi) {
-        // cria a query
-        String sql = "select * from carros where carChassi like '%?%' order by carCod;";
-        // cria o ArrayList
-        ArrayList<Carro> lista = null;
-        try {
-            // prepared statement para inserção
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            // seta os valores
-            stmt.setString(1, chassi);
-
-            // executa
-            ResultSet rs = stmt.executeQuery();
-
-            //cria a lista
-            while (rs.next()) {
-                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-                carro.setCod(rs.getInt(1));
-                lista.add(carro);
-            }
-            // fecha a conexão
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return lista;
-    }
-    
-    public ArrayList<Carro> getDono(String nomeDono) {
-        // cria a query
-        String sql = "select * from carros join pessoas where pesNome like '%?%' and car_pesCod=pesCod order by car_pesCod;";
-        // cria o ArrayList
-        ArrayList<Carro> lista = null;
-        try {
-            // prepared statement para inserção
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            // seta os valores
-            stmt.setString(1, nomeDono);
-
-            // executa
-            ResultSet rs = stmt.executeQuery();
-
-            //cria a lista
-            while (rs.next()) {
-                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-                carro.setCod(rs.getInt(1));
-                lista.add(carro);
-            }
-            // fecha a conexão
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return lista;
-    }
-
-    private void addDono(int idCarro, int idDono) {
-        // cria a query
-        String sql = "insert into Carros_Pessoas (ccl_carCod,ccl_pesCod) values" + "(" + idCarro + "," + idDono + ");";
-
-        try {
-            // prepara o statement
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            // executa
-            stmt.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }
