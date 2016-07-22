@@ -11,6 +11,10 @@ public class Login {
         this.senha = senha;
     }
 
+    public Login() {
+
+    }
+
     public int getCod() {
         return cod;
     }

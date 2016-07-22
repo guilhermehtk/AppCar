@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import model.Servico;
 import model.dao.ServicoDao;
 
-public class ControllerServico implements InterfaceControllerCrud{
-    
+public class ControllerServico implements InterfaceControllerCrud {
+
     ServicoDao serDao = new ServicoDao();
 
     @Override
@@ -15,18 +15,18 @@ public class ControllerServico implements InterfaceControllerCrud{
 
     @Override
     public void remove(int id) {
-       serDao.remove(id);
+        serDao.remove(id);
     }
 
     @Override
     public void altera(Object servico) {
-       Servico ser = (Servico) servico;
-       serDao.altera(ser);
+        Servico ser = (Servico) servico;
+        serDao.altera(ser);
     }
 
     @Override
     public Object get(int id) {
-         return serDao.get(id);
+        return serDao.get(id);
     }
 
     @Override
@@ -42,11 +42,10 @@ public class ControllerServico implements InterfaceControllerCrud{
         if (ser.getDescricao().isEmpty()) {
             erros.add("Nome");
         }
-        if (ser.getValor()!=0) {
+        if (ser.getValor() != 0) {
             erros.add("Valor");
         }
         return erros;
     }
 
-    
 }

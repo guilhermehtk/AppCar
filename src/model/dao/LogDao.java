@@ -35,13 +35,13 @@ public class LogDao implements InterfaceDao {
 
             // executa
             stmt.execute();
-            
+
             // pega o id gerado
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 id = rs.getInt(1);
             }
-            
+
             // fecha a conexão
             stmt.close();
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class LogDao implements InterfaceDao {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // seta os valores
-         stmt.setString(1, log.getDescricao());
+            stmt.setString(1, log.getDescricao());
             stmt.setString(2, log.getData().toString());
             stmt.setInt(3, log.getMecCod());
             stmt.setInt(4, log.getCod());
@@ -111,7 +111,7 @@ public class LogDao implements InterfaceDao {
 
             //cria o log
             while (rs.next()) {
-                log = new Log(rs.getString(2),rs.getInt(4));
+                log = new Log(rs.getString(2), rs.getInt(4));
                 log.setData(Timestamp.valueOf(rs.getString(3)));
                 log.setCod(rs.getInt(1));
             }
@@ -137,7 +137,7 @@ public class LogDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                Log log = new Log(rs.getString(2),rs.getInt(4));
+                Log log = new Log(rs.getString(2), rs.getInt(4));
                 log.setData(Timestamp.valueOf(rs.getString(3)));
                 log.setCod(rs.getInt(1));
                 lista.add(log);

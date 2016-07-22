@@ -2,7 +2,6 @@ package views;
 
 import control.ServicosController;
 import java.util.ArrayList;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Servico;
 

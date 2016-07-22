@@ -5,15 +5,16 @@ import javax.swing.table.DefaultTableModel;
 import model.Servico;
 
 public class OrdemServico extends javax.swing.JInternalFrame {
+
     ArrayList<Servico> servicos = new ArrayList();
     DefaultTableModel dTable;
     TabelaServicos ts = new TabelaServicos(this);
-    
+
     public OrdemServico() {
         initComponents();
         povoaTabela();
     }
-    
+
     public void povoaTabela() {
         dTable = criaTabela();
         dTable.addColumn("Código");
@@ -24,7 +25,8 @@ public class OrdemServico extends javax.swing.JInternalFrame {
         }
         tableServicos.setModel(dTable);
     }
-     private DefaultTableModel criaTabela() {
+
+    private DefaultTableModel criaTabela() {
 
         DefaultTableModel dTable = new DefaultTableModel() {
 
@@ -45,23 +47,23 @@ public class OrdemServico extends javax.swing.JInternalFrame {
     return dTable;
     }
 
-     public void setServicos(ArrayList<Servico> servicos) {
-         dTable = (DefaultTableModel) tableServicos.getModel();
-            for (Servico servico : servicos) {
+    public void setServicos(ArrayList<Servico> servicos) {
+        dTable = (DefaultTableModel) tableServicos.getModel();
+        for (Servico servico : servicos) {
             dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), servico.getValor()});
         }
         tableServicos.setModel(dTable);
         this.atualizaValor();
-     }
-     
-     public void atualizaValor(){
-         double a = 0;
-         for (int i = 0; i < dTable.getRowCount(); i++) {      
-                   a = a + (double)dTable.getValueAt(i,2);
-         }
+    }
+
+    public void atualizaValor() {
+        double a = 0;
+        for (int i = 0; i < dTable.getRowCount(); i++) {
+            a = a + (double) dTable.getValueAt(i, 2);
+        }
         labelValor.setText(String.valueOf(a));
-     }
-     
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -453,7 +455,7 @@ public class OrdemServico extends javax.swing.JInternalFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         ts.setVisible(true);
-        
+
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcActionPerformed

@@ -46,10 +46,24 @@ public class CarroController implements InterfaceControllerCrud {
         if (car.getModelo().equals("Selecione...")) {
             erros.add("Modelo");
         }
-        if (car.getPlaca().isEmpty()) {
+        if (car.getPlaca().isEmpty() || car.getPlaca().equals("   -    ")) {
             erros.add("Placa");
         }
 
+        return erros;
+    }
+
+    public ArrayList<String> validaUniques(Object carro) {
+        Carro car = (Carro) carro;
+        ArrayList<String> erros = new ArrayList();
+        for (Carro carros : getAll()) {
+            if (carros.getChassi().equals(car.getChassi())) {
+                erros.add("Chassi");
+            }
+            if (carros.getPlaca().equals(car.getPlaca())) {
+                erros.add("Placa");
+            }
+        }
         return erros;
     }
 

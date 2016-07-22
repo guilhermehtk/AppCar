@@ -13,9 +13,10 @@ public class Pessoa {
     private int tipo;
     private String rg;
 
-    public Pessoa(){
-        
+    public Pessoa() {
+
     }
+
     public Pessoa(String nome, String cpf, String sexo, String email, String telefoneM, String telefoneF, Endereco endereco, int tipo, String rg) {
         this.nome = nome;
         this.cpf = cpf;
@@ -100,6 +101,9 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
+    // Cliente -> 2
+    // Funcionario -> 3
+    // Administrador -> 1 
     public int getTipo() {
         return tipo;
     }

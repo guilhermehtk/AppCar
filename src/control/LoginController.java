@@ -2,18 +2,19 @@ package control;
 
 import model.Login;
 import model.dao.LoginDao;
-import model.dao.MecanicoDao;
+import model.dao.FuncionarioDao;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginController {
 
     LoginDao loginDao = new LoginDao();
-    MecanicoDao mecanicoDao = new MecanicoDao();
+    FuncionarioDao mecanicoDao = new FuncionarioDao();
     Login log;
 
     public int validaLogin(Login login) {
         log = loginDao.getUsuario(login);
-        if (log != null) {
-            if (login.getSenha().equals(log.getSenha())) {
+        if (log!=null) {
+            if (BCrypt.checkpw(login.getSenha(), log.getSenha())) {
                 // Validou -> Retorna ID do usuário
                 return mecanicoDao.getLogin(log.getCod()).getCodigo();
             } else {

@@ -116,7 +116,7 @@ public class ClienteDao implements InterfaceDao {
         // dao para selecionar o endereco
         EnderecoDao endDao = new EnderecoDao();
         // cria a query
-        String sql = "select * from pessoas where pesCod=?;";
+        String sql = "select * from pessoas where pesCod=? and pesTipo=2;";
         // cria o objeto
         Cliente cliente = null;
         try {

@@ -25,8 +25,8 @@ public class ConnectionFactory {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
-          Mensagens.erroBD(e.toString());
-          System.exit(0);
+            Mensagens.erroBD(e.toString());
+            System.exit(0);
         }
         return connection;
     }

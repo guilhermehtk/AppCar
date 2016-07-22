@@ -37,12 +37,12 @@ public class CarroDao implements InterfaceDao {
             stmt.setString(6, carro.getKm());
             stmt.setString(7, carro.getPlaca());
             stmt.setString(8, carro.getObs());
-            if (carro.getDono()!=0){
+            if (carro.getDono() != 0) {
                 stmt.setInt(9, carro.getDono());
             } else {
                 stmt.setNull(9, 4);
-            }    
-            
+            }
+
             // executa
             stmt.execute();
 
@@ -98,7 +98,11 @@ public class CarroDao implements InterfaceDao {
             stmt.setString(6, carro.getKm());
             stmt.setString(7, carro.getPlaca());
             stmt.setString(8, carro.getObs());
-             stmt.setInt(9, carro.getDono());
+            if (carro.getDono() != 0) {
+                stmt.setInt(9, carro.getDono());
+            } else {
+                stmt.setNull(9, 4);
+            }
             stmt.setInt(10, carro.getCod());
 
             // executa
@@ -127,7 +131,7 @@ public class CarroDao implements InterfaceDao {
 
             //cria o carro
             while (rs.next()) {
-                carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
+                carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
                 carro.setCod(rs.getInt(1));
             }
             // fecha a conexão
@@ -152,7 +156,7 @@ public class CarroDao implements InterfaceDao {
 
             //cria a lista
             while (rs.next()) {
-                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
+                Carro carro = new Carro(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
                 carro.setCod(rs.getInt(1));
                 lista.add(carro);
             }
@@ -163,6 +167,5 @@ public class CarroDao implements InterfaceDao {
         }
         return lista;
     }
-
 
 }

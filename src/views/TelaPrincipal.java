@@ -3,21 +3,27 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
-import model.Mecanico;
+import model.Funcionario;
+import model.dao.FuncionarioDao;
 
 public class TelaPrincipal extends javax.swing.JFrame {
-  
-    Mecanico usuario;
+
+    Funcionario usuario;
 
     public TelaPrincipal(int idUsuario) {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         this.initMaximized();
-        
-        labelVersao.setText("1.0");
-        // labelUsuario.setText(this.usuario.getNome());
         jToolbarTop.setFloatable(false);
+        // Icone
+        this.setIconImage(new ImageIcon(getClass().getResource("/views/icons/AppCar.png")).getImage());
+        // Nome do Usuário
+        usuario = new FuncionarioDao().get(idUsuario);
+        labelUsuario.setText(this.usuario.getNome());
+        // Versão
+        labelVersao.setText("1.0");
     }
 
     private void initMaximized() {
@@ -60,6 +66,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuMecanico = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuMecanico1 = new javax.swing.JMenuItem();
+        menuMecanico2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AppCar");
@@ -137,6 +144,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         buttonUsuario.setBackground(new java.awt.Color(204, 204, 255));
         buttonUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Usuario-35.png"))); // NOI18N
+        buttonUsuario.setToolTipText("Usuários");
         buttonUsuario.setFocusable(false);
         buttonUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -149,6 +157,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         buttonCarro.setBackground(new java.awt.Color(204, 204, 255));
         buttonCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Carro-35.png"))); // NOI18N
+        buttonCarro.setToolTipText("Carro");
         buttonCarro.setFocusable(false);
         buttonCarro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonCarro.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -161,6 +170,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         buttoOs.setBackground(new java.awt.Color(204, 204, 255));
         buttoOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/OS-35.png"))); // NOI18N
+        buttoOs.setToolTipText("Ordem de Serviço");
         buttoOs.setFocusable(false);
         buttoOs.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttoOs.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -173,6 +183,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         buttonServico.setBackground(new java.awt.Color(204, 204, 255));
         buttonServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Pistao-35.png"))); // NOI18N
+        buttonServico.setToolTipText("Lista de Serviço");
         buttonServico.setFocusable(false);
         buttonServico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonServico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -185,6 +196,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         buttonMecanico.setBackground(new java.awt.Color(204, 204, 255));
         buttonMecanico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Mecanico-35.png"))); // NOI18N
+        buttonMecanico.setToolTipText("Mecânico");
         buttonMecanico.setFocusable(false);
         buttonMecanico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonMecanico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -197,6 +209,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         buttonSettings.setBackground(new java.awt.Color(204, 204, 255));
         buttonSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Settings-35.png"))); // NOI18N
+        buttonSettings.setToolTipText("Configurações");
         buttonSettings.setFocusable(false);
         buttonSettings.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonSettings.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -231,6 +244,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastros.setText("Cadastros");
         menuCadastros.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
+        menuUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         menuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Usuario-25.png"))); // NOI18N
         menuUsuario.setText("Cliente");
         menuUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -240,6 +254,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastros.add(menuUsuario);
 
+        menuCarro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         menuCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Carro-25.png"))); // NOI18N
         menuCarro.setText("Carros");
         menuCarro.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +269,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuOs.setText("O.S");
         menuOs.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
+        menuGeraOs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         menuGeraOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/OS-25.png"))); // NOI18N
         menuGeraOs.setText("Abrir O.S");
         menuGeraOs.addActionListener(new java.awt.event.ActionListener() {
@@ -263,6 +279,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuOs.add(menuGeraOs);
 
+        menuListaServico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         menuListaServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Pistao-25.png"))); // NOI18N
         menuListaServico.setText("Lista de Serviços ");
         menuListaServico.addActionListener(new java.awt.event.ActionListener() {
@@ -276,8 +293,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuPainelControle.setText("Painel de Controle");
 
+        menuMecanico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_MASK));
         menuMecanico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Mecanico-25.png"))); // NOI18N
-        menuMecanico.setText("Cadastro de Mecânico");
+        menuMecanico.setText("Funcionários");
         menuMecanico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuMecanicoActionPerformed(evt);
@@ -290,14 +308,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuAjuda.setText("Ajuda");
         menuAjuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
+        menuMecanico1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         menuMecanico1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
-        menuMecanico1.setText("Sobre");
+        menuMecanico1.setText("Ajuda");
         menuMecanico1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuMecanico1ActionPerformed(evt);
             }
         });
         menuAjuda.add(menuMecanico1);
+
+        menuMecanico2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        menuMecanico2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
+        menuMecanico2.setText("Sobre");
+        menuMecanico2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMecanico2ActionPerformed(evt);
+            }
+        });
+        menuAjuda.add(menuMecanico2);
 
         menuPrincipal.add(menuAjuda);
 
@@ -376,15 +405,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
-        addInternal(new CadastroCliente());
+        addInternal(new ClienteView());
     }//GEN-LAST:event_menuUsuarioActionPerformed
 
     private void menuMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanicoActionPerformed
-        addInternal(new CadastroMecanico());
+        addInternal(new FuncionarioView());
     }//GEN-LAST:event_menuMecanicoActionPerformed
 
     private void menuCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCarroActionPerformed
-        addInternal(new CadastroCarro());
+        addInternal(new CarroView());
     }//GEN-LAST:event_menuCarroActionPerformed
 
     private void menuGeraOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGeraOsActionPerformed
@@ -396,11 +425,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuListaServicoActionPerformed
 
     private void buttonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUsuarioActionPerformed
-        addInternal(new CadastroCliente());
+        addInternal(new ClienteView());
     }//GEN-LAST:event_buttonUsuarioActionPerformed
 
     private void buttonCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarroActionPerformed
-        addInternal(new CadastroCarro());
+        addInternal(new CarroView());
     }//GEN-LAST:event_buttonCarroActionPerformed
 
     private void buttoOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoOsActionPerformed
@@ -412,11 +441,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonServicoActionPerformed
 
     private void buttonMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMecanicoActionPerformed
-        addInternal(new CadastroMecanico());
+        addInternal(new FuncionarioView());
     }//GEN-LAST:event_buttonMecanicoActionPerformed
 
     private void buttonSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSettingsActionPerformed
-        addInternal(new CadastroCliente());
+        addInternal(new ClienteView());
     }//GEN-LAST:event_buttonSettingsActionPerformed
 
     private void jDesktopPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentResized
@@ -438,6 +467,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void menuMecanico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanico1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuMecanico1ActionPerformed
+
+    private void menuMecanico2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanico2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuMecanico2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -497,6 +530,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuListaServico;
     private javax.swing.JMenuItem menuMecanico;
     private javax.swing.JMenuItem menuMecanico1;
+    private javax.swing.JMenuItem menuMecanico2;
     private javax.swing.JMenu menuOs;
     private javax.swing.JMenu menuPainelControle;
     private javax.swing.JMenuBar menuPrincipal;

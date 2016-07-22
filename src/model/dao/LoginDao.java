@@ -108,7 +108,7 @@ public class LoginDao implements InterfaceDao {
 
             //cria o login
             while (rs.next()) {
-                login = new Login(rs.getString(1), rs.getString(2));
+                login = new Login(rs.getString(2), rs.getString(3));
                 login.setCod(rs.getInt(1));
             }
             // fecha a conexão

@@ -3,7 +3,6 @@ package control;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import model.Cliente;
-import model.Cliente;
 import model.dao.ClienteDao;
 
 public class ClienteController implements InterfaceControllerCrud {
@@ -17,17 +16,17 @@ public class ClienteController implements InterfaceControllerCrud {
 
     @Override
     public void remove(int id) {
-       cliDao.remove(id);
+        cliDao.remove(id);
     }
 
     @Override
     public void altera(Object cliente) {
-       Cliente mec = (Cliente) cliente;
-       cliDao.altera(mec);
+        Cliente cli = (Cliente) cliente;
+        cliDao.altera(cli);
     }
 
     public Cliente get(int id) {
-         return cliDao.get(id);
+        return cliDao.get(id);
     }
 
     @Override
@@ -37,27 +36,46 @@ public class ClienteController implements InterfaceControllerCrud {
 
     @Override
     public ArrayList<String> valida(Object cliente) {
-        Cliente mec = (Cliente) cliente;
+        Cliente cli = (Cliente) cliente;
         ArrayList<String> erros = new ArrayList();
-        if (mec.getNome().isEmpty()) {
+        if (cli.getNome().isEmpty()) {
             erros.add("Nome");
         }
-        if (mec.getCpf().isEmpty()) {
+        if (cli.getCpf().isEmpty()) {
             erros.add("CPF");
         }
-        if (mec.getRg().isEmpty()) {
+        if (cli.getRg().isEmpty()) {
             erros.add("RG");
         }
-        if (mec.getTelefoneM().isEmpty()) {
+        if (cli.getTelefoneM().isEmpty()) {
             erros.add("Telefone");
         }
-        if (mec.getSexo().isEmpty()) {
+        if (cli.getSexo().isEmpty()) {
             erros.add("Sexo");
+        }
+        // Endereço
+        if (cli.getEndereco().getRua().isEmpty()) {
+            erros.add("Rua");
+        }
+        if (cli.getEndereco().getNumero().isEmpty()) {
+            erros.add("Número");
+        }
+        if (cli.getEndereco().getComplemento().isEmpty()) {
+            erros.add("Complemento");
+        }
+        if (cli.getEndereco().getBairro().isEmpty()) {
+            erros.add("Bairro");
+        }
+        if (cli.getEndereco().getCidade().isEmpty()) {
+            erros.add("Cidade");
+        }
+        if (cli.getEndereco().getCep().isEmpty()) {
+            erros.add("CEP");
         }
         return erros;
     }
 
-     public DefaultComboBoxModel procurar(int tipo) {
+    public DefaultComboBoxModel procurar(int tipo) {
         DefaultComboBoxModel cbArray = new DefaultComboBoxModel();
         cbArray.insertElementAt("Selecione...", 0);
         switch (tipo) {
@@ -70,7 +88,7 @@ public class ClienteController implements InterfaceControllerCrud {
             case 1:
                 // Nome
                 for (Cliente cliente : getAll()) {
-                    cbArray.addElement(cliente.getNome() + " | " + cliente.getCpf()+ "| Código " + cliente.getCodigo());
+                    cbArray.addElement(cliente.getNome() + " | " + cliente.getCpf() + "| Código " + cliente.getCodigo());
                 }
                 break;
             case 2:
@@ -88,5 +106,19 @@ public class ClienteController implements InterfaceControllerCrud {
         }
 
         return cbArray;
+    }
+
+    public ArrayList<String> validaUniques(Object cliente) {
+        Cliente cli = (Cliente) cliente;
+        ArrayList<String> erros = new ArrayList();
+        for (Cliente clientes : getAll()) {
+            if (clientes.getCpf().equals(cli.getCpf())) {
+                erros.add("CPF");
+            }
+            if (clientes.getRg().equals(cli.getRg())) {
+                erros.add("RG");
+            }
+        }
+        return erros;
     }
 }

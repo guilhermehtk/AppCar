@@ -13,10 +13,10 @@ public class Carro {
     private String obs;
     private int dono;
 
-    public Carro(){
-        
+    public Carro() {
+
     }
-    
+
     public Carro(String marca, String modelo, String cor, String ano, String chassi, String km, String placa, String obs, int dono) {
         this.marca = marca;
         this.modelo = modelo;
@@ -26,7 +26,7 @@ public class Carro {
         this.km = km;
         this.placa = placa;
         this.obs = obs;
-        this.dono=dono;
+        this.dono = dono;
     }
 
     public int getCod() {
