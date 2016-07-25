@@ -20,6 +20,7 @@ public class CarroView extends javax.swing.JInternalFrame {
         initComponents();
         this.preencheProcurar();
         AutoCompleteDecorator.decorate(comboResultados);
+          AutoCompleteDecorator.decorate(comboDono);
     }
 
     private void preencheProcurar() {

@@ -30,7 +30,7 @@ public class Servico_OSDao implements InterfaceDao {
             // seta os valores
             stmt.setInt(1, servico_OS.getOsCod());
             stmt.setInt(2, servico_OS.getMecCod());
-            stmt.setInt(2, servico_OS.getSvcCod());
+            stmt.setInt(3, servico_OS.getSvcCod());
 
             // executa
             stmt.execute();
@@ -149,9 +149,9 @@ public class Servico_OSDao implements InterfaceDao {
 
     public ArrayList<Servico_OS> getOS(int os) {
         // cria a query
-        String sql = "select * from Servicos_OS where ser_osCod=?;";
+        String sql = "select * from servicos_os where ser_osCod=?;";
         // cria o ArrayList
-        ArrayList<Servico_OS> lista = null;
+        ArrayList<Servico_OS> lista = new ArrayList<>();
         try {
             // prepared statement para inserção
             PreparedStatement stmt = con.prepareStatement(sql);

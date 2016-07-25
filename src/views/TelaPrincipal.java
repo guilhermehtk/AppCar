@@ -10,7 +10,7 @@ import model.dao.FuncionarioDao;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    Funcionario usuario;
+    Funcionario funcionario;
 
     public TelaPrincipal(int idUsuario) {
         initComponents();
@@ -20,8 +20,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Icone
         this.setIconImage(new ImageIcon(getClass().getResource("/views/icons/AppCar.png")).getImage());
         // Nome do Usuário
-        usuario = new FuncionarioDao().get(idUsuario);
-        labelUsuario.setText(this.usuario.getNome());
+        funcionario = new FuncionarioDao().get(idUsuario);
+        labelUsuario.setText(this.funcionario.getNome());
         // Versão
         labelVersao.setText("1.0");
     }
@@ -417,7 +417,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCarroActionPerformed
 
     private void menuGeraOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGeraOsActionPerformed
-        addInternal(new OrdemServico());
+        addInternal(new OrdensServico(funcionario.getCodigo()));
     }//GEN-LAST:event_menuGeraOsActionPerformed
 
     private void menuListaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServicoActionPerformed
@@ -433,7 +433,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCarroActionPerformed
 
     private void buttoOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoOsActionPerformed
-        addInternal(new OrdemServico());
+        addInternal(new OrdensServico(funcionario.getCodigo()));
     }//GEN-LAST:event_buttoOsActionPerformed
 
     private void buttonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonServicoActionPerformed

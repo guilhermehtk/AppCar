@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import model.Servico;
 import model.dao.ServicoDao;
 
-public class ServicosController implements InterfaceControllerCrud {
+public class ServicoController implements InterfaceControllerCrud {
 
     ServicoDao servicoDao = new ServicoDao();
 
@@ -25,7 +25,7 @@ public class ServicosController implements InterfaceControllerCrud {
     }
 
     @Override
-    public Object get(int id) {
+    public Servico get(int id) {
         return servicoDao.get(id);
     }
 

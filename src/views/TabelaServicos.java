@@ -1,18 +1,18 @@
 package views;
 
-import control.ServicosController;
+import control.ServicoController;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import model.Servico;
 
 public class TabelaServicos extends javax.swing.JFrame {
 
-    ServicosController serCon = new ServicosController();
+    ServicoController serCon = new ServicoController();
     DefaultTableModel dTable;
     private ArrayList<Servico> servicos;
-    private OrdemServico janela;
+    private OrdensServico janela;
 
-    public TabelaServicos(OrdemServico janela) {
+    public TabelaServicos(OrdensServico janela) {
         initComponents();
         this.janela = janela;
         this.povoaTabela();

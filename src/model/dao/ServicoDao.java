@@ -93,7 +93,7 @@ public class ServicoDao implements InterfaceDao {
     @Override
     public Servico get(int id) {
         // cria a query
-        String sql = "select * from Servicos where svcCod=?;";
+        String sql = "select * from servicos where svcCod=?;";
         Servico servico = null;
         try {
             // prepared statement para seleção

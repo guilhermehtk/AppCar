@@ -10,12 +10,26 @@ public class OrdemServico {
     private int situacao;
     private int cliCod;
     private int carCod;
+    private String descricao;
 
-    public OrdemServico(String tipo, int situacao, int carCod, int cliCod) {
+    public OrdemServico(String tipo, int situacao, int carCod, int cliCod, String descricao) {
         this.tipo = tipo;
         this.situacao = situacao;
         this.cliCod = cliCod;
         this.carCod = carCod;
+        this.descricao = descricao;
+    }
+
+    public OrdemServico() {
+
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public int getCod() {
