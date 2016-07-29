@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `enderecos` WRITE;
 /*!40000 ALTER TABLE `enderecos` DISABLE KEYS */;
-INSERT INTO `enderecos` VALUES (1,'1212112','121212','121212','12121212','',''),(2,'1212','asas','sasas','assasa','121212','121221'),(3,'1','a','a','a','a',''),(4,'1','a','aa','1','a','a'),(5,'1','1','1','1','',''),(6,'1','11111','1','1','1',''),(7,'1','1','1','1','',''),(8,'1','1','11','1','1',''),(9,'1','1','1','1','',''),(10,'1','1','1','1','1','1'),(11,'1','1','1','1','1','1'),(12,'12','12','12','12','',''),(13,'11','aasassaas','1','1','1','1'),(14,'1212','asas','saas','asas','',''),(15,'122121','asasasas','assaas','sasasa','',''),(16,'1','guig','gui','gui','gui','gui'),(17,'1221','12211212','21122112','122121','',''),(18,'1221','12211212','21122112','122121','',''),(19,'3','12121','1212','12112','',''),(20,'121221','Rua Sete de Setembnnro','centro','formiga','35559-000','clmdslsdf'),(21,'365','Rua Sete de Setembro','Centro','Apart A','35580-000','saasasAasassaas'),(22,'386','Sete de Setembro','Centro','Formiga','35570-000','A'),(23,'386','Sete de Setembro','Centro','Formiga','35570-000','A'),(24,'3432','asdsd','3432','34423','34222-222','32434'),(25,'365','Rua Sete de Setembro','centro ','formiga','35579-000','apart A'),(26,'365','Rua Sete de Setembro','centro ','formiga','35579-000','apart A'),(27,'3756','Sete de Setembro','dsijsdijs','centro','35589-000','aoajaso'),(28,'3756','Sete de Setembro','dsijsdijs','centro','35589-000','aoajaso'),(29,'1','1','\'1','1','     -   ','1'),(30,'33','3','3','3','33333-333','3'),(31,'983272387','9128219','2847384974','8247482','88888-888','38272987'),(32,'93483920','924823940','2948923843','9340823982','34983-493','90438398'),(33,'3333','333333','33333','333','33333-333','assaas'),(34,'375','Sete de Setembro','Centro','Formiga','35570-000','A');
+INSERT INTO `enderecos` VALUES (21,'365','Rua Sete de Setembro','Centro','Apart B','35580-000','saasasAasassaas'),(34,'375','Sete de Setembro','Centro','Formiga','35570-000','A');
 /*!40000 ALTER TABLE `enderecos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `ordemservicos` WRITE;
 /*!40000 ALTER TABLE `ordemservicos` DISABLE KEYS */;
-INSERT INTO `ordemservicos` VALUES (12,'Orçamento','2016-07-29 02:59:51',2,'Carro',65,15);
+INSERT INTO `ordemservicos` VALUES (12,'Orçamento','2016-07-29 02:59:51',2,'Carro',65,15),(13,'Orçamento','2016-07-29 16:57:01',0,'',65,15);
 /*!40000 ALTER TABLE `ordemservicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
-INSERT INTO `pessoas` VALUES (15,'Guilherme Henrique Pinto','Masculino','guilhermehtk@hotmail.comssaas','(37)99996-3627','(92)4923-4843','094.139.356-96','MG187272828',2,21,NULL),(22,'a','Masculino','a','(11)11111-1111','(13)2333-3333','222.222.222-22','A',3,33,10),(23,'Guilherme Henrique','Masculino','guilhermehtk@hotmail.com','(37)99988-1818','(38)8883-3333','094.139.344-46','MG19383888',3,34,11);
+INSERT INTO `pessoas` VALUES (15,'Guilherme Henrique Pinto','Masculino','guilhermehtk@hotmail.comssaas','(37)99996-3627','(92)4923-4843','094.139.356-96','MG187272828',2,21,NULL),(23,'Guilherme Henrique','Masculino','guilhermehtk@hotmail.com','(37)99988-1818','(38)8883-3333','094.139.344-46','MG19383888',3,34,11);
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `servicos_os` WRITE;
 /*!40000 ALTER TABLE `servicos_os` DISABLE KEYS */;
-INSERT INTO `servicos_os` VALUES (19,12,2,23),(20,12,3,23);
+INSERT INTO `servicos_os` VALUES (19,12,2,23),(20,12,3,23),(21,13,2,23),(22,13,4,23);
 /*!40000 ALTER TABLE `servicos_os` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -103,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-29  0:10:12
+-- Dump completed on 2016-07-29 14:20:55
