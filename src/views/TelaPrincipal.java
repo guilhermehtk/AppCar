@@ -18,7 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.initMaximized();
         jToolbarTop.setFloatable(false);
         // Icone
-        this.setIconImage(new ImageIcon("/views/icons/Ok-25.png").getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/views/icons/AppCar.png")).getImage());
         // Nome do Usuário
         funcionario = new FuncionarioDao().get(idUsuario);
         labelUsuario.setText(this.funcionario.getNome());
