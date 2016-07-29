@@ -18,7 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.initMaximized();
         jToolbarTop.setFloatable(false);
         // Icone
-        this.setIconImage(new ImageIcon(getClass().getResource("/views/icons/AppCar.png")).getImage());
+        this.setIconImage(new ImageIcon("/views/icons/Ok-25.png").getImage());
         // Nome do Usuário
         funcionario = new FuncionarioDao().get(idUsuario);
         labelUsuario.setText(this.funcionario.getNome());
@@ -54,7 +54,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         buttoOs = new javax.swing.JButton();
         buttonServico = new javax.swing.JButton();
         buttonMecanico = new javax.swing.JButton();
-        buttonSettings = new javax.swing.JButton();
+        buttonHelp = new javax.swing.JButton();
+        buttonInfo = new javax.swing.JButton();
         menuPrincipal = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
         menuUsuario = new javax.swing.JMenuItem();
@@ -65,8 +66,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuPainelControle = new javax.swing.JMenu();
         menuMecanico = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
-        menuMecanico1 = new javax.swing.JMenuItem();
-        menuMecanico2 = new javax.swing.JMenuItem();
+        menuAjuda1 = new javax.swing.JMenuItem();
+        menuSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AppCar");
@@ -196,7 +197,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         buttonMecanico.setBackground(new java.awt.Color(204, 204, 255));
         buttonMecanico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Mecanico-35.png"))); // NOI18N
-        buttonMecanico.setToolTipText("Mecânico");
+        buttonMecanico.setToolTipText("Funcionário");
         buttonMecanico.setFocusable(false);
         buttonMecanico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonMecanico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -207,18 +208,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jToolbarTop.add(buttonMecanico);
 
-        buttonSettings.setBackground(new java.awt.Color(204, 204, 255));
-        buttonSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Settings-35.png"))); // NOI18N
-        buttonSettings.setToolTipText("Configurações");
-        buttonSettings.setFocusable(false);
-        buttonSettings.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonSettings.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        buttonSettings.addActionListener(new java.awt.event.ActionListener() {
+        buttonHelp.setBackground(new java.awt.Color(204, 204, 255));
+        buttonHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Help-35.png"))); // NOI18N
+        buttonHelp.setToolTipText("Ajuda");
+        buttonHelp.setFocusable(false);
+        buttonHelp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonHelp.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSettingsActionPerformed(evt);
+                buttonHelpActionPerformed(evt);
             }
         });
-        jToolbarTop.add(buttonSettings);
+        jToolbarTop.add(buttonHelp);
+
+        buttonInfo.setBackground(new java.awt.Color(204, 204, 255));
+        buttonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Info-35.png"))); // NOI18N
+        buttonInfo.setToolTipText("Sobre");
+        buttonInfo.setFocusable(false);
+        buttonInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonInfoActionPerformed(evt);
+            }
+        });
+        jToolbarTop.add(buttonInfo);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -308,25 +322,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuAjuda.setText("Ajuda");
         menuAjuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        menuMecanico1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        menuMecanico1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
-        menuMecanico1.setText("Ajuda");
-        menuMecanico1.addActionListener(new java.awt.event.ActionListener() {
+        menuAjuda1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        menuAjuda1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Help-25.png"))); // NOI18N
+        menuAjuda1.setText("Ajuda");
+        menuAjuda1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuMecanico1ActionPerformed(evt);
+                menuAjuda1ActionPerformed(evt);
             }
         });
-        menuAjuda.add(menuMecanico1);
+        menuAjuda.add(menuAjuda1);
 
-        menuMecanico2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        menuMecanico2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
-        menuMecanico2.setText("Sobre");
-        menuMecanico2.addActionListener(new java.awt.event.ActionListener() {
+        menuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
+        menuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Info-25.png"))); // NOI18N
+        menuSobre.setText("Sobre");
+        menuSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuMecanico2ActionPerformed(evt);
+                menuSobreActionPerformed(evt);
             }
         });
-        menuAjuda.add(menuMecanico2);
+        menuAjuda.add(menuSobre);
 
         menuPrincipal.add(menuAjuda);
 
@@ -390,7 +404,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         // Removendo se estiver aberto
         for (JInternalFrame internals : array) {
-            if (internals.equals(internal)) {
+            if (internals.getClass().equals(internal.getClass())) {
                 internals.dispose();
                 jDesktopPane1.remove(internal);
                 flag = true;
@@ -417,7 +431,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCarroActionPerformed
 
     private void menuGeraOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGeraOsActionPerformed
-        addInternal(new OrdensServico(funcionario.getCodigo()));
+        addInternal(new OrdensServicoView(funcionario.getCodigo()));
     }//GEN-LAST:event_menuGeraOsActionPerformed
 
     private void menuListaServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServicoActionPerformed
@@ -433,7 +447,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCarroActionPerformed
 
     private void buttoOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoOsActionPerformed
-        addInternal(new OrdensServico(funcionario.getCodigo()));
+        addInternal(new OrdensServicoView(funcionario.getCodigo()));
     }//GEN-LAST:event_buttoOsActionPerformed
 
     private void buttonServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonServicoActionPerformed
@@ -443,10 +457,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void buttonMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMecanicoActionPerformed
         addInternal(new FuncionarioView());
     }//GEN-LAST:event_buttonMecanicoActionPerformed
-
-    private void buttonSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSettingsActionPerformed
-        addInternal(new ClienteView());
-    }//GEN-LAST:event_buttonSettingsActionPerformed
 
     private void jDesktopPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentResized
         onResize();
@@ -464,13 +474,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jDesktopPane1ComponentMoved
 
-    private void menuMecanico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanico1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuMecanico1ActionPerformed
+    private void menuAjuda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjuda1ActionPerformed
+         addInternal(new AjudaView());
+    }//GEN-LAST:event_menuAjuda1ActionPerformed
 
-    private void menuMecanico2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMecanico2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuMecanico2ActionPerformed
+    private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
+       addInternal(new SobreView());
+    }//GEN-LAST:event_menuSobreActionPerformed
+
+    private void buttonHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHelpActionPerformed
+          addInternal(new AjudaView());
+    }//GEN-LAST:event_buttonHelpActionPerformed
+
+    private void buttonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInfoActionPerformed
+        addInternal(new SobreView());
+    }//GEN-LAST:event_buttonInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,9 +528,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttoOs;
     private javax.swing.JButton buttonCarro;
+    private javax.swing.JButton buttonHelp;
+    private javax.swing.JButton buttonInfo;
     private javax.swing.JButton buttonMecanico;
     private javax.swing.JButton buttonServico;
-    private javax.swing.JButton buttonSettings;
     private javax.swing.JButton buttonUsuario;
     private javax.swing.JPanel footer;
     private javax.swing.JLabel imagemFundo;
@@ -524,16 +543,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel labelUsuario;
     private javax.swing.JLabel labelVersao;
     private javax.swing.JMenu menuAjuda;
+    private javax.swing.JMenuItem menuAjuda1;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenuItem menuCarro;
     private javax.swing.JMenuItem menuGeraOs;
     private javax.swing.JMenuItem menuListaServico;
     private javax.swing.JMenuItem menuMecanico;
-    private javax.swing.JMenuItem menuMecanico1;
-    private javax.swing.JMenuItem menuMecanico2;
     private javax.swing.JMenu menuOs;
     private javax.swing.JMenu menuPainelControle;
     private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JMenuItem menuSobre;
     private javax.swing.JMenuItem menuUsuario;
     // End of variables declaration//GEN-END:variables
 }

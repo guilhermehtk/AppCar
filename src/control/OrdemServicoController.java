@@ -17,8 +17,7 @@ public class OrdemServicoController implements InterfaceControllerCrud {
 
     @Override
     public int add(Object ordemServico) {
-        OrdemServico os = (OrdemServico) ordemServico;
-        os.setSituacao(1); // Orçamento     
+        OrdemServico os = (OrdemServico) ordemServico;    
         os.setData(new Timestamp(System.currentTimeMillis()));
         return osDao.add(os);
     }

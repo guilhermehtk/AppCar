@@ -227,6 +227,8 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Funcionário");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Mecanico-25.png"))); // NOI18N
 
         titulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -313,6 +315,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         buttonAdicionar.setBackground(new java.awt.Color(204, 204, 255));
         buttonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Adicionar-50.png"))); // NOI18N
+        buttonAdicionar.setToolTipText("Adicionar");
         buttonAdicionar.setFocusable(false);
         buttonAdicionar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonAdicionar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -326,6 +329,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         buttonEditar.setBackground(new java.awt.Color(204, 204, 255));
         buttonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Editar-50.png"))); // NOI18N
+        buttonEditar.setToolTipText("Editar");
         buttonEditar.setFocusable(false);
         buttonEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -341,6 +345,7 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
 
         buttonExcluir.setBackground(new java.awt.Color(204, 204, 255));
         buttonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Lixeira-50.png"))); // NOI18N
+        buttonExcluir.setToolTipText("Excluir");
         buttonExcluir.setFocusable(false);
         buttonExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

@@ -69,7 +69,7 @@ public class ServicoDao implements InterfaceDao {
 
     public void altera(Object ser) {
         // cria a query
-        String sql = "update Servico set svcDescricao=?,svcValor=? where svcCod=?";
+        String sql = "update Servicos set svcDescricao=?,svcValor=? where svcCod=?";
         // cast
         Servico servico = (Servico) ser;
         try {

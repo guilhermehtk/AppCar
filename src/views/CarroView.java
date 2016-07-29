@@ -4,6 +4,8 @@ import control.CarroController;
 import control.ClienteController;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.Carro;
 import model.Cliente;
@@ -20,7 +22,56 @@ public class CarroView extends javax.swing.JInternalFrame {
         initComponents();
         this.preencheProcurar();
         AutoCompleteDecorator.decorate(comboResultados);
-          AutoCompleteDecorator.decorate(comboDono);
+        AutoCompleteDecorator.decorate(comboDono);
+        this.setFrameIcon(new ImageIcon(getClass().getResource("/views/icons/AppCar.png")));
+    }
+
+    private DefaultComboBoxModel preencheModelo(String marca) {
+        DefaultComboBoxModel cbArray = new DefaultComboBoxModel();
+        cbArray.insertElementAt("Selecione...", 0);
+        switch (marca) {
+            case "FIAT":
+                cbArray.addElement("Uno");
+                cbArray.addElement("Mobi");
+                cbArray.addElement("Palio");
+                cbArray.addElement("Strada");
+                cbArray.addElement("Freemont");
+                cbArray.addElement("Ducato");
+                break;
+            case "GM - Chevrolet":
+                cbArray.addElement("Camaro");
+                cbArray.addElement("Cobalt");
+                cbArray.addElement("Onix");
+                cbArray.addElement("Cruze");
+                cbArray.addElement("Monza");
+                break;
+            case "Volkswagen":
+                cbArray.addElement("Saveiro");
+                cbArray.addElement("Gol");
+                cbArray.addElement("UP");
+                cbArray.addElement("Jetta");
+                cbArray.addElement("Fox");
+                cbArray.addElement("Golf");
+                break;
+            case "Hyundai":
+                cbArray.addElement("HB20");
+                cbArray.addElement("ix35");
+                cbArray.addElement("Veloster");
+                break;
+            case "Ford":
+                cbArray.addElement("Escort Hobby");
+                cbArray.addElement("KA");
+                cbArray.addElement("Fiesta");
+                cbArray.addElement("Fusion");
+                cbArray.addElement("Ecosport");
+                cbArray.addElement("Edge");
+                break;
+            default:
+                cbArray.addElement("Outros");
+                break;
+
+        }
+        return cbArray;
     }
 
     private void preencheProcurar() {
@@ -182,6 +233,7 @@ public class CarroView extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Carro");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Carro-25.png"))); // NOI18N
 
         buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
@@ -292,10 +344,15 @@ public class CarroView extends javax.swing.JInternalFrame {
         panelDados.add(labelModelo2);
         labelModelo2.setBounds(190, 70, 50, 20);
 
-        cbMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "FIAT", "GM - Chevrolet" }));
+        cbMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "FIAT", "Ford", "GM - Chevrolet", "Volkswagen", "Hyundai", "Honda", "Audi", "BMW", "Toyota", "Volvo", "Mercedes Benz", "Porsche", "GMC", "JEEP", "Nissan", "Mazda", "Mitsubishi", "Renault", "Suzuki" }));
         cbMarca.setEnabled(false);
         cbMarca.setMinimumSize(new java.awt.Dimension(81, 20));
         cbMarca.setPreferredSize(new java.awt.Dimension(81, 20));
+        cbMarca.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMarcaItemStateChanged(evt);
+            }
+        });
         cbMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbMarcaActionPerformed(evt);
@@ -455,6 +512,7 @@ public class CarroView extends javax.swing.JInternalFrame {
 
         buttonAdicionar.setBackground(new java.awt.Color(204, 204, 255));
         buttonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Adicionar-50.png"))); // NOI18N
+        buttonAdicionar.setToolTipText("Adicionar");
         buttonAdicionar.setFocusable(false);
         buttonAdicionar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonAdicionar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -468,6 +526,7 @@ public class CarroView extends javax.swing.JInternalFrame {
 
         buttonEditar.setBackground(new java.awt.Color(204, 204, 255));
         buttonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Editar-50.png"))); // NOI18N
+        buttonEditar.setToolTipText("Editar");
         buttonEditar.setFocusable(false);
         buttonEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -483,6 +542,7 @@ public class CarroView extends javax.swing.JInternalFrame {
 
         buttonExcluir.setBackground(new java.awt.Color(204, 204, 255));
         buttonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Lixeira-50.png"))); // NOI18N
+        buttonExcluir.setToolTipText("Excluir");
         buttonExcluir.setFocusable(false);
         buttonExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -653,6 +713,11 @@ public class CarroView extends javax.swing.JInternalFrame {
         Mensagens.somenteNumeros(evt);
         Mensagens.restringirTamanho(evt, 11);
     }//GEN-LAST:event_tfKmKeyTyped
+
+    private void cbMarcaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMarcaItemStateChanged
+       cbModelo.setModel(this.preencheModelo(cbMarca.getSelectedItem().toString()));
+       cbModelo.setSelectedIndex(0);
+    }//GEN-LAST:event_cbMarcaItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

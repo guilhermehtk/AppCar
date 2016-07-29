@@ -2,6 +2,7 @@ package views;
 
 import control.ServicoController;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import model.Servico;
 
@@ -10,12 +11,13 @@ public class TabelaServicos extends javax.swing.JFrame {
     ServicoController serCon = new ServicoController();
     DefaultTableModel dTable;
     private ArrayList<Servico> servicos;
-    private OrdensServico janela;
+    private OrdensServicoView janela;
 
-    public TabelaServicos(OrdensServico janela) {
+    public TabelaServicos(OrdensServicoView janela) {
         initComponents();
         this.janela = janela;
         this.povoaTabela();
+        this.setIconImage(new ImageIcon(getClass().getResource("/views/icons/AppCar.png")).getImage());
     }
 
     private DefaultTableModel criaTabela() {

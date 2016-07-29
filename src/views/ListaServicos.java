@@ -48,7 +48,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         servicos = serCon.getAll();
 
         for (Servico servico : servicos) {
-            dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), servico.getValor()});
+            dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), String.valueOf(servico.getValor()).replace('.',',')});
         }
         tabelaServicos.setModel(dTable);
     }
@@ -69,7 +69,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         if (tfValor.getText().isEmpty()){
             i = 0.0;
         } else {
-            i = Double.parseDouble(tfValor.getText());
+            i = Double.parseDouble(tfValor.getText().replace(',','.'));
         }
         Servico servico = new Servico(tfNome.getText(),i);
 
@@ -87,18 +87,19 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         tfNome = new javax.swing.JTextField();
         labelAno = new javax.swing.JLabel();
         labelAno1 = new javax.swing.JLabel();
-        tfValor = new javax.swing.JTextField();
         toolbarCrud = new javax.swing.JToolBar();
         buttonAdicionar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         buttonEditar = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         buttonExcluir = new javax.swing.JButton();
+        tfValor = new javax.swing.JFormattedTextField();
         labelTitulo = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Serviços");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Pistao-25.png"))); // NOI18N
         setMaximumSize(new java.awt.Dimension(666, 598));
         setMinimumSize(new java.awt.Dimension(666, 598));
         setPreferredSize(new java.awt.Dimension(666, 598));
@@ -196,31 +197,13 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
         labelAno1.setText("Valor:*");
 
-        tfValor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        tfValor.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                tfValorInputMethodTextChanged(evt);
-            }
-        });
-        tfValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfValorActionPerformed(evt);
-            }
-        });
-        tfValor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfValorKeyTyped(evt);
-            }
-        });
-
         toolbarCrud.setBackground(new java.awt.Color(204, 204, 255));
         toolbarCrud.setFloatable(false);
         toolbarCrud.setRollover(true);
 
         buttonAdicionar.setBackground(new java.awt.Color(204, 204, 255));
         buttonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Adicionar-50.png"))); // NOI18N
+        buttonAdicionar.setToolTipText("Adicionar");
         buttonAdicionar.setFocusable(false);
         buttonAdicionar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonAdicionar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -234,6 +217,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
         buttonEditar.setBackground(new java.awt.Color(204, 204, 255));
         buttonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Editar-50.png"))); // NOI18N
+        buttonEditar.setToolTipText("Editar");
         buttonEditar.setFocusable(false);
         buttonEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -249,6 +233,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
         buttonExcluir.setBackground(new java.awt.Color(204, 204, 255));
         buttonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Lixeira-50.png"))); // NOI18N
+        buttonExcluir.setToolTipText("Excluir");
         buttonExcluir.setFocusable(false);
         buttonExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -258,6 +243,8 @@ public class ListaServicos extends javax.swing.JInternalFrame {
             }
         });
         toolbarCrud.add(buttonExcluir);
+
+        tfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -274,13 +261,13 @@ public class ListaServicos extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfNome)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 198, Short.MAX_VALUE)
                         .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 199, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(209, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +329,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfNomeActionPerformed
 
     private void tfNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomeKeyTyped
-
+     Mensagens.restringirTamanho(evt, 45);
     }//GEN-LAST:event_tfNomeKeyTyped
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
@@ -351,26 +338,10 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
-    private void tfValorInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_tfValorInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfValorInputMethodTextChanged
-
-    private void tfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfValorActionPerformed
-
-    }//GEN-LAST:event_tfValorActionPerformed
-
-    private void tfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfValorKeyTyped
-        String caracteres = "0123456789";
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_tfValorKeyTyped
-
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         Servico servico = servicos.get(retornaLinha());
         servico.setDescricao(tfNome.getText());
-        servico.setValor(Double.parseDouble(tfValor.getText()));
+        servico.setValor(Double.parseDouble(tfValor.getText().replace(',','.')));
         serCon.altera(servico);
         this.povoaTabela();
     }//GEN-LAST:event_buttonEditarActionPerformed
@@ -399,7 +370,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tabelaServicos;
     private javax.swing.JTextField tfNome;
-    private javax.swing.JTextField tfValor;
+    private javax.swing.JFormattedTextField tfValor;
     private javax.swing.JToolBar toolbarCrud;
     // End of variables declaration//GEN-END:variables
 }
