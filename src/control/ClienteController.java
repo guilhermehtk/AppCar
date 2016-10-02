@@ -16,6 +16,11 @@ import model.dao.OrdemServicoDao;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.view.JasperViewer;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import model.Cliente;
+import model.dao.ClienteDao;
+
 
 public class ClienteController implements InterfaceControllerCrud {
 
@@ -133,46 +138,3 @@ public class ClienteController implements InterfaceControllerCrud {
         }
         return erros;
     }
-    
-    public void geraRelatorioOSCliente(String sql){
-        sql = "select\n" +
-"    OrdemServicos.osCod,\n" +
-"    OrdemServicos.osTipo,\n" +
-"    OrdemServicos.osData,\n" +
-"    sum(Servicos.svcValor)\n" +
-"from\n" +
-"    OrdemServicos\n" +
-"join\n" +
-"    Servicos_OS\n" +
-"join\n" +
-"    Servicos\n" +
-"where\n" +
-"    ser_osCod = osCod and\n" +
-"    ser_svcCod = svcCod\n" +
-            " and os_cliCod=15 " +
-"group by\n" +
-"	osCod;";
-       Connection con = getConnection();
-       ResultSet rs;
-       try {
-            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-
-            // executa
-          rs = stmt.executeQuery();
-
-            // fecha a conexão
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-       
-       try {
-           JRResultSetDataSource jrRS = new JRResultSetDataSource(rs);
-           Map parameters = new HashMap();
-           JasperViewer .viewReport(JasperFillManager.fillReport("OSCliente.jasper",parameters,jrRS));
-       } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao gerar o relatório, " + e.getMessage(), "Erro", JOptionPane.INFORMATION_MESSAGE);
-       }
-        
-    }
-}

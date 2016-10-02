@@ -9,6 +9,24 @@ import static model.dao.ConnectionFactory.getConnection;
 
 public class GeraRelatório {
 
+    private string sql =  "select\n" +
+    "    OrdemServicos.osCod,\n" +
+    "    OrdemServicos.osTipo,\n" +
+    "    OrdemServicos.osData,\n" +
+    "    sum(Servicos.svcValor)\n" +
+    "from\n" +
+    "    OrdemServicos\n" +
+    "join\n" +
+    "    Servicos_OS\n" +
+    "join\n" +
+    "    Servicos\n" +
+    "where\n" +
+    "    ser_osCod = osCod and\n" +
+    "    ser_svcCod = svcCod\n" +
+    " and os_cliCod=15 " +
+    "group by\n" +
+    "   osCod;";
+
     public static void geraRelatorioOSCliente(String sql, String relatorio) {
         Connection con = getConnection();
         ResultSet rs;
