@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Funcionario;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class FuncionarioDao implements InterfaceDao {
 

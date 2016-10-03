@@ -1,21 +1,6 @@
 package control;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import model.Cliente;
-import model.dao.ClienteDao;
-import static model.dao.ConnectionFactory.getConnection;
-import model.dao.OrdemServicoDao;
-import net.sf.jasperreports.engine.JRResultSetDataSource;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.view.JasperViewer;
+
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import model.Cliente;
@@ -138,3 +123,4 @@ public class ClienteController implements InterfaceControllerCrud {
         }
         return erros;
     }
+}
