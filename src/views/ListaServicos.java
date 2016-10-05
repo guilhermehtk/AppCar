@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Servico;
+import relatorios.RelatorioController;
 
 public class ListaServicos extends javax.swing.JInternalFrame {
 
@@ -83,6 +84,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         panelPrincipal = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaServicos = new javax.swing.JTable();
+        buttonPDF = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         tfNome = new javax.swing.JTextField();
         labelAno = new javax.swing.JLabel();
@@ -171,6 +173,15 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
         panelPrincipal.add(jScrollPane1);
         jScrollPane1.setBounds(20, 20, 600, 280);
+
+        buttonPDF.setText("Gerar PDF");
+        buttonPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPDFActionPerformed(evt);
+            }
+        });
+        panelPrincipal.add(buttonPDF);
+        buttonPDF.setBounds(270, 310, 90, 23);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviço"));
 
@@ -311,7 +322,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
                 .addGap(5, 5, 5)
                 .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -356,10 +367,15 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         this.povoaTabela();
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
+    private void buttonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPDFActionPerformed
+       RelatorioController.geraRelatorioServicos();
+    }//GEN-LAST:event_buttonPDFActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionar;
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
+    private javax.swing.JButton buttonPDF;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;

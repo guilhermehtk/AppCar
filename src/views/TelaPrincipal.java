@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import model.Funcionario;
 import model.dao.FuncionarioDao;
+import relatorios.RelatorioController;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -65,6 +66,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuListaServico = new javax.swing.JMenuItem();
         menuPainelControle = new javax.swing.JMenu();
         menuMecanico = new javax.swing.JMenuItem();
+        menuRelatorios = new javax.swing.JMenu();
+        menuServRealPeriodo = new javax.swing.JMenuItem();
+        menuListaServ = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuAjuda1 = new javax.swing.JMenuItem();
         menuSobre = new javax.swing.JMenuItem();
@@ -319,6 +323,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuPrincipal.add(menuPainelControle);
 
+        menuRelatorios.setText("Relatórios");
+        menuRelatorios.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        menuServRealPeriodo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Martelo-25.png"))); // NOI18N
+        menuServRealPeriodo.setText("Serviços Realizados por Período");
+        menuServRealPeriodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuServRealPeriodoActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuServRealPeriodo);
+
+        menuListaServ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Pistao-25.png"))); // NOI18N
+        menuListaServ.setText("Lista de Serviços");
+        menuListaServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuListaServActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuListaServ);
+
+        menuPrincipal.add(menuRelatorios);
+
         menuAjuda.setText("Ajuda");
         menuAjuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -490,6 +517,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         addInternal(new SobreView());
     }//GEN-LAST:event_buttonInfoActionPerformed
 
+    private void menuServRealPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuServRealPeriodoActionPerformed
+       
+    }//GEN-LAST:event_menuServRealPeriodoActionPerformed
+
+    private void menuListaServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServActionPerformed
+        RelatorioController.geraRelatorioServicos();
+    }//GEN-LAST:event_menuListaServActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -547,11 +582,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenuItem menuCarro;
     private javax.swing.JMenuItem menuGeraOs;
+    private javax.swing.JMenuItem menuListaServ;
     private javax.swing.JMenuItem menuListaServico;
     private javax.swing.JMenuItem menuMecanico;
     private javax.swing.JMenu menuOs;
     private javax.swing.JMenu menuPainelControle;
     private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JMenu menuRelatorios;
+    private javax.swing.JMenuItem menuServRealPeriodo;
     private javax.swing.JMenuItem menuSobre;
     private javax.swing.JMenuItem menuUsuario;
     // End of variables declaration//GEN-END:variables
