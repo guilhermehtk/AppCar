@@ -9,9 +9,9 @@ import relatorios.RelatorioController;
 
 public class ListaServicos extends javax.swing.JInternalFrame {
 
-    ServicoController serCon = new ServicoController();
-    ArrayList<Servico> servicos;
-    DefaultTableModel dTable;
+    private ServicoController serCon = new ServicoController();
+    private ArrayList<Servico> servicos;
+    private DefaultTableModel dTable;
 
     public ListaServicos() {
         initComponents();

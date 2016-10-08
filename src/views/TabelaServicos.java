@@ -8,8 +8,8 @@ import model.Servico;
 
 public class TabelaServicos extends javax.swing.JFrame {
 
-    ServicoController serCon = new ServicoController();
-    DefaultTableModel dTable;
+    private ServicoController serCon = new ServicoController();
+    private DefaultTableModel dTable;
     private ArrayList<Servico> servicos;
     private OrdensServicoView janela;
 

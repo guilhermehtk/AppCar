@@ -13,10 +13,10 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class CarroView extends javax.swing.JInternalFrame {
 
-    CarroController carControl = new CarroController();
-    ClienteController cliControl = new ClienteController();
-    ArrayList<Carro> carros;
-    ArrayList<Cliente> clientes;
+    private CarroController carControl = new CarroController();
+    private ClienteController cliControl = new ClienteController();
+    private ArrayList<Carro> carros;
+    private ArrayList<Cliente> clientes;
 
     public CarroView() {
         initComponents();

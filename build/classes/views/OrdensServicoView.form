@@ -9,13 +9,13 @@
       <Image iconType="3" name="/views/icons/OS-25.png"/>
     </Property>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[667, 627]"/>
+      <Dimension value="[667, 653]"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[667, 627]"/>
+      <Dimension value="[667, 653]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[667, 627]"/>
+      <Dimension value="[667, 653]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -78,11 +78,11 @@
                       <Component id="toolbarCrud" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="panelValor" min="-2" pref="54" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="panelButtons" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panelValor" min="-2" pref="90" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="panelButtons" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -715,7 +715,21 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="250" y="20" width="-1" height="20"/>
+              <AbsoluteConstraints x="250" y="20" width="50" height="20"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonGerarPdf">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gerar PDF"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonGerarPdfActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="230" y="60" width="-1" height="20"/>
             </Constraint>
           </Constraints>
         </Component>

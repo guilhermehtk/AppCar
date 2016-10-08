@@ -8,6 +8,7 @@ import javax.swing.JInternalFrame;
 import model.Funcionario;
 import model.dao.FuncionarioDao;
 import relatorios.RelatorioController;
+import views.relatorios.ClienteOSRelatorioView;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -69,6 +70,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuRelatorios = new javax.swing.JMenu();
         menuServRealPeriodo = new javax.swing.JMenuItem();
         menuListaServ = new javax.swing.JMenuItem();
+        menuListaServ1 = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuAjuda1 = new javax.swing.JMenuItem();
         menuSobre = new javax.swing.JMenuItem();
@@ -238,6 +240,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jToolbarTop.add(buttonInfo);
 
+        jDesktopPane1.setLayer(footer, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(imagemFundo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jToolbarTop, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
@@ -255,9 +261,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jDesktopPane1.setLayer(footer, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(imagemFundo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jToolbarTop, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuCadastros.setText("Cadastros");
         menuCadastros.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -343,6 +346,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuRelatorios.add(menuListaServ);
+
+        menuListaServ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Usuario-25.png"))); // NOI18N
+        menuListaServ1.setText("O.S por Cliente");
+        menuListaServ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuListaServ1ActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuListaServ1);
 
         menuPrincipal.add(menuRelatorios);
 
@@ -502,15 +514,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jDesktopPane1ComponentMoved
 
     private void menuAjuda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjuda1ActionPerformed
-         addInternal(new AjudaView());
+        addInternal(new AjudaView());
     }//GEN-LAST:event_menuAjuda1ActionPerformed
 
     private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
-       addInternal(new SobreView());
+        addInternal(new SobreView());
     }//GEN-LAST:event_menuSobreActionPerformed
 
     private void buttonHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHelpActionPerformed
-          addInternal(new AjudaView());
+        addInternal(new AjudaView());
     }//GEN-LAST:event_buttonHelpActionPerformed
 
     private void buttonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInfoActionPerformed
@@ -518,12 +530,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonInfoActionPerformed
 
     private void menuServRealPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuServRealPeriodoActionPerformed
-       
+
     }//GEN-LAST:event_menuServRealPeriodoActionPerformed
 
     private void menuListaServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServActionPerformed
         RelatorioController.geraRelatorioServicos();
     }//GEN-LAST:event_menuListaServActionPerformed
+
+    private void menuListaServ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServ1ActionPerformed
+        addInternal(new ClienteOSRelatorioView());
+    }//GEN-LAST:event_menuListaServ1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -583,6 +599,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCarro;
     private javax.swing.JMenuItem menuGeraOs;
     private javax.swing.JMenuItem menuListaServ;
+    private javax.swing.JMenuItem menuListaServ1;
     private javax.swing.JMenuItem menuListaServico;
     private javax.swing.JMenuItem menuMecanico;
     private javax.swing.JMenu menuOs;

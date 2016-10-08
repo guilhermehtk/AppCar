@@ -11,8 +11,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class FuncionarioView extends javax.swing.JInternalFrame {
 
-    FuncionarioController funControl = new FuncionarioController();
-    ArrayList<Funcionario> funcionarios;
+    private FuncionarioController funControl = new FuncionarioController();
+    private ArrayList<Funcionario> funcionarios;
 
     public FuncionarioView() {
         initComponents();

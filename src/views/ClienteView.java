@@ -9,8 +9,8 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class ClienteView extends javax.swing.JInternalFrame {
 
-    ClienteController cliControl = new ClienteController();
-    ArrayList<Cliente> clientes;
+    private ClienteController cliControl = new ClienteController();
+    private ArrayList<Cliente> clientes;
 
     public ClienteView() {
         initComponents();

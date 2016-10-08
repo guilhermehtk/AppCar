@@ -15,24 +15,25 @@ import model.OrdemServico;
 import model.Servico;
 import model.Servico_OS;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import relatorios.RelatorioController;
 
 public class OrdensServicoView extends javax.swing.JInternalFrame {
 
-    DefaultTableModel dTable;
-    TabelaServicos ts;
+    private DefaultTableModel dTable;
+    private TabelaServicos ts;
 
-    ClienteController cliControl = new ClienteController();
-    CarroController carControl = new CarroController();
-    OrdemServicoController osControl = new OrdemServicoController();
-    ServicoController serControl = new ServicoController();
-    Servico_OSController serOS = new Servico_OSController();
+    private ClienteController cliControl = new ClienteController();
+    private CarroController carControl = new CarroController();
+    private OrdemServicoController osControl = new OrdemServicoController();
+    private ServicoController serControl = new ServicoController();
+    private Servico_OSController serOS = new Servico_OSController();
 
-    ArrayList<Carro> carros;
-    ArrayList<Cliente> clientes;
-    ArrayList<OrdemServico> ordens;
+    private ArrayList<Carro> carros;
+    private ArrayList<Cliente> clientes;
+    private ArrayList<OrdemServico> ordens;
     ArrayList<Servico> servicos = new ArrayList<>();
 
-    int funcionario;
+    private int funcionario;
 
     public OrdensServicoView(int funcionario) {
         initComponents();
@@ -83,7 +84,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
     public void setServicos(ArrayList<Servico> servicos) {
         for (Servico servico : servicos) {
-                    this.servicos.add(servico);
+            this.servicos.add(servico);
             dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), servico.getValor()});
         }
         tableServicos.setModel(dTable);
@@ -112,6 +113,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         servicos = new ArrayList<>();
         labelCodigo.setText(String.valueOf(os.getCod()));
         labelData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(os.getData()));
+        buttonGerarPdf.setEnabled(true);
         switch (os.getSituacao()) {
             case 1:
                 // Orçamento
@@ -119,11 +121,11 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
                 break;
             case 2:
                 // Em Andamento
-               cbSituacao.setSelectedItem("Aberta");
+                cbSituacao.setSelectedItem("Aberta");
                 break;
             case 3:
                 // Finalizada
-               cbSituacao.setSelectedItem("Fechada");
+                cbSituacao.setSelectedItem("Fechada");
                 break;
             case 4:
                 // Cancelada
@@ -181,6 +183,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         comboSelectCliente.setEnabled(flag);
         tableServicos.setEnabled(flag);
         cbSituacao.setEnabled(flag);
+        buttonGerarPdf.setEnabled(!flag);
     }
 
     private OrdemServico newOS() {
@@ -212,25 +215,25 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         } else {
             os.setCliCod(clientes.get(comboSelectCliente.getSelectedIndex() - 1).getCodigo());
         }
-        switch (cbSituacao.getSelectedIndex()){
-              case 0:
+        switch (cbSituacao.getSelectedIndex()) {
+            case 0:
                 // Orçamento
                 os.setSituacao(1);
                 break;
             case 1:
                 // Aberta
-               os.setSituacao(2);
+                os.setSituacao(2);
                 break;
             case 2:
                 // Fechada
-              os.setSituacao(3);
+                os.setSituacao(3);
                 break;
             case 3:
                 // Cancelada
-               os.setSituacao(4);
+                os.setSituacao(4);
                 break;
         }
-          os.setTipo(tfTipo.getText());
+        os.setTipo(tfTipo.getText());
         os.setDescricao(tfDescricao.getText());
         return os;
     }
@@ -269,8 +272,8 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         titulo = new javax.swing.JLabel();
         panelProcurar = new javax.swing.JPanel();
         labelPor = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<String>();
-        comboResultados = new javax.swing.JComboBox<String>();
+        comboTipo = new javax.swing.JComboBox<>();
+        comboResultados = new javax.swing.JComboBox<>();
         toolbarCrud = new javax.swing.JToolBar();
         buttonAdicionar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
@@ -284,10 +287,10 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         panelDados = new javax.swing.JPanel();
         labelMarca1 = new javax.swing.JLabel();
         tfTipo = new javax.swing.JTextField();
-        comboTipoCarro = new javax.swing.JComboBox<String>();
-        comboSelectCarro = new javax.swing.JComboBox<String>();
-        comboSelectCliente = new javax.swing.JComboBox<String>();
-        comboTipoCliente = new javax.swing.JComboBox<String>();
+        comboTipoCarro = new javax.swing.JComboBox<>();
+        comboSelectCarro = new javax.swing.JComboBox<>();
+        comboSelectCliente = new javax.swing.JComboBox<>();
+        comboTipoCliente = new javax.swing.JComboBox<>();
         labelMarca5 = new javax.swing.JLabel();
         labelMarca4 = new javax.swing.JLabel();
         labelMarca2 = new javax.swing.JLabel();
@@ -306,14 +309,15 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         labelData = new javax.swing.JLabel();
         cbSituacao = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
+        buttonGerarPdf = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ordem de Serviço");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/OS-25.png"))); // NOI18N
-        setMaximumSize(new java.awt.Dimension(667, 627));
-        setMinimumSize(new java.awt.Dimension(667, 627));
-        setPreferredSize(new java.awt.Dimension(667, 627));
+        setMaximumSize(new java.awt.Dimension(667, 653));
+        setMinimumSize(new java.awt.Dimension(667, 653));
+        setPreferredSize(new java.awt.Dimension(667, 653));
 
         titulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -324,7 +328,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         labelPor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelPor.setText("Por:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Cliente", "Carro", "Data" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Cliente", "Carro", "Data" }));
         comboTipo.setToolTipText("");
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -459,7 +463,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         });
 
         comboTipoCarro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboTipoCarro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Placa", "Chassi", "Dono" }));
+        comboTipoCarro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Placa", "Chassi", "Dono" }));
         comboTipoCarro.setEnabled(false);
         comboTipoCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -469,18 +473,18 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
         comboSelectCarro.setEditable(true);
         comboSelectCarro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboSelectCarro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        comboSelectCarro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         comboSelectCarro.setToolTipText("");
         comboSelectCarro.setEnabled(false);
 
         comboSelectCliente.setEditable(true);
         comboSelectCliente.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboSelectCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        comboSelectCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         comboSelectCliente.setToolTipText("");
         comboSelectCliente.setEnabled(false);
 
         comboTipoCliente.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        comboTipoCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
+        comboTipoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CPF", "RG" }));
         comboTipoCliente.setEnabled(false);
         comboTipoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -681,7 +685,17 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Situação:");
         panelValor.add(jLabel7);
-        jLabel7.setBounds(250, 20, 45, 20);
+        jLabel7.setBounds(250, 20, 50, 20);
+
+        buttonGerarPdf.setText("Gerar PDF");
+        buttonGerarPdf.setEnabled(false);
+        buttonGerarPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGerarPdfActionPerformed(evt);
+            }
+        });
+        panelValor.add(buttonGerarPdf);
+        buttonGerarPdf.setBounds(230, 60, 81, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -694,9 +708,10 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelTabelaServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(panelProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelTabelaServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -720,11 +735,11 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelValor, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelValor, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -791,10 +806,10 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         if (comboResultados.getSelectedIndex() != 0) {
-            osControl.remove(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
-             for (Servico_OS serv : serOS.getAllOS(carros.get(comboResultados.getSelectedIndex() - 1).getCod())) {
-            serOS.remove(serv.getCod());
-        }
+            for (Servico_OS serv : serOS.getAllOS(carros.get(comboResultados.getSelectedIndex()-1 ).getCod())) {
+                serOS.remove(serv.getCod());
+            }
+                osControl.remove(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
             this.editable(false);
             this.limpar();
             this.preencheProcurar();
@@ -827,12 +842,20 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboTipoActionPerformed
 
     private void tfTipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTipoKeyTyped
-        Mensagens.restringirTamanho(evt, 45);
+        Mensagens.restringirTamanho(evt, 11);
     }//GEN-LAST:event_tfTipoKeyTyped
 
     private void tfDescricaoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDescricaoKeyTyped
-        Mensagens.restringirTamanho(evt, 45);
+        Mensagens.restringirTamanho(evt, 20);
     }//GEN-LAST:event_tfDescricaoKeyTyped
+
+    private void buttonGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarPdfActionPerformed
+        if (cbSituacao.getSelectedIndex() == 0) {
+            RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()));
+        } else {
+            JOptionPane.showMessageDialog(this, "O.S não é um orçamento", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonGerarPdfActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
@@ -841,6 +864,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExc;
     private javax.swing.JButton buttonExcluir;
+    private javax.swing.JButton buttonGerarPdf;
     private javax.swing.JButton buttonLimpar;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JComboBox cbSituacao;
