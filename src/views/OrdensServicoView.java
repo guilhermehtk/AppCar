@@ -82,8 +82,8 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     }
 
     public void setServicos(ArrayList<Servico> servicos) {
-        this.servicos = servicos;
         for (Servico servico : servicos) {
+                    this.servicos.add(servico);
             dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), servico.getValor()});
         }
         tableServicos.setModel(dTable);
