@@ -49,7 +49,7 @@ public abstract class GlassPaneWorker extends SwingWorker<Object, Object> {
             centerPanel.setOpaque(false);
             centerPanel.add(busyLabel);
             add(centerPanel, BorderLayout.CENTER);
-            final JButton cancelButton = new JButton("Cancel");
+            final JButton cancelButton = new JButton("Cancelar");
             cancelButton.setOpaque(false);
             cancelButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {

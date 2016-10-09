@@ -2,6 +2,7 @@ package views.relatorios;
 
 import control.ClienteController;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Cliente;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import relatorios.RelatorioController;
@@ -10,7 +11,7 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
 
     ClienteController cliControl = new ClienteController();
     ArrayList<Cliente> clientes;
-   private int id;
+    private int id = 0;
 
     public ClienteOSRelatorioView() {
         initComponents();
@@ -24,6 +25,9 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
         comboResultados.setSelectedIndex(0);
     }
 
+    private Boolean valida() {
+        return id != 0;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -32,10 +36,11 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
         titulo = new javax.swing.JLabel();
         panelProcurar = new javax.swing.JPanel();
         labelPor = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>();
-        comboResultados = new javax.swing.JComboBox<>();
+        comboTipo = new javax.swing.JComboBox<String>();
+        comboResultados = new javax.swing.JComboBox<String>();
         panelButtons = new javax.swing.JPanel();
         buttonSalvar = new javax.swing.JButton();
+        buttonCancelar3 = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -54,7 +59,7 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
         labelPor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         labelPor.setText("Por:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CPF", "RG" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Nome", "CPF", "RG" }));
         comboTipo.setToolTipText("");
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +68,7 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
         });
 
         comboResultados.setEditable(true);
-        comboResultados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione..." }));
+        comboResultados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
         comboResultados.setToolTipText("");
         comboResultados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +109,17 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
         });
         panelButtons.add(buttonSalvar);
 
+        buttonCancelar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Cancelar-25.png"))); // NOI18N
+        buttonCancelar3.setText("Cancelar");
+        buttonCancelar3.setMaximumSize(null);
+        buttonCancelar3.setMinimumSize(null);
+        buttonCancelar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelar3ActionPerformed(evt);
+            }
+        });
+        panelButtons.add(buttonCancelar3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,7 +148,12 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-      RelatorioController.geraRelatorioOs(id,this);
+        if (id != 0) {
+            RelatorioController.geraRelatorioOs(id, this);
+        } else {
+            JOptionPane.showMessageDialog(this, "É necessário selecionar um cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
@@ -145,8 +166,16 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_comboResultadosActionPerformed
 
+    private void buttonCancelar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelar3ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_buttonCancelar3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCancelar;
+    private javax.swing.JButton buttonCancelar1;
+    private javax.swing.JButton buttonCancelar2;
+    private javax.swing.JButton buttonCancelar3;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JComboBox<String> comboResultados;
     private javax.swing.JComboBox<String> comboTipo;

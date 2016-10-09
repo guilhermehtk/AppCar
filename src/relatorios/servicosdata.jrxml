@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-04T22:29:38 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio.servicosdata" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5254a4f0-9d26-4fbe-8d9e-ecd22baebed7">
+<!-- 2016-10-09T12:27:00 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio.servicosdata" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5254a4f0-9d26-4fbe-8d9e-ecd22baebed7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<parameter name="dataInicial" class="java.lang.String"/>
@@ -32,7 +32,7 @@
 					<textElement>
 						<font size="18"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{dataInicial}.substring(8,10)+"/"+$P{dataInicial}.substring(5,7) +"/"+ $P{dataInicial}.substring(2,4)  + " a " + $P{dataFinal}.substring(8,10)+"/"+$P{dataFinal}.substring(5,7) +"/"+ $P{dataFinal}.substring(2,4)  ]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{dataInicial}.substring(8,10)+"/"+$P{dataInicial}.substring(5,7) +"/"+ $P{dataInicial}.substring(2,4)  + " a " + $P{dataFinal}.substring(8,10)+"/"+$P{dataFinal}.substring(5,7) +"/"+ $P{dataFinal}.substring(2,4)]]></textFieldExpression>
 				</textField>
 				<image>
 					<reportElement x="465" y="3" width="125" height="85" uuid="de1107bf-8acf-4c6d-baf6-83eb7e703516">
