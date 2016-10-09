@@ -1,217 +1,45 @@
+-- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
+--
+-- Host: localhost    Database: appcar
+-- ------------------------------------------------------
+-- Server version	5.7.14
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+--
+-- Table structure for table `carros`
+--
 
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `AppCar` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `AppCar` ;
-
--- -----------------------------------------------------
--- Table `AppCar`.`Enderecos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Enderecos` (
-	`endCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`endNumero` VARCHAR(45) NULL COMMENT '',
-	`endRua` VARCHAR(45) NULL COMMENT '',
-	`endBairro` VARCHAR(45) NULL COMMENT '',
-	`endCidade` VARCHAR(45) NULL COMMENT '',
-	`endCep` VARCHAR(45) NULL COMMENT '',
-	`endComplemento` VARCHAR(45) NULL COMMENT '',
-	PRIMARY KEY (`endCod`)  COMMENT '')
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`Logins`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Logins` (
-	`loginCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`loginUsuario` VARCHAR(45) NULL COMMENT '',
-	`loginSenha` VARCHAR(255) NULL COMMENT '',
-	PRIMARY KEY (`loginCod`)  COMMENT '')
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`Pessoas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Pessoas` (
-	`pesCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`pesNome` VARCHAR(45) NULL COMMENT '',
-	`pesSexo` VARCHAR(45) NULL COMMENT '',
-	`pesEmail` VARCHAR(45) NULL COMMENT '',
-	`pesTelefoneM` VARCHAR(45) NULL COMMENT '',
-	`pesTelefoneF` VARCHAR(45) NULL COMMENT '',
-	`pesCpf` VARCHAR(14) NULL COMMENT '',
-	`pesRg` VARCHAR(45) NULL COMMENT '',
-	`pesTipo` INT NULL COMMENT '',
-	`pes_endCod` INT NOT NULL COMMENT '',
-	`pes_loginCod` INT NULL COMMENT '',
-	PRIMARY KEY (`pesCod`)  COMMENT '',
-	INDEX `fk_Mecanico_Endereco1_idx` (`pes_endCod` ASC)  COMMENT '',
-	INDEX `fk_Pessoas_Login1_idx` (`pes_loginCod` ASC)  COMMENT '',
-	UNIQUE INDEX `pesRg_UNIQUE` (`pesRg` ASC)  COMMENT '',
-	UNIQUE INDEX `pesCpf_UNIQUE` (`pesCpf` ASC)  COMMENT '',
-	CONSTRAINT `fk_Mecanico_Endereco1`
-	FOREIGN KEY (`pes_endCod`)
-	REFERENCES `AppCar`.`Enderecos` (`endCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE,
-	CONSTRAINT `fk_Pessoas_Login1`
-	FOREIGN KEY (`pes_loginCod`)
-	REFERENCES `AppCar`.`Logins` (`loginCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`Carros`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Carros` (
-	`carCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`carMarca` VARCHAR(45) NULL COMMENT '',
-	`carModelo` VARCHAR(45) NULL COMMENT '',
-	`carCor` VARCHAR(45) NULL COMMENT '',
-	`carAno` VARCHAR(45) NULL COMMENT '',
-	`carNumeroChassi` VARCHAR(45) NULL COMMENT '',
-	`carQuilometragem` VARCHAR(45) NULL COMMENT '',
-	`carPlaca` VARCHAR(45) NULL COMMENT '',
-	`carObs` TEXT NULL COMMENT '',
-	`car_pesCod` INT NULL COMMENT '',
-	PRIMARY KEY (`carCod`)  COMMENT '',
-	INDEX `fk_Carros_Pessoas1_idx` (`car_pesCod` ASC)  COMMENT '',
-	UNIQUE INDEX `carPlaca_UNIQUE` (`carPlaca` ASC)  COMMENT '',
-	UNIQUE INDEX `carNumeroChassi_UNIQUE` (`carNumeroChassi` ASC)  COMMENT '',
-	CONSTRAINT `fk_Carros_Pessoas1`
-	FOREIGN KEY (`car_pesCod`)
-	REFERENCES `AppCar`.`Pessoas` (`pesCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`Logs`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Logs` (
-	`logCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`logDescricao` TEXT NULL COMMENT '',
-	`logData` TIMESTAMP NULL COMMENT '',
-	`log_mecCod` INT NOT NULL COMMENT '',
-	PRIMARY KEY (`logCod`)  COMMENT '',
-	INDEX `fk_Log_Mecanico1_idx` (`log_mecCod` ASC)  COMMENT '',
-	CONSTRAINT `fk_Log_Mecanico1`
-	FOREIGN KEY (`log_mecCod`)
-	REFERENCES `AppCar`.`Pessoas` (`pesCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`OrdemServicos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`OrdemServicos` (
-	`osCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`osTipo` VARCHAR(45) NULL COMMENT '',
-	`osData` TIMESTAMP NULL COMMENT '',
-	`osSituacao` INT NULL COMMENT '',
-	`osDescricao` TEXT NULL COMMENT '',
-	`os_carCod` INT NOT NULL COMMENT '',
-	`os_cliCod` INT NOT NULL COMMENT '',
-	PRIMARY KEY (`osCod`)  COMMENT '',
-	INDEX `fk_OrdemServicos_Pessoas1_idx` (`os_cliCod` ASC)  COMMENT '',
-	INDEX `fk_OrdemServicos_Carros1_idx` (`os_carCod` ASC)  COMMENT '',
-	CONSTRAINT `fk_OrdemServicos_Pessoas1`
-	FOREIGN KEY (`os_cliCod`)
-	REFERENCES `AppCar`.`Pessoas` (`pesCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE,
-	CONSTRAINT `fk_OrdemServicos_Carros1`
-	FOREIGN KEY (`os_carCod`)
-	REFERENCES `AppCar`.`Carros` (`carCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`Servicos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Servicos` (
-	`svcCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`svcDescricao` VARCHAR(45) NULL COMMENT '',
-	`svcValor` DOUBLE NULL COMMENT '',
-	PRIMARY KEY (`svcCod`)  COMMENT '')
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`Servicos_OS`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Servicos_OS` (
-	`serCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`ser_osCod` INT NOT NULL COMMENT '',
-	`ser_svcCod` INT NOT NULL COMMENT '',
-	`ser_mecCod` INT NULL COMMENT '',
-	PRIMARY KEY (`serCod`)  COMMENT '',
-	INDEX `fk_Servico_Manutencao1_idx` (`ser_osCod` ASC)  COMMENT '',
-	INDEX `fk_Servicos_Pessoas1_idx` (`ser_mecCod` ASC)  COMMENT '',
-	INDEX `fk_Servicos/OS_Servicos1_idx` (`ser_svcCod` ASC)  COMMENT '',
-	CONSTRAINT `fk_Servico_Manutencao1`
-	FOREIGN KEY (`ser_osCod`)
-	REFERENCES `AppCar`.`OrdemServicos` (`osCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE,
-	CONSTRAINT `fk_Servicos_Pessoas1`
-	FOREIGN KEY (`ser_mecCod`)
-	REFERENCES `AppCar`.`Pessoas` (`pesCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE,
-	CONSTRAINT `fk_Servicos/OS_Servicos1`
-	FOREIGN KEY (`ser_svcCod`)
-	REFERENCES `AppCar`.`Servicos` (`svcCod`)
-	ON DELETE CASCADE
-	ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`Marcas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Marcas` (
-	`marCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`marNome` VARCHAR(45) NULL COMMENT '',
-	PRIMARY KEY (`marCod`)  COMMENT '')
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AppCar`.`Modelos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AppCar`.`Modelos` (
-	`modCod` INT NOT NULL AUTO_INCREMENT COMMENT '',
-	`modNome` VARCHAR(45) NULL COMMENT '',
-	`Marcas_marCod` INT NULL COMMENT '',
-	PRIMARY KEY (`modCod`)  COMMENT '',
-	INDEX `fk_Modelos_Marcas1_idx` (`Marcas_marCod` ASC)  COMMENT '',
-	CONSTRAINT `fk_Modelos_Marcas1`
-	FOREIGN KEY (`Marcas_marCod`)
-	REFERENCES `AppCar`.`Marcas` (`marCod`)
-	ON DELETE NO ACTION
-	ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
-use AppCar;
+DROP TABLE IF EXISTS `carros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `carros` (
+  `carCod` int(11) NOT NULL AUTO_INCREMENT,
+  `carMarca` varchar(45) DEFAULT NULL,
+  `carModelo` varchar(45) DEFAULT NULL,
+  `carCor` varchar(45) DEFAULT NULL,
+  `carAno` varchar(45) DEFAULT NULL,
+  `carNumeroChassi` varchar(45) DEFAULT NULL,
+  `carQuilometragem` varchar(45) DEFAULT NULL,
+  `carPlaca` varchar(45) DEFAULT NULL,
+  `carObs` text,
+  `car_pesCod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`carCod`),
+  UNIQUE KEY `carPlaca_UNIQUE` (`carPlaca`),
+  UNIQUE KEY `carNumeroChassi_UNIQUE` (`carNumeroChassi`),
+  KEY `fk_Carros_Pessoas1_idx` (`car_pesCod`),
+  CONSTRAINT `fk_Carros_Pessoas1` FOREIGN KEY (`car_pesCod`) REFERENCES `pessoas` (`pesCod`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `carros`
@@ -224,6 +52,25 @@ INSERT INTO `carros` VALUES (65,'FIAT','Uno','Branco ','1221','1221','21212','SA
 UNLOCK TABLES;
 
 --
+-- Table structure for table `enderecos`
+--
+
+DROP TABLE IF EXISTS `enderecos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enderecos` (
+  `endCod` int(11) NOT NULL AUTO_INCREMENT,
+  `endNumero` varchar(45) DEFAULT NULL,
+  `endRua` varchar(45) DEFAULT NULL,
+  `endBairro` varchar(45) DEFAULT NULL,
+  `endCidade` varchar(45) DEFAULT NULL,
+  `endCep` varchar(45) DEFAULT NULL,
+  `endComplemento` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`endCod`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `enderecos`
 --
 
@@ -232,6 +79,21 @@ LOCK TABLES `enderecos` WRITE;
 INSERT INTO `enderecos` VALUES (21,'365','Rua Sete de Setembro','Centro','Apart B','35580-000','saasasAasassaas'),(34,'375','Sete de Setembro','Centro','Formiga','35570-000','A');
 /*!40000 ALTER TABLE `enderecos` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `logins`
+--
+
+DROP TABLE IF EXISTS `logins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logins` (
+  `loginCod` int(11) NOT NULL AUTO_INCREMENT,
+  `loginUsuario` varchar(45) DEFAULT NULL,
+  `loginSenha` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`loginCod`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `logins`
@@ -244,6 +106,24 @@ INSERT INTO `logins` VALUES (10,'administradorr','$2a$10$RAQs8cmtH6Ehp8OLoke81uT
 UNLOCK TABLES;
 
 --
+-- Table structure for table `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logs` (
+  `logCod` int(11) NOT NULL AUTO_INCREMENT,
+  `logDescricao` text,
+  `logData` timestamp NULL DEFAULT NULL,
+  `log_mecCod` int(11) NOT NULL,
+  PRIMARY KEY (`logCod`),
+  KEY `fk_Log_Mecanico1_idx` (`log_mecCod`),
+  CONSTRAINT `fk_Log_Mecanico1` FOREIGN KEY (`log_mecCod`) REFERENCES `pessoas` (`pesCod`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `logs`
 --
 
@@ -253,14 +133,115 @@ LOCK TABLES `logs` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `marcas`
+--
+
+DROP TABLE IF EXISTS `marcas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `marcas` (
+  `marCod` int(11) NOT NULL AUTO_INCREMENT,
+  `marNome` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`marCod`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `marcas`
+--
+
+LOCK TABLES `marcas` WRITE;
+/*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `modelos`
+--
+
+DROP TABLE IF EXISTS `modelos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modelos` (
+  `modCod` int(11) NOT NULL AUTO_INCREMENT,
+  `modNome` varchar(45) DEFAULT NULL,
+  `Marcas_marCod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`modCod`),
+  KEY `fk_Modelos_Marcas1_idx` (`Marcas_marCod`),
+  CONSTRAINT `fk_Modelos_Marcas1` FOREIGN KEY (`Marcas_marCod`) REFERENCES `marcas` (`marCod`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modelos`
+--
+
+LOCK TABLES `modelos` WRITE;
+/*!40000 ALTER TABLE `modelos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `modelos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ordemservicos`
+--
+
+DROP TABLE IF EXISTS `ordemservicos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ordemservicos` (
+  `osCod` int(11) NOT NULL AUTO_INCREMENT,
+  `osTipo` varchar(45) DEFAULT NULL,
+  `osData` timestamp NULL DEFAULT NULL,
+  `osSituacao` int(11) DEFAULT NULL,
+  `osDescricao` text,
+  `os_carCod` int(11) NOT NULL,
+  `os_cliCod` int(11) NOT NULL,
+  PRIMARY KEY (`osCod`),
+  KEY `fk_OrdemServicos_Pessoas1_idx` (`os_cliCod`),
+  KEY `fk_OrdemServicos_Carros1_idx` (`os_carCod`),
+  CONSTRAINT `fk_OrdemServicos_Carros1` FOREIGN KEY (`os_carCod`) REFERENCES `carros` (`carCod`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_OrdemServicos_Pessoas1` FOREIGN KEY (`os_cliCod`) REFERENCES `pessoas` (`pesCod`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `ordemservicos`
 --
 
 LOCK TABLES `ordemservicos` WRITE;
 /*!40000 ALTER TABLE `ordemservicos` DISABLE KEYS */;
-INSERT INTO `ordemservicos` VALUES (12,'Orçamento','2016-07-29 02:59:51',2,'Carro',65,15),(13,'Orçamento','2016-07-29 16:57:01',0,'',65,15);
+INSERT INTO `ordemservicos` VALUES (12,'Orçamento','2016-07-29 02:59:51',2,'Carro',65,15),(13,'Orçamento','2016-07-29 16:57:01',0,'Carro',65,15);
 /*!40000 ALTER TABLE `ordemservicos` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `pessoas`
+--
+
+DROP TABLE IF EXISTS `pessoas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pessoas` (
+  `pesCod` int(11) NOT NULL AUTO_INCREMENT,
+  `pesNome` varchar(45) DEFAULT NULL,
+  `pesSexo` varchar(45) DEFAULT NULL,
+  `pesEmail` varchar(45) DEFAULT NULL,
+  `pesTelefoneM` varchar(45) DEFAULT NULL,
+  `pesTelefoneF` varchar(45) DEFAULT NULL,
+  `pesCpf` varchar(14) DEFAULT NULL,
+  `pesRg` varchar(45) DEFAULT NULL,
+  `pesTipo` int(11) DEFAULT NULL,
+  `pes_endCod` int(11) NOT NULL,
+  `pes_loginCod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pesCod`),
+  UNIQUE KEY `pesRg_UNIQUE` (`pesRg`),
+  UNIQUE KEY `pesCpf_UNIQUE` (`pesCpf`),
+  KEY `fk_Mecanico_Endereco1_idx` (`pes_endCod`),
+  KEY `fk_Pessoas_Login1_idx` (`pes_loginCod`),
+  CONSTRAINT `fk_Mecanico_Endereco1` FOREIGN KEY (`pes_endCod`) REFERENCES `enderecos` (`endCod`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Pessoas_Login1` FOREIGN KEY (`pes_loginCod`) REFERENCES `logins` (`loginCod`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `pessoas`
@@ -273,6 +254,21 @@ INSERT INTO `pessoas` VALUES (15,'Guilherme Henrique Pinto','Masculino','guilher
 UNLOCK TABLES;
 
 --
+-- Table structure for table `servicos`
+--
+
+DROP TABLE IF EXISTS `servicos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `servicos` (
+  `svcCod` int(11) NOT NULL AUTO_INCREMENT,
+  `svcDescricao` varchar(45) DEFAULT NULL,
+  `svcValor` double DEFAULT NULL,
+  PRIMARY KEY (`svcCod`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `servicos`
 --
 
@@ -283,11 +279,44 @@ INSERT INTO `servicos` VALUES (1,'Oleo',22),(2,'Ventoinha',23),(3,'Manivela',233
 UNLOCK TABLES;
 
 --
+-- Table structure for table `servicos_os`
+--
+
+DROP TABLE IF EXISTS `servicos_os`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `servicos_os` (
+  `serCod` int(11) NOT NULL AUTO_INCREMENT,
+  `ser_osCod` int(11) NOT NULL,
+  `ser_svcCod` int(11) NOT NULL,
+  `ser_mecCod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`serCod`),
+  KEY `fk_Servico_Manutencao1_idx` (`ser_osCod`),
+  KEY `fk_Servicos_Pessoas1_idx` (`ser_mecCod`),
+  KEY `fk_Servicos/OS_Servicos1_idx` (`ser_svcCod`),
+  CONSTRAINT `fk_Servico_Manutencao1` FOREIGN KEY (`ser_osCod`) REFERENCES `ordemservicos` (`osCod`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Servicos/OS_Servicos1` FOREIGN KEY (`ser_svcCod`) REFERENCES `servicos` (`svcCod`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_Servicos_Pessoas1` FOREIGN KEY (`ser_mecCod`) REFERENCES `pessoas` (`pesCod`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `servicos_os`
 --
 
 LOCK TABLES `servicos_os` WRITE;
 /*!40000 ALTER TABLE `servicos_os` DISABLE KEYS */;
-INSERT INTO `servicos_os` VALUES (19,12,2,23),(20,12,3,23),(21,13,2,23),(22,13,4,23);
+INSERT INTO `servicos_os` VALUES (21,13,2,23),(22,13,4,23),(29,12,1,23),(30,12,2,23),(31,12,3,23),(32,12,4,23),(33,12,3,23);
 /*!40000 ALTER TABLE `servicos_os` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-10-09  1:04:13

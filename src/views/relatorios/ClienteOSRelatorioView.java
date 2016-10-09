@@ -132,7 +132,7 @@ public class ClienteOSRelatorioView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-      RelatorioController.geraRelatorioOs(id);
+      RelatorioController.geraRelatorioOs(id,this);
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed

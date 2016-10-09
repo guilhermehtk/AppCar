@@ -534,7 +534,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuServRealPeriodoActionPerformed
 
     private void menuListaServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServActionPerformed
-        RelatorioController.geraRelatorioServicos();
+        RelatorioController.geraRelatorioServicos(new JInternalFrame());
     }//GEN-LAST:event_menuListaServActionPerformed
 
     private void menuListaServ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListaServ1ActionPerformed

@@ -368,7 +368,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPDFActionPerformed
-       RelatorioController.geraRelatorioServicos();
+       RelatorioController.geraRelatorioServicos(this);
     }//GEN-LAST:event_buttonPDFActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

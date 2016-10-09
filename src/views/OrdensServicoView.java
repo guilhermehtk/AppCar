@@ -851,7 +851,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
     private void buttonGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarPdfActionPerformed
         if (cbSituacao.getSelectedIndex() == 0) {
-            RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()));
+            RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()),this);
         } else {
             JOptionPane.showMessageDialog(this, "O.S não é um orçamento", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
