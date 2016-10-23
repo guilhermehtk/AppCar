@@ -7,6 +7,7 @@ import control.ServicoController;
 import control.Servico_OSController;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Carro;
@@ -42,6 +43,18 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         AutoCompleteDecorator.decorate(comboSelectCarro);
         AutoCompleteDecorator.decorate(comboSelectCliente);
         this.funcionario = funcionario;
+    }
+
+    private void disableButton(JButton button1, JButton button2, JButton button3) {
+        button1.setEnabled(false);
+        button2.setEnabled(false);
+        button3.setEnabled(false);
+    }
+
+    private void enableButton(JButton button1, JButton button2, JButton button3) {
+        button1.setEnabled(true);
+        button2.setEnabled(true);
+        button3.setEnabled(true);
     }
 
     private void preencheProcurar() {
@@ -768,6 +781,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
         this.limpar();
         this.editable(true);
+        this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
@@ -777,6 +791,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
                 this.addServicos_OS(id);
                 if (id != 0) {
                     Mensagens.sucessoCreate();
+                    this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
                     this.setOSResultado(id);
                 }
             } else {
@@ -784,6 +799,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
                 this.alteraServicos(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
                 this.setOSResultado(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
                 Mensagens.sucessoAlterar();
+                this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
             }
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
@@ -799,6 +815,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         if (comboResultados.getSelectedIndex() != 0) {
             this.editable(true);
+            this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione alguma O.S para editar!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -806,10 +823,10 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         if (comboResultados.getSelectedIndex() != 0) {
-            for (Servico_OS serv : serOS.getAllOS(carros.get(comboResultados.getSelectedIndex()-1 ).getCod())) {
+            for (Servico_OS serv : serOS.getAllOS(carros.get(comboResultados.getSelectedIndex() - 1).getCod())) {
                 serOS.remove(serv.getCod());
             }
-                osControl.remove(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
+            osControl.remove(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
             this.editable(false);
             this.limpar();
             this.preencheProcurar();
@@ -851,7 +868,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
     private void buttonGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarPdfActionPerformed
         if (cbSituacao.getSelectedIndex() == 0) {
-            RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()),this);
+            RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()), this);
         } else {
             JOptionPane.showMessageDialog(this, "O.S não é um orçamento", "Alerta", JOptionPane.WARNING_MESSAGE);
         }

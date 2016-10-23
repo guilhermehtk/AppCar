@@ -2,6 +2,7 @@ package views;
 
 import control.ClienteController;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Endereco;
@@ -30,6 +31,18 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
     private boolean validaUnique() {
         return Mensagens.errosUnique(cliControl.validaUniques(newCliente()));
+    }
+
+    private void disableButton(JButton button1, JButton button2, JButton button3) {
+        button1.setEnabled(false);
+        button2.setEnabled(false);
+        button3.setEnabled(false);
+    }
+
+    private void enableButton(JButton button1, JButton button2, JButton button3) {
+        button1.setEnabled(true);
+        button2.setEnabled(true);
+        button3.setEnabled(true);
     }
 
     private void setClientesResultado(int id) {
@@ -598,6 +611,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
                     int id = cliControl.add(newCliente());
                     if (id != 0) {
                         Mensagens.sucessoCreate();
+                        this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
                         this.setClientesResultado(id);
                     }
                 }
@@ -605,6 +619,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
                 cliControl.altera(alteraCliente(clientes.get(comboResultados.getSelectedIndex() - 1)));
                 this.setClientesResultado(clientes.get(comboResultados.getSelectedIndex() - 1).getCodigo());
                 Mensagens.sucessoAlterar();
+                this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
             }
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
@@ -620,6 +635,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
         this.limpar();
         this.editable(true);
+        this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
@@ -636,6 +652,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         if (comboResultados.getSelectedIndex() != 0) {
             this.editable(true);
+            this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione algum cliente para editar!", "Erro", JOptionPane.PLAIN_MESSAGE);
         }

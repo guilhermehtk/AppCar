@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.Carro;
 import model.Cliente;
@@ -132,6 +133,18 @@ public class CarroView extends javax.swing.JInternalFrame {
         comboTipoDono.setSelectedIndex(0);
         comboDono.setSelectedIndex(0);
         comboResultados.setSelectedIndex(0);
+    }
+
+    private void disableButton(JButton button1, JButton button2, JButton button3) {
+        button1.setEnabled(false);
+        button2.setEnabled(false);
+        button3.setEnabled(false);
+    }
+
+    private void enableButton(JButton button1, JButton button2, JButton button3) {
+        button1.setEnabled(true);
+        button2.setEnabled(true);
+        button3.setEnabled(true);
     }
 
     private void editable(boolean flag) {
@@ -607,6 +620,7 @@ public class CarroView extends javax.swing.JInternalFrame {
                 if (this.validaUnique()) {
                     int id = carControl.add(newCarro());
                     if (id != 0) {
+                        this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
                         Mensagens.sucessoCreate();
                         this.setCarroResultado(id);
                     }
@@ -615,6 +629,7 @@ public class CarroView extends javax.swing.JInternalFrame {
                 carControl.altera(alteraCarro(carros.get(comboResultados.getSelectedIndex() - 1)));
                 this.setCarroResultado(carros.get(comboResultados.getSelectedIndex() - 1).getCod());
                 Mensagens.sucessoAlterar();
+                this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
             }
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
@@ -630,6 +645,7 @@ public class CarroView extends javax.swing.JInternalFrame {
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
         this.limpar();
         this.editable(true);
+        this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void comboResultadosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboResultadosPropertyChange
@@ -647,6 +663,7 @@ public class CarroView extends javax.swing.JInternalFrame {
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         if (comboResultados.getSelectedIndex() != 0) {
             this.editable(true);
+            this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione algum carro para editar!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -715,8 +732,8 @@ public class CarroView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfKmKeyTyped
 
     private void cbMarcaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMarcaItemStateChanged
-       cbModelo.setModel(this.preencheModelo(cbMarca.getSelectedItem().toString()));
-       cbModelo.setSelectedIndex(0);
+        cbModelo.setModel(this.preencheModelo(cbMarca.getSelectedItem().toString()));
+        cbModelo.setSelectedIndex(0);
     }//GEN-LAST:event_cbMarcaItemStateChanged
 
 
