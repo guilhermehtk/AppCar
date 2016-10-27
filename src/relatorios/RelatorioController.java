@@ -64,5 +64,14 @@ public class RelatorioController {
     public static void geraRelatorioServicos(JInternalFrame frame) {
         geraRelatorio("listaservicos", null, frame);
     }
+      public static void geraRelatorioServicoRealizado(JInternalFrame frame) {
+        geraRelatorio("RelatorioServicoRealizado", null, frame);
+    }
+
+    public static void geraRelatorioRecibo(JInternalFrame frame, int osCod) {
+        HashMap params = new HashMap<>();
+        params.put("osCod", osCod);
+        geraRelatorio("Recibo", params, frame);
+    }
 
 }
