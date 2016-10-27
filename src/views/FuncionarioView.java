@@ -2,7 +2,6 @@ package views;
 
 import control.FuncionarioController;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.Endereco;
 import model.Funcionario;
@@ -19,18 +18,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
         initComponents();
         this.preencheProcurar();
         AutoCompleteDecorator.decorate(comboResultados);
-    }
-
-    private void disableButton(JButton button1, JButton button2, JButton button3) {
-        button1.setEnabled(false);
-        button2.setEnabled(false);
-        button3.setEnabled(false);
-    }
-
-    private void enableButton(JButton button1, JButton button2, JButton button3) {
-        button1.setEnabled(true);
-        button2.setEnabled(true);
-        button3.setEnabled(true);
     }
 
     private void preencheProcurar() {
@@ -694,7 +681,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                     int id = funControl.add(newFuncionario());
                     if (id != 0) {
                         Mensagens.sucessoCreate();
-                        this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
                         this.setFuncionarioResultado(id);
                     }
                 }
@@ -702,7 +688,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
                 funControl.altera(alteraFuncionario(funcionarios.get(comboResultados.getSelectedIndex() - 1)));
                 this.setFuncionarioResultado(funcionarios.get(comboResultados.getSelectedIndex() - 1).getCodigo());
                 Mensagens.sucessoAlterar();
-                this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
             }
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
@@ -718,7 +703,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
         this.limpar();
         this.editable(true);
-        this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void campoNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNomeKeyTyped
@@ -797,7 +781,6 @@ public class FuncionarioView extends javax.swing.JInternalFrame {
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         if (comboResultados.getSelectedIndex() != 0) {
             this.editable(true);
-            this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione algum funcionário para editar!", "Erro", JOptionPane.ERROR_MESSAGE);
         }

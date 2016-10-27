@@ -7,7 +7,6 @@ import control.ServicoController;
 import control.Servico_OSController;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Carro;
@@ -43,18 +42,6 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         AutoCompleteDecorator.decorate(comboSelectCarro);
         AutoCompleteDecorator.decorate(comboSelectCliente);
         this.funcionario = funcionario;
-    }
-
-    private void disableButton(JButton button1, JButton button2, JButton button3) {
-        button1.setEnabled(false);
-        button2.setEnabled(false);
-        button3.setEnabled(false);
-    }
-
-    private void enableButton(JButton button1, JButton button2, JButton button3) {
-        button1.setEnabled(true);
-        button2.setEnabled(true);
-        button3.setEnabled(true);
     }
 
     private void preencheProcurar() {
@@ -126,8 +113,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         servicos = new ArrayList<>();
         labelCodigo.setText(String.valueOf(os.getCod()));
         labelData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(os.getData()));
-        buttonGerarRecibo.setEnabled(true);
-        buttonGerarOrcamento.setEnabled(true);
+        buttonGerarPdf.setEnabled(true);
         switch (os.getSituacao()) {
             case 1:
                 // Orçamento
@@ -197,8 +183,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         comboSelectCliente.setEnabled(flag);
         tableServicos.setEnabled(flag);
         cbSituacao.setEnabled(flag);
-        buttonGerarRecibo.setEnabled(!flag);
-        buttonGerarOrcamento.setEnabled(!flag);
+        buttonGerarPdf.setEnabled(!flag);
     }
 
     private OrdemServico newOS() {
@@ -324,8 +309,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         labelData = new javax.swing.JLabel();
         cbSituacao = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
-        buttonGerarRecibo = new javax.swing.JButton();
-        buttonGerarOrcamento = new javax.swing.JButton();
+        buttonGerarPdf = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -703,25 +687,15 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         panelValor.add(jLabel7);
         jLabel7.setBounds(250, 20, 50, 20);
 
-        buttonGerarRecibo.setText("Gerar Recibo");
-        buttonGerarRecibo.setEnabled(false);
-        buttonGerarRecibo.addActionListener(new java.awt.event.ActionListener() {
+        buttonGerarPdf.setText("Gerar PDF");
+        buttonGerarPdf.setEnabled(false);
+        buttonGerarPdf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonGerarReciboActionPerformed(evt);
+                buttonGerarPdfActionPerformed(evt);
             }
         });
-        panelValor.add(buttonGerarRecibo);
-        buttonGerarRecibo.setBounds(320, 60, 130, 20);
-
-        buttonGerarOrcamento.setText("Gerar Orçamento");
-        buttonGerarOrcamento.setEnabled(false);
-        buttonGerarOrcamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonGerarOrcamentoActionPerformed(evt);
-            }
-        });
-        panelValor.add(buttonGerarOrcamento);
-        buttonGerarOrcamento.setBounds(120, 60, 130, 20);
+        panelValor.add(buttonGerarPdf);
+        buttonGerarPdf.setBounds(230, 60, 81, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -734,9 +708,10 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelTabelaServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(panelProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelTabelaServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -793,7 +768,6 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
         this.limpar();
         this.editable(true);
-        this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
@@ -803,7 +777,6 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
                 this.addServicos_OS(id);
                 if (id != 0) {
                     Mensagens.sucessoCreate();
-                    this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
                     this.setOSResultado(id);
                 }
             } else {
@@ -811,7 +784,6 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
                 this.alteraServicos(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
                 this.setOSResultado(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
                 Mensagens.sucessoAlterar();
-                this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
             }
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
@@ -827,7 +799,6 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         if (comboResultados.getSelectedIndex() != 0) {
             this.editable(true);
-            this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione alguma O.S para editar!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -835,10 +806,10 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         if (comboResultados.getSelectedIndex() != 0) {
-            for (Servico_OS serv : serOS.getAllOS(carros.get(comboResultados.getSelectedIndex() - 1).getCod())) {
+            for (Servico_OS serv : serOS.getAllOS(carros.get(comboResultados.getSelectedIndex()-1 ).getCod())) {
                 serOS.remove(serv.getCod());
             }
-            osControl.remove(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
+                osControl.remove(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
             this.editable(false);
             this.limpar();
             this.preencheProcurar();
@@ -878,27 +849,13 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         Mensagens.restringirTamanho(evt, 20);
     }//GEN-LAST:event_tfDescricaoKeyTyped
 
-    private void buttonGerarReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarReciboActionPerformed
-        if (cbSituacao.getSelectedIndex() == 1) {
-            RelatorioController.geraRelatorioRecibo(this, Integer.parseInt(labelCodigo.getText()));
-            ordens.get(comboResultados.getSelectedIndex() - 1).setSituacao(3);
-            osControl.altera(ordens.get(comboResultados.getSelectedIndex() - 1));
-            cbSituacao.setSelectedIndex(ordens.get(comboResultados.getSelectedIndex() - 1).getSituacao());
-            this.setOSResultado(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
-            Mensagens.sucessoAlterar();
-
-        } else {
-            JOptionPane.showMessageDialog(this, "O.S não é Recibo", "Alerta", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_buttonGerarReciboActionPerformed
-
-    private void buttonGerarOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarOrcamentoActionPerformed
+    private void buttonGerarPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarPdfActionPerformed
         if (cbSituacao.getSelectedIndex() == 0) {
-            RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()), this);
+            RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()),this);
         } else {
-            JOptionPane.showMessageDialog(this, "O.S não é Orçamento", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "O.S não é um orçamento", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_buttonGerarOrcamentoActionPerformed
+    }//GEN-LAST:event_buttonGerarPdfActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
@@ -907,8 +864,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExc;
     private javax.swing.JButton buttonExcluir;
-    private javax.swing.JButton buttonGerarOrcamento;
-    private javax.swing.JButton buttonGerarRecibo;
+    private javax.swing.JButton buttonGerarPdf;
     private javax.swing.JButton buttonLimpar;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JComboBox cbSituacao;
