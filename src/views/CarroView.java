@@ -191,7 +191,7 @@ public class CarroView extends javax.swing.JInternalFrame {
         carro.setModelo(cbModelo.getSelectedItem().toString());
         carro.setObs(tfObs.getText());
         carro.setPlaca(tfPlaca.getText());
-        if (comboDono.getSelectedIndex() == 0) {
+        if (comboDono.getSelectedIndex() <= 0) {
             carro.setDono(0);
         } else {
             carro.setDono(clientes.get(comboDono.getSelectedIndex() - 1).getCodigo());
@@ -643,6 +643,7 @@ public class CarroView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
+        
         this.limpar();
         this.editable(true);
         this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);

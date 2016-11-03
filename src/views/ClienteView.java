@@ -626,6 +626,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
     private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
         this.limpar();
+        this.enableButton(buttonAdicionar,buttonExcluir,buttonEditar);
     }//GEN-LAST:event_buttonLimparActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed

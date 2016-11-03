@@ -2,6 +2,8 @@ package views;
 
 import control.ServicoController;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import model.Servico;
@@ -12,6 +14,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     private ServicoController serCon = new ServicoController();
     private ArrayList<Servico> servicos;
     private DefaultTableModel dTable;
+    private boolean flag = true;
 
     public ListaServicos() {
         initComponents();
@@ -49,9 +52,33 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         servicos = serCon.getAll();
 
         for (Servico servico : servicos) {
-            dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), String.valueOf(servico.getValor()).replace('.',',')});
+            dTable.addRow(new Object[]{servico.getCod(), servico.getDescricao(), String.valueOf(servico.getValor()).replace('.', ',')});
         }
         tabelaServicos.setModel(dTable);
+    }
+
+    private void limpar() {
+        tfNome.setText("");
+        tfValor.setText("");
+    }
+
+    private void disableButton(JButton button1, JButton button2, JButton button3) {
+        button1.setEnabled(false);
+        button2.setEnabled(false);
+        button3.setEnabled(false);
+    }
+
+    private void enableButton(JButton button2) {
+        button2.setEnabled(true);
+
+    }
+
+    private void validaCampos() {
+        if (tfNome.getText().equals("") && tfValor.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Campo nome e valor em branco", "Alerta", JOptionPane.WARNING_MESSAGE);
+        } else if (tfNome.getText().equals("") || tfValor.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Campo nome ou valor em branco", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private int retornaLinha() {
@@ -63,16 +90,19 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         int linha = tabelaServicos.getSelectedRow();
         tfNome.setText(servicos.get(linha).getDescricao());
         tfValor.setText(String.valueOf(servicos.get(linha).getValor()));
+        buttonEditar.setEnabled(true);
+        buttonExcluir.setEnabled(true);
+        buttonAdicionar.setEnabled(true);
     }
 
     private Servico newServico() {
         Double i;
-        if (tfValor.getText().isEmpty()){
+        if (tfValor.getText().isEmpty()) {
             i = 0.0;
         } else {
-            i = Double.parseDouble(tfValor.getText().replace(',','.'));
+            i = Double.parseDouble(tfValor.getText().replace(',', '.'));
         }
-        Servico servico = new Servico(tfNome.getText(),i);
+        Servico servico = new Servico(tfNome.getText(), i);
 
         return servico;
     }
@@ -89,22 +119,27 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         tfNome = new javax.swing.JTextField();
         labelAno = new javax.swing.JLabel();
         labelAno1 = new javax.swing.JLabel();
+        tfValor = new javax.swing.JFormattedTextField();
+        panelButtons = new javax.swing.JPanel();
+        buttonSalvar = new javax.swing.JButton();
+        buttonLimpar = new javax.swing.JButton();
+        buttonCancelar = new javax.swing.JButton();
+        labelTitulo = new javax.swing.JLabel();
         toolbarCrud = new javax.swing.JToolBar();
         buttonAdicionar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         buttonEditar = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         buttonExcluir = new javax.swing.JButton();
-        tfValor = new javax.swing.JFormattedTextField();
-        labelTitulo = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Serviços");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Pistao-25.png"))); // NOI18N
-        setMaximumSize(new java.awt.Dimension(666, 598));
-        setMinimumSize(new java.awt.Dimension(666, 598));
-        setPreferredSize(new java.awt.Dimension(666, 598));
+        setMaximumSize(new java.awt.Dimension(737, 598));
+        setMinimumSize(new java.awt.Dimension(737, 598));
+        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(737, 598));
 
         panelPrincipal.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         panelPrincipal.setLayout(null);
@@ -185,6 +220,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviço"));
 
+        tfNome.setEditable(false);
         tfNome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         tfNome.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
@@ -208,8 +244,90 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
         labelAno1.setText("Valor:*");
 
+        tfValor.setEditable(false);
+        tfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        tfValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfValorActionPerformed(evt);
+            }
+        });
+        tfValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfValorKeyTyped(evt);
+            }
+        });
+
+        buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Checado-25.png"))); // NOI18N
+        buttonSalvar.setText("Salvar");
+        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSalvarActionPerformed(evt);
+            }
+        });
+        panelButtons.add(buttonSalvar);
+
+        buttonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Limpar-25.png"))); // NOI18N
+        buttonLimpar.setText("Limpar");
+        buttonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLimparActionPerformed(evt);
+            }
+        });
+        panelButtons.add(buttonLimpar);
+
+        buttonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Cancelar-25.png"))); // NOI18N
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.setMaximumSize(null);
+        buttonCancelar.setMinimumSize(null);
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarActionPerformed(evt);
+            }
+        });
+        panelButtons.add(buttonCancelar);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelAno1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelAno, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfNome)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addComponent(panelButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelAno, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelAno1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTitulo.setText("Lista de Serviços");
+        labelTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         toolbarCrud.setBackground(new java.awt.Color(204, 204, 255));
         toolbarCrud.setFloatable(false);
+        toolbarCrud.setOrientation(javax.swing.SwingConstants.VERTICAL);
         toolbarCrud.setRollover(true);
 
         buttonAdicionar.setBackground(new java.awt.Color(204, 204, 255));
@@ -229,8 +347,12 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         buttonEditar.setBackground(new java.awt.Color(204, 204, 255));
         buttonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Editar-50.png"))); // NOI18N
         buttonEditar.setToolTipText("Editar");
+        buttonEditar.setEnabled(false);
         buttonEditar.setFocusable(false);
         buttonEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonEditar.setMaximumSize(new java.awt.Dimension(67, 67));
+        buttonEditar.setMinimumSize(new java.awt.Dimension(67, 67));
+        buttonEditar.setPreferredSize(new java.awt.Dimension(67, 67));
         buttonEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,8 +367,12 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         buttonExcluir.setBackground(new java.awt.Color(204, 204, 255));
         buttonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Lixeira-50.png"))); // NOI18N
         buttonExcluir.setToolTipText("Excluir");
+        buttonExcluir.setEnabled(false);
         buttonExcluir.setFocusable(false);
         buttonExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonExcluir.setMaximumSize(new java.awt.Dimension(67, 67));
+        buttonExcluir.setMinimumSize(new java.awt.Dimension(67, 67));
+        buttonExcluir.setPreferredSize(new java.awt.Dimension(67, 67));
         buttonExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,77 +381,39 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         });
         toolbarCrud.add(buttonExcluir);
 
-        tfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelAno1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelAno, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfNome)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 198, Short.MAX_VALUE)
-                        .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(209, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelAno, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelAno1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        labelTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTitulo.setText("Lista de Serviços");
-        labelTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 71, Short.MAX_VALUE)
                 .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(toolbarCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -340,21 +428,23 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfNomeActionPerformed
 
     private void tfNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomeKeyTyped
-     Mensagens.restringirTamanho(evt, 45);
+        Mensagens.restringirTamanho(evt, 45);
     }//GEN-LAST:event_tfNomeKeyTyped
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-        serCon.add(newServico());
-        this.povoaTabela();
-
+        tfNome.setText("");
+        tfValor.setText("");
+        tfNome.setEditable(true);
+        tfValor.setEditable(true);
+        flag = false;
+        this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
-        Servico servico = servicos.get(retornaLinha());
-        servico.setDescricao(tfNome.getText());
-        servico.setValor(Double.parseDouble(tfValor.getText().replace(',','.')));
-        serCon.altera(servico);
-        this.povoaTabela();
+        flag = true;
+        tfNome.setEditable(true);
+        tfValor.setEditable(true);
+        this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
     }//GEN-LAST:event_buttonEditarActionPerformed
 
     private void tabelaServicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaServicosMouseClicked
@@ -368,14 +458,65 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPDFActionPerformed
-       RelatorioController.geraRelatorioServicos(this);
+        RelatorioController.geraRelatorioServicos(this);
     }//GEN-LAST:event_buttonPDFActionPerformed
 
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
+        this.validaCampos();
+        if (flag == true) {
+            Servico servico = servicos.get(retornaLinha());
+            servico.setDescricao(tfNome.getText());
+            servico.setValor(Double.parseDouble(tfValor.getText().replace(',', '.')));
+            serCon.altera(servico);
+            this.enableButton(buttonAdicionar);
+            buttonEditar.setEnabled(false);
+            buttonExcluir.setEnabled(false);
+            tfNome.setEditable(false);
+            tfValor.setEditable(false);
+            this.povoaTabela();
+        } else {
+            serCon.add(newServico());
+            this.povoaTabela();
+            this.enableButton(buttonAdicionar);
+            tfNome.setEditable(false);
+            tfValor.setEditable(false);
+            buttonEditar.setEnabled(false);
+            buttonExcluir.setEnabled(false);
+        }
+    }//GEN-LAST:event_buttonSalvarActionPerformed
+
+    private void buttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimparActionPerformed
+        this.limpar();
+        buttonEditar.setEnabled(false);
+        buttonAdicionar.setEnabled(true);
+        buttonExcluir.setEnabled(false);
+    }//GEN-LAST:event_buttonLimparActionPerformed
+
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_buttonCancelarActionPerformed
+
+    private void tfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfValorKeyTyped
+        this.somenteNumeros(evt);
+    }//GEN-LAST:event_tfValorKeyTyped
+
+    private void tfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfValorActionPerformed
+    public static void somenteNumeros(java.awt.event.KeyEvent evt) {
+        String caracteres = "0123456789.";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionar;
+    private javax.swing.JButton buttonCancelar;
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
+    private javax.swing.JButton buttonLimpar;
     private javax.swing.JButton buttonPDF;
+    private javax.swing.JButton buttonSalvar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -383,6 +524,7 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel labelAno;
     private javax.swing.JLabel labelAno1;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JPanel panelButtons;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tabelaServicos;
     private javax.swing.JTextField tfNome;
