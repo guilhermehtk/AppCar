@@ -73,12 +73,15 @@ public class ListaServicos extends javax.swing.JInternalFrame {
 
     }
 
-    private void validaCampos() {
+    private boolean validaCampos() {
         if (tfNome.getText().equals("") && tfValor.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo nome e valor em branco", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
         } else if (tfNome.getText().equals("") || tfValor.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo nome ou valor em branco", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
+        return true;
     }
 
     private int retornaLinha() {
@@ -232,6 +235,11 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         tfNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfNomeActionPerformed(evt);
+            }
+        });
+        tfNome.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tfNomePropertyChange(evt);
             }
         });
         tfNome.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -462,7 +470,9 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonPDFActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        this.validaCampos();
+        if (!this.validaCampos()) {
+            return;
+        }
         if (flag == true) {
             Servico servico = servicos.get(retornaLinha());
             servico.setDescricao(tfNome.getText());
@@ -490,6 +500,8 @@ public class ListaServicos extends javax.swing.JInternalFrame {
         buttonEditar.setEnabled(false);
         buttonAdicionar.setEnabled(true);
         buttonExcluir.setEnabled(false);
+        tfValor.setEditable(false);
+        tfNome.setEditable(false);
     }//GEN-LAST:event_buttonLimparActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
@@ -503,6 +515,10 @@ public class ListaServicos extends javax.swing.JInternalFrame {
     private void tfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfValorActionPerformed
+
+    private void tfNomePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tfNomePropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNomePropertyChange
     public static void somenteNumeros(java.awt.event.KeyEvent evt) {
         String caracteres = "0123456789.";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
