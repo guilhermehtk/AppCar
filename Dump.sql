@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `appcar` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `appcar`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.12, for linux-glibc2.5 (x86_64)
 --
--- Host: 127.0.0.1    Database: appcar
+-- Host: localhost    Database: appcar
 -- ------------------------------------------------------
--- Server version	5.6.16
+-- Server version	5.7.16-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -69,7 +67,7 @@ CREATE TABLE `enderecos` (
   `endCep` varchar(45) DEFAULT NULL,
   `endComplemento` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`endCod`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +76,7 @@ CREATE TABLE `enderecos` (
 
 LOCK TABLES `enderecos` WRITE;
 /*!40000 ALTER TABLE `enderecos` DISABLE KEYS */;
-INSERT INTO `enderecos` VALUES (21,'365','Rua Sete de Setembro','Centro','Apart B','35580-000','saasasAasassaas'),(34,'375','Sete de Setembro','Centro','Formiga','35570-000','A'),(35,'12','qqqwq','3244123235','2121','00000-000','saf');
+INSERT INTO `enderecos` VALUES (21,'365','Rua Sete de Setembro','Centro','Formiga','35580-000','Apart. A'),(36,'19','Prof. Francis','Nra. Lourdes','Formiga','35570-000','E'),(37,'84','Antonio Jorge Rezende','Sao Lourenço','Formiga','35570-000','A'),(38,'41','do Ifmg','Centro','Formiga','35570-000','A'),(39,'656','do Saae','SAAE','Formiga','35570-000','A');
 /*!40000 ALTER TABLE `enderecos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +101,7 @@ CREATE TABLE `logins` (
 
 LOCK TABLES `logins` WRITE;
 /*!40000 ALTER TABLE `logins` DISABLE KEYS */;
-INSERT INTO `logins` VALUES (10,'administradorr','$2a$10$RAQs8cmtH6Ehp8OLoke81uTaKnvWRBkkH37ZylUDLa.aaMcTdVQp2'),(11,'administrador','$2a$10$5Uu99FlUhGem6zWc2SdPeOdSO5Y/ilD49gJj9RHspQT/nU/xBq1LC');
+INSERT INTO `logins` VALUES (11,'administrador','$2a$10$5Uu99FlUhGem6zWc2SdPeOdSO5Y/ilD49gJj9RHspQT/nU/xBq1LC');
 /*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +210,7 @@ CREATE TABLE `ordemservicos` (
 
 LOCK TABLES `ordemservicos` WRITE;
 /*!40000 ALTER TABLE `ordemservicos` DISABLE KEYS */;
-INSERT INTO `ordemservicos` VALUES (12,'Orçamento','2016-07-29 02:59:51',3,'Carro',65,15),(13,'Orçamento','2016-07-29 16:57:01',0,'Carro',65,15);
+INSERT INTO `ordemservicos` VALUES (12,'Orçamento','2016-07-29 02:59:51',3,'Carro',65,15);
 /*!40000 ALTER TABLE `ordemservicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +240,7 @@ CREATE TABLE `pessoas` (
   KEY `fk_Pessoas_Login1_idx` (`pes_loginCod`),
   CONSTRAINT `fk_Mecanico_Endereco1` FOREIGN KEY (`pes_endCod`) REFERENCES `enderecos` (`endCod`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Pessoas_Login1` FOREIGN KEY (`pes_loginCod`) REFERENCES `logins` (`loginCod`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +249,7 @@ CREATE TABLE `pessoas` (
 
 LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
-INSERT INTO `pessoas` VALUES (15,'Guilherme Henrique Pinto','Masculino','guilhermehtk@hotmail.comssaas','(37)99996-3627','(92)4923-4843','094.139.356-96','MG187272828',2,21,NULL),(23,'Guilherme Henrique','Masculino','guilhermehtk@hotmail.com','(37)99988-1818','(38)8883-3333','094.139.344-46','MG19383888',3,34,11),(24,'Saulo','Outro','saulo-v-o@hotmail.com','(21)23112-3231','(12)1242-4123','111.111.111-11','SKJBDAJDBAKJHD',2,35,NULL);
+INSERT INTO `pessoas` VALUES (15,'Guilherme Henrique Pinto','Masculino','guilhermehtk@hotmail.com','(37)99996-3627','(92)4923-4843','094.139.356-96','MG187272828',2,21,NULL),(23,'Guilherme Henrique','Masculino','guilhermehtk@hotmail.com','(37)99988-1818','(38)8883-3333','094.139.344-46','MG19383888',3,21,11),(25,'Leandro Souza Pinheiro','Masculino','lelepinheiro@hotmail.com','(37)98545-4544','(37)6565-6121','125.987.988-32','MG12366998',2,36,NULL),(26,'Danillo Remaclo dos Santos','Masculino','danillo@hotmail.com','(37)56565-3621','(37)6545-6432','032.216.565-65','MG654232454',2,37,NULL),(27,' Thomas do Vale','Masculino','thomas@thomas.com.br','(37)65652-1545','(37)6564-1362','036.546.546-54','MG36232323256',2,38,NULL),(28,'Marcelo Geovane Silva Sá','Masculino','leitao@arape.com.br','(37)65652-1545','(37)6526-5332','312.241.545-45','MG65621212',2,39,NULL);
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,4 +319,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-08 12:16:36
+-- Dump completed on 2016-11-10 10:00:05
