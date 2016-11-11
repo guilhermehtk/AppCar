@@ -18,7 +18,7 @@ public class LoginDao implements InterfaceDao {
 
     public int add(Object end) {
         // cria a query
-        String sql = "insert into logins (loginUsuario,loginSenha) values (?,?)";
+        String sql = "insert into Logins (loginUsuario,loginSenha) values (?,?)";
         // cast
         Login login = (Login) end;
         // id
@@ -51,7 +51,7 @@ public class LoginDao implements InterfaceDao {
 
     public void remove(int id) {
         // cria a query
-        String sql = "delete from logins where loginCod=?;";
+        String sql = "delete from Logins where loginCod=?;";
         try {
             // prepared statement para deleção
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class LoginDao implements InterfaceDao {
 
     public void altera(Object log) {
         // cria a query
-        String sql = "update logins set loginUsuario=?,loginSenha=? where loginCod=?";
+        String sql = "update Logins set loginUsuario=?,loginSenha=? where loginCod=?";
         // cast
         Login login = (Login) log;
         try {
@@ -94,7 +94,7 @@ public class LoginDao implements InterfaceDao {
     @Override
     public Login get(int id) {
         // cria a query
-        String sql = "select * from logins where loginCod=?;";
+        String sql = "select * from Logins where loginCod=?;";
         Login login = null;
         try {
             // prepared statement para seleção
@@ -121,7 +121,7 @@ public class LoginDao implements InterfaceDao {
 
     public ArrayList<Login> getAll() {
         // cria a query
-        String sql = "select * from logins;";
+        String sql = "select * from Logins;";
         // cria o ArrayList
         ArrayList<Login> lista = null;
         try {
@@ -147,7 +147,7 @@ public class LoginDao implements InterfaceDao {
 
     public Login getUsuario(Login log) {
         // cria a query
-        String sql = "select * from logins where loginUsuario=?;";
+        String sql = "select * from Logins where loginUsuario=?;";
         Login login = null;
         try {
             // prepared statement para seleção

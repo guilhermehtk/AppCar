@@ -8,7 +8,7 @@ import views.Mensagens;
 public class ConnectionFactory {
 
     private static final ConnectionFactory instance = new ConnectionFactory();
-    public static final String URL = "jdbc:mysql://localhost:3306/appcar";
+    public static final String URL = "jdbc:mysql://localhost:3306/AppCar";
     public static final String USER = "root";
     public static final String PASSWORD = "root";
     public static final String DRIVER_CLASS = "org.gjt.mm.mysql.Driver";
