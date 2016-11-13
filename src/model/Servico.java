@@ -10,6 +10,10 @@ public class Servico {
         this.descricao = descricao;
         this.valor = valor;
     }
+    
+    public Servico(){
+        
+    }
 
     public double getValor() {
         return valor;

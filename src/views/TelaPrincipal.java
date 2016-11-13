@@ -74,7 +74,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuServRealPeriodo = new javax.swing.JMenuItem();
         menuListaServ = new javax.swing.JMenuItem();
         menuOsCliente = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuServRealizados = new javax.swing.JMenuItem();
+        menuServidor = new javax.swing.JMenu();
+        menuServ = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuAjuda1 = new javax.swing.JMenuItem();
         menuSobre = new javax.swing.JMenuItem();
@@ -103,7 +105,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         footer.setBackground(new java.awt.Color(255, 255, 255));
-        footer.setBorder(javax.swing.BorderFactory.createBevelBorder(1));
+        footer.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         labelVersao.setText("1.0");
 
@@ -244,10 +246,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jToolbarTop.add(buttonInfo);
 
-        jDesktopPane1.setLayer(footer, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(imagemFundo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jToolbarTop, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
@@ -265,6 +263,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+        jDesktopPane1.setLayer(footer, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(imagemFundo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jToolbarTop, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuCadastros.setText("Cadastros");
         menuCadastros.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -360,16 +361,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuRelatorios.add(menuOsCliente);
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Martelo-25.png"))); // NOI18N
-        jMenuItem1.setText("Serviços Realizados");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuServRealizados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Martelo-25.png"))); // NOI18N
+        menuServRealizados.setText("Serviços Realizados");
+        menuServRealizados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuServRealizadosActionPerformed(evt);
             }
         });
-        menuRelatorios.add(jMenuItem1);
+        menuRelatorios.add(menuServRealizados);
 
         menuPrincipal.add(menuRelatorios);
+
+        menuServidor.setText("Servidor");
+        menuServidor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        menuServ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icons/Server-25.png"))); // NOI18N
+        menuServ.setText("Servidor");
+        menuServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuServActionPerformed(evt);
+            }
+        });
+        menuServidor.add(menuServ);
+
+        menuPrincipal.add(menuServidor);
 
         menuAjuda.setText("Ajuda");
         menuAjuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -554,9 +569,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         addInternal(new ClienteOSRelatorioView());
     }//GEN-LAST:event_menuOsClienteActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuServRealizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuServRealizadosActionPerformed
         addInternal(new ServicosRealizadosRelatorioView());
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuServRealizadosActionPerformed
+
+    private void menuServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuServActionPerformed
+      addInternal(new ServidorView());
+    }//GEN-LAST:event_menuServActionPerformed
 
     /**
      * @param args the command line arguments
@@ -606,7 +625,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar jToolbarTop;
     private javax.swing.JLabel labelUsuario;
@@ -624,7 +642,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuPainelControle;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JMenu menuRelatorios;
+    private javax.swing.JMenuItem menuServ;
     private javax.swing.JMenuItem menuServRealPeriodo;
+    private javax.swing.JMenuItem menuServRealizados;
+    private javax.swing.JMenu menuServidor;
     private javax.swing.JMenuItem menuSobre;
     private javax.swing.JMenuItem menuUsuario;
     // End of variables declaration//GEN-END:variables
