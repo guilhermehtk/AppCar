@@ -1,11 +1,29 @@
 package servidor;
 
+import control.CarroController;
+import control.ClienteController;
+import control.FuncionarioController;
 import control.LoginController;
+import control.OrdemServicoController;
+import control.ServicoController;
+import control.Servico_OSController;
 import java.net.*;
 import java.io.*;
+import model.Carro;
+import model.Cliente;
+import model.Funcionario;
+import model.OrdemServico;
+import model.Servico;
+import model.Servico_OS;
 import servidor.json.JSONException;
 import servidor.json.JSONObject;
+import servidor.rest.CarroJSON;
+import servidor.rest.ClienteJSON;
+import servidor.rest.FuncionarioJSON;
 import servidor.rest.LoginJSON;
+import servidor.rest.OrdemServicoJSON;
+import servidor.rest.ServicoJSON;
+import servidor.rest.Servico_OSJSON;
 import views.Mensagens;
 
 public class ServidorTCP {
@@ -30,7 +48,7 @@ public class ServidorTCP {
 
     public void esperaConexao() {
         //laço infinito para esperar várias conexões
-        while (ss!=null && ss.isBound() && !ss.isClosed()) {
+        while (ss != null && ss.isBound() && !ss.isClosed()) {
             try {
                 System.out.println("Esperando Conexoes");
                 msgResposta = "";//declarada global, é o retorno para o cliente
@@ -50,7 +68,7 @@ public class ServidorTCP {
                     String retorno = "-1";
 
                     LoginController loginController = new LoginController();
-                    int flag = loginController.validaLogin(LoginJSON.getLoginJSON(json));
+                    int flag = loginController.validaLogin(LoginJSON.getLoginJSON(json.getJSONObject("login")));
                     //
                     if (flag == 0) {
                         System.out.println("Senha Incorreta");
@@ -59,9 +77,11 @@ public class ServidorTCP {
                         System.out.println("Usuário Não Cadastrado");
                         retorno = "Usuário Não Cadastrado";
                     } else {
-                        //*********************************************
-                        // Se quiser fazer algum processamento após receber a msg o local é aqui
-                        //*********************************************
+                        if (json.has("object")) {
+                            retorno = this.request(json.getString("request"), json.getJSONObject("object"));
+                        } else {
+                            retorno = this.request(json.getString("request"), null);
+                        }
                     }
                     //manda(responde) msg para o cliente
                     ps.println(retorno);
@@ -90,5 +110,62 @@ public class ServidorTCP {
         }
         System.out.println("Servidor Ligado");
 
+    }
+
+    public String request(String request, JSONObject objeto) {
+        switch (request) {
+            // ------------------------------- GET all ------------------------- //
+            case "get_Carro_All":
+                return CarroJSON.geraJSONCarros(new CarroController().getAll());
+            case "get_Cliente_All":
+                return ClienteJSON.geraJSONClientes(new ClienteController().getAll());
+            case "get_Funcionario_All":
+                return FuncionarioJSON.geraJSONFuncionarios(new FuncionarioController().getAll());
+            case "get_OrdemServico_All":
+                return OrdemServicoJSON.geraJSONOrdemServicos(new OrdemServicoController().getAll());
+            case "get_Servico_All":
+                return ServicoJSON.geraJSONServicos(new ServicoController().getAll());
+            case "get_Servico_OS_All":
+                return Servico_OSJSON.geraJSONServico_OSs(new Servico_OSController().getAll());
+
+            // ------------------------------- GET id ------------------------- //
+            case "get_Carro":
+                return CarroJSON.geraJSONCarro((Carro) new CarroController().get(objeto.getInt("carCod")));
+            case "get_Cliente":
+                return ClienteJSON.geraJSONCliente((Cliente) new ClienteController().get(objeto.getInt("pesCod")));
+            case "get_Funcionario":
+                return FuncionarioJSON.geraJSONFuncionario((Funcionario) new FuncionarioController().get(objeto.getInt("pesCod")));
+            case "get_OrdemServico":
+                return OrdemServicoJSON.geraJSONOrdemServico((OrdemServico) new OrdemServicoController().get(objeto.getInt("osCod")));
+            case "get_Servico":
+                return ServicoJSON.geraJSONServico((Servico) new ServicoController().get(objeto.getInt("svcCod")));
+            case "get_Servico_OS":
+                return Servico_OSJSON.geraJSONServico_OS((Servico_OS) new Servico_OSController().get(objeto.getInt("serCod")));
+
+            // ------------------------------- SET object ------------------------- //
+            case "set_Carro":
+                new CarroController().altera(CarroJSON.getCarroJSON(objeto.getJSONObject("carro")));
+                return "true";
+            case "set_Cliente":
+                new ClienteController().altera(ClienteJSON.getClienteJSON(objeto.getJSONObject("cliente")));
+                return "true";
+            case "set_Funcionario":
+                new FuncionarioController().altera(FuncionarioJSON.getFuncionarioJSON(objeto.getJSONObject("funcionario")));
+                return "true";
+            case "set_OrdemServico":
+                new OrdemServicoController().altera(OrdemServicoJSON.getOrdemServicoJSON(objeto.getJSONObject("ordemservico")));
+                return "true";
+            case "set_Servico":
+                new ServicoController().altera(ServicoJSON.getServicoJSON(objeto.getJSONObject("servico")));
+                return "true";
+            case "set_Servico_OS":
+                new Servico_OSController().altera(Servico_OSJSON.getServico_OSJSON(objeto.getJSONObject("servico_os")));
+                return "true";
+
+            // ------------------------------- Default ------------------------- //    
+            default:
+                break;
+        }
+        return null;
     }
 }

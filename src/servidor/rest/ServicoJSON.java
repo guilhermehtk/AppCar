@@ -28,13 +28,8 @@ public class ServicoJSON {
         JSONObject registro;
         //cria um registro primeiro
         for (Servico servico : servicos) {
-            registro = new JSONObject();
-            try {
-                registro.put("svcCod", servico.getCod());
-                registro.put("svcDescricao", servico.getDescricao());
-                registro.put("svcValor", servico.getValor());
-            } catch (JSONException k) {
-            }
+            registro = preencheJSON(servico);
+
             //adiciona registro à lista de registros
             tabelaServicos.add(registro);
         }
@@ -46,6 +41,21 @@ public class ServicoJSON {
         } catch (JSONException u) {
         }
         return UtilJSON.limpaJSON(bd);
+    }
+
+    public static String geraJSONServico(Servico servico) {
+        return UtilJSON.limpaJSON(preencheJSON(servico));
+    }
+
+    public static JSONObject preencheJSON(Servico servico) {
+        JSONObject registro = new JSONObject();
+        try {
+            registro.put("svcCod", servico.getCod());
+            registro.put("svcDescricao", servico.getDescricao());
+            registro.put("svcValor", servico.getValor());
+        } catch (JSONException k) {
+        }
+        return null;
     }
 
 }

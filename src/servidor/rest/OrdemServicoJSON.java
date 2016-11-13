@@ -24,7 +24,7 @@ public class OrdemServicoJSON {
             os.setSituacao(object.getInt("osSituacao"));
             os.setTipo(object.getString("osTipo"));
             os.setDescricao(object.getString("osDescricao"));
-           
+
         } catch (Exception x) {
         }
         return os;
@@ -35,18 +35,8 @@ public class OrdemServicoJSON {
         JSONObject registro;
         //cria um registro primeiro
         for (OrdemServico os : ordens) {
-            registro = new JSONObject();
-            try {
-                registro.put("osCod", os.getCod());
-                registro.put("os_cliCod", os.getCliCod());
-                registro.put("os_carCod", os.getCarCod());
-                registro.put("osData", os.getData().toString());
-                registro.put("osDescricao", os.getDescricao());
-                registro.put("osSituacao", os.getSituacao());
-                registro.put("osTipo", os.getTipo());
+            registro = preencheJSON(os);
 
-            } catch (JSONException k) {
-            }
             //adiciona registro à lista de registros
             tabelaOrdemServicos.add(registro);
         }
@@ -58,6 +48,25 @@ public class OrdemServicoJSON {
         } catch (JSONException u) {
         }
         return UtilJSON.limpaJSON(bd);
+    }
+
+    public static String geraJSONOrdemServico(OrdemServico os) {
+        return UtilJSON.limpaJSON(preencheJSON(os));
+    }
+
+    public static JSONObject preencheJSON(OrdemServico os) {
+        JSONObject registro = new JSONObject();
+        try {
+            registro.put("osCod", os.getCod());
+            registro.put("os_cliCod", os.getCliCod());
+            registro.put("os_carCod", os.getCarCod());
+            registro.put("osData", os.getData().toString());
+            registro.put("osDescricao", os.getDescricao());
+            registro.put("osSituacao", os.getSituacao());
+            registro.put("osTipo", os.getTipo());
+        } catch (JSONException k) {
+        }
+        return null;
     }
 
 }

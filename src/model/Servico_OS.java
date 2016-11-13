@@ -12,6 +12,10 @@ public class Servico_OS {
         this.osCod = osCod;
         this.mecCod = mecCod;
     }
+    
+    public Servico_OS(){
+        
+    }
 
     public int getCod() {
         return cod;
