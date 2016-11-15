@@ -2,7 +2,6 @@ package servidor.rest;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import model.OrdemServico;
 import servidor.json.JSONArray;
 import servidor.json.JSONException;

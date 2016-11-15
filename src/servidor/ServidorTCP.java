@@ -34,7 +34,6 @@ public class ServidorTCP {
     private BufferedReader br = null;
     private PrintStream ps = null;
     private String msgRecebida = "";
-    public String msgResposta = "";
 
     public ServidorTCP(int p) {
         porta = p;//a porta pode ser um argumento 
@@ -51,7 +50,7 @@ public class ServidorTCP {
         while (ss != null && ss.isBound() && !ss.isClosed()) {
             try {
                 System.out.println("Esperando Conexoes");
-                msgResposta = "";//declarada global, é o retorno para o cliente
+                //inicia processo de conexão
                 try {
                     //aguarda conexões
                     s = ss.accept();
@@ -64,27 +63,29 @@ public class ServidorTCP {
                     ps = new PrintStream(s.getOutputStream());
 
                     JSONObject json = new JSONObject(msgRecebida);
-                    //testa se o usuário é o teste de senha teste
-                    String retorno = "-1";
+                    JSONObject jsonResposta = new JSONObject();
 
                     LoginController loginController = new LoginController();
                     int flag = loginController.validaLogin(LoginJSON.getLoginJSON(json.getJSONObject("login")));
-                    //
+                    // testa o login do usuário
                     if (flag == 0) {
                         System.out.println("Senha Incorreta");
-                        retorno = "Senha Incorreta";
+                        jsonResposta.put("login", "senha_incorreta");
                     } else if (flag == 1) {
                         System.out.println("Usuário Não Cadastrado");
-                        retorno = "Usuário Não Cadastrado";
+                        jsonResposta.put("login", "usuario_nao_cadastrado");
                     } else {
+                        //se logar
                         if (json.has("object")) {
-                            retorno = this.request(json.getString("request"), json.getJSONObject("object"));
+                            // tem objeto
+                            jsonResposta.put("return", this.request(json.getString("request"), json.getJSONObject("object")));
                         } else {
-                            retorno = this.request(json.getString("request"), null);
+                            // não tem
+                            jsonResposta.put("return", this.request(json.getString("request"), null));
                         }
                     }
                     //manda(responde) msg para o cliente
-                    ps.println(retorno);
+                    ps.println(jsonResposta.toString());
                     s.close();
                     //System.gc();
                 } catch (IOException | JSONException e) {
@@ -141,6 +142,8 @@ public class ServidorTCP {
                 return ServicoJSON.geraJSONServico((Servico) new ServicoController().get(objeto.getInt("svcCod")));
             case "get_Servico_OS":
                 return Servico_OSJSON.geraJSONServico_OS((Servico_OS) new Servico_OSController().get(objeto.getInt("serCod")));
+            case "get_Servico_OS_osCod":
+                return Servico_OSJSON.geraJSONServico_OS((Servico_OS) new Servico_OSController().get(objeto.getInt("ser_osCod")));
 
             // ------------------------------- SET object ------------------------- //
             case "set_Carro":
@@ -160,6 +163,40 @@ public class ServidorTCP {
                 return "true";
             case "set_Servico_OS":
                 new Servico_OSController().altera(Servico_OSJSON.getServico_OSJSON(objeto.getJSONObject("servico_os")));
+                return "true";
+
+            // ------------------------------- ADD object ------------------------- //
+            case "add_Carro":
+                return Integer.toString(new CarroController().add(CarroJSON.getCarroJSON(objeto.getJSONObject("carro"))));
+            case "add_Cliente":
+                return Integer.toString(new ClienteController().add(ClienteJSON.getClienteJSON(objeto.getJSONObject("cliente"))));
+            case "add_Funcionario":
+                return Integer.toString(new FuncionarioController().add(FuncionarioJSON.getFuncionarioJSON(objeto.getJSONObject("funcionario"))));
+            case "add_OrdemServico":
+                return Integer.toString(new OrdemServicoController().add(OrdemServicoJSON.getOrdemServicoJSON(objeto.getJSONObject("ordemservico"))));
+            case "add_Servico":
+                return Integer.toString(new ServicoController().add(ServicoJSON.getServicoJSON(objeto.getJSONObject("servico"))));
+            case "add_Servico_OS":
+                return Integer.toString(new Servico_OSController().add(Servico_OSJSON.getServico_OSJSON(objeto.getJSONObject("servico_os"))));
+
+            // ------------------------------- REMOVE object ------------------------- //
+            case "rmv_Carro":
+                new CarroController().remove(CarroJSON.getCarroJSON(objeto.getJSONObject("carro")).getCod());
+                return "true";
+            case "rmv_Cliente":
+                new ClienteController().remove(ClienteJSON.getClienteJSON(objeto.getJSONObject("cliente")).getCodigo());
+                return "true";
+            case "rmv_Funcionario":
+                new FuncionarioController().remove(FuncionarioJSON.getFuncionarioJSON(objeto.getJSONObject("funcionario")).getCodigo());
+                return "true";
+            case "rmv_OrdemServico":
+                new OrdemServicoController().remove(OrdemServicoJSON.getOrdemServicoJSON(objeto.getJSONObject("ordemservico")).getCod());
+                return "true";
+            case "rmv_Servico":
+                new ServicoController().remove(ServicoJSON.getServicoJSON(objeto.getJSONObject("servico")).getCod());
+                return "true";
+            case "rmv_Servico_OS":
+                new Servico_OSController().remove(Servico_OSJSON.getServico_OSJSON(objeto.getJSONObject("servico_os")).getCod());
                 return "true";
 
             // ------------------------------- Default ------------------------- //    

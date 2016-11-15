@@ -1,5 +1,6 @@
 package control;
 
+import control.*;
 import java.util.ArrayList;
 import model.Servico_OS;
 import model.dao.Servico_OSDao;
