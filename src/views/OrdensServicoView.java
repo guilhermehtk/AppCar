@@ -821,7 +821,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
-        if (comboResultados.getSelectedIndex() != 0) {
+        if (comboResultados.getSelectedIndex() > 0) {
             this.editable(true);
             this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
         } else {
@@ -830,7 +830,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonEditarActionPerformed
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-        if (comboResultados.getSelectedIndex() != 0) {
+        if (comboResultados.getSelectedIndex() > 0) {
             for (Servico_OS serv : serOS.getAllOS(carros.get(comboResultados.getSelectedIndex() - 1).getCod())) {
                 serOS.remove(serv.getCod());
             }
@@ -848,9 +848,10 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfDescricaoActionPerformed
 
     private void comboResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboResultadosActionPerformed
-        if ((comboResultados.getSelectedIndex() != 0) && (comboResultados.getSelectedIndex() != -1)) {
+        if (comboResultados.getSelectedIndex() > 0) {
             this.preencher(ordens.get(comboResultados.getSelectedIndex() - 1));
             this.editable(false);
+            this.enableButton(buttonAdicionar,buttonEditar,buttonExcluir);
         }
     }//GEN-LAST:event_comboResultadosActionPerformed
 
