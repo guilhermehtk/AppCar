@@ -26,7 +26,7 @@ public class RelatorioController {
                     SimpleDateFormat dt = new SimpleDateFormat("dd-mm-yyyy");
                     Connection con = getConnection();
                     Map parameters = param;
-                    JasperReport report = JasperCompileManager.compileReport("src/relatorios/" + jrxml + ".jrxml");
+                    JasperReport report = JasperCompileManager.compileReport("src/relatorios/xml/" + jrxml + ".jrxml");
                     JasperPrint impressao = JasperFillManager.fillReport(report, parameters, con);
                     JasperExportManager.exportReportToPdfFile(impressao, "relatorios/" + jrxml + "-" + dt.format(Calendar.getInstance().getTime()) + ".pdf");
                     File arquivo = new File("relatorios/" + jrxml + "-" + dt.format(Calendar.getInstance().getTime()) + ".pdf");                                             

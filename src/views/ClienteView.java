@@ -112,6 +112,12 @@ public class ClienteView extends javax.swing.JInternalFrame {
         Cliente cliente = new Cliente();
         cliente.setNome(campoNome.getText());
         cliente.setCpf(campoCpf.getText());
+        for (Cliente cliente1 : clientes) {
+            if (cliente1.getCpf().equals(campoCpf.getText())){
+               JOptionPane.showMessageDialog(this, "Erro ao cadastrar cliente Cpf já existe", "Erro", JOptionPane.ERROR_MESSAGE);
+                return null;
+            } 
+        }
         cliente.setRg(campoRg.getText().toUpperCase());
         cliente.setEmail(campoEmail.getText().toLowerCase());
         cliente.setTelefoneF(campoTelefoneFixo.getText());
@@ -131,7 +137,12 @@ public class ClienteView extends javax.swing.JInternalFrame {
 
     private Cliente alteraCliente(Cliente cliente) {
         cliente.setNome(campoNome.getText());
-        cliente.setCpf(campoCpf.getText());
+        for (Cliente cliente1 : clientes) {
+            if (cliente1.getCpf().equals(campoCpf.getText())){
+               JOptionPane.showMessageDialog(this, "Erro ao alterar cliente Cpf já existe", "Erro", JOptionPane.ERROR_MESSAGE);
+                return null;
+            } 
+        }
         cliente.setRg(campoRg.getText());
         cliente.setEmail(campoEmail.getText());
         cliente.setTelefoneF(campoTelefoneFixo.getText());
@@ -616,7 +627,12 @@ public class ClienteView extends javax.swing.JInternalFrame {
                     }
                 }
             } else {
-                cliControl.altera(alteraCliente(clientes.get(comboResultados.getSelectedIndex() - 1)));
+                Cliente cliente2 = alteraCliente(clientes.get(comboResultados.getSelectedIndex() - 1));
+                if(cliente2!=null){
+                                 cliControl.altera(cliente2);   
+                } else {
+                    return;
+                }
                 this.setClientesResultado(clientes.get(comboResultados.getSelectedIndex() - 1).getCodigo());
                 Mensagens.sucessoAlterar();
                 this.enableButton(buttonEditar, buttonAdicionar, buttonExcluir);
@@ -656,7 +672,7 @@ public class ClienteView extends javax.swing.JInternalFrame {
             this.editable(true);
             this.disableButton(buttonEditar, buttonAdicionar, buttonExcluir);
         } else {
-            JOptionPane.showMessageDialog(this, "Selecione algum cliente para editar!", "Erro", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione algum cliente para editar!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buttonEditarActionPerformed
 
@@ -666,8 +682,9 @@ public class ClienteView extends javax.swing.JInternalFrame {
             this.editable(false);
             this.limpar();
             this.preencheProcurar();
+            Mensagens.sucessDelete();
         } else {
-            JOptionPane.showMessageDialog(this, "Selecione algum cliente para excluir!", "Erro", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione algum cliente para excluir!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buttonExcluirActionPerformed
 

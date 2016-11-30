@@ -677,6 +677,7 @@ public class CarroView extends javax.swing.JInternalFrame {
             this.editable(false);
             this.limpar();
             this.preencheProcurar();
+            Mensagens.sucessDelete();
         } else {
             JOptionPane.showMessageDialog(this, "Selecione algum carro para excluir!", "Erro", JOptionPane.ERROR_MESSAGE);
         }

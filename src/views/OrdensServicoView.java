@@ -126,8 +126,6 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         servicos = new ArrayList<>();
         labelCodigo.setText(String.valueOf(os.getCod()));
         labelData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(os.getData()));
-        buttonGerarRecibo.setEnabled(true);
-        buttonGerarOrcamento.setEnabled(true);
         switch (os.getSituacao()) {
             case 1:
                 // Orçamento
@@ -162,6 +160,21 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
             }
         }
         this.setServicosOS(this.getServicosOS(os.getCod()));
+        System.out.println(cbSituacao.getSelectedIndex());
+          switch (cbSituacao.getSelectedIndex()) {
+            case 0:
+                buttonGerarOrcamento.setEnabled(true);
+                buttonGerarRecibo.setEnabled(false);
+                break;
+            case 1:
+                buttonGerarRecibo.setEnabled(true);
+                buttonGerarOrcamento.setEnabled(false);
+                break;
+            default:
+                buttonGerarOrcamento.setEnabled(false);
+                buttonGerarRecibo.setEnabled(false);
+                break;
+        }
     }
 
     private ArrayList<Servico> getServicosOS(int os) {
@@ -197,8 +210,6 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
         comboSelectCliente.setEnabled(flag);
         tableServicos.setEnabled(flag);
         cbSituacao.setEnabled(flag);
-        buttonGerarRecibo.setEnabled(!flag);
-        buttonGerarOrcamento.setEnabled(!flag);
     }
 
     private OrdemServico newOS() {
@@ -696,6 +707,11 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
 
         cbSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Orçamento", "Aberta", "Fechada", "Cancelada" }));
         cbSituacao.setEnabled(false);
+        cbSituacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSituacaoActionPerformed(evt);
+            }
+        });
         panelValor.add(cbSituacao);
         cbSituacao.setBounds(300, 20, 90, 20);
 
@@ -838,6 +854,7 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
             this.editable(false);
             this.limpar();
             this.preencheProcurar();
+            Mensagens.sucessDelete();
         } else {
             JOptionPane.showMessageDialog(this, "Selecione alguma O.S para excluir!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -876,31 +893,26 @@ public class OrdensServicoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfDescricaoKeyTyped
 
     private void buttonGerarReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarReciboActionPerformed
-        if (cbSituacao.getSelectedIndex() == 1) {
             RelatorioController.geraRelatorioRecibo(this, Integer.parseInt(labelCodigo.getText()));
             ordens.get(comboResultados.getSelectedIndex() - 1).setSituacao(3);
             osControl.altera(ordens.get(comboResultados.getSelectedIndex() - 1));
             cbSituacao.setSelectedIndex(ordens.get(comboResultados.getSelectedIndex() - 1).getSituacao());
             this.setOSResultado(ordens.get(comboResultados.getSelectedIndex() - 1).getCod());
             Mensagens.sucessoAlterar();
-
-        } else {
-            JOptionPane.showMessageDialog(this, "O.S não é Recibo", "Alerta", JOptionPane.WARNING_MESSAGE);
-        }
     }//GEN-LAST:event_buttonGerarReciboActionPerformed
 
     private void buttonGerarOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarOrcamentoActionPerformed
-        if (cbSituacao.getSelectedIndex() == 0) {
-            RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()), this);
-        } else {
-            JOptionPane.showMessageDialog(this, "O.S não é orçamento", "Alerta", JOptionPane.WARNING_MESSAGE);
-        }
+              RelatorioController.geraRelatorioOrcamento(Integer.parseInt(labelCodigo.getText()), this);
     }//GEN-LAST:event_buttonGerarOrcamentoActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         ts = new TabelaServicos(this);
         ts.setVisible(true);
     }//GEN-LAST:event_buttonAddActionPerformed
+
+    private void cbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituacaoActionPerformed
+      
+    }//GEN-LAST:event_cbSituacaoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
